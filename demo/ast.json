@@ -52,5 +52,13 @@
   {
     "type": "get",
     "body": ""
+  },
+  {
+    "type": "number-expression",
+    "body": {
+      "left": 1,
+      "operator": "+",
+      "right": 2
+    }
   }
 ]
