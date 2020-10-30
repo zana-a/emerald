@@ -56,10 +56,16 @@
   {
     "type": "expression",
     "body": {
-      "left": 1,
+      "left": {
+        "type": "number",
+        "body": 1
+      },
       "optional": {
         "operator": "+",
-        "right": 2
+        "right": {
+          "type": "number",
+          "body": 2
+        }
       }
     }
   }

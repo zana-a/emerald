@@ -5,18 +5,27 @@
       "type": "definition",
       "name": "a",
       "body": {
-        "type": "number-expression",
+        "type": "expression",
         "body": {
-          "left": 2,
+          "left": {
+            "type": "number",
+            "body": 2
+          },
           "optional": {
             "operator": "+",
             "right": {
-              "type": "number-expression",
+              "type": "expression",
               "body": {
-                "left": 2,
+                "left": {
+                  "type": "number",
+                  "body": 2
+                },
                 "optional": {
                   "operator": "*",
-                  "right": 3
+                  "right": {
+                    "type": "number",
+                    "body": 3
+                  }
                 }
               }
             }
@@ -33,16 +42,25 @@
           "left": {
             "type": "expression",
             "body": {
-              "left": 1,
+              "left": {
+                "type": "number",
+                "body": 1
+              },
               "optional": {
                 "operator": "+",
-                "right": 2
+                "right": {
+                  "type": "number",
+                  "body": 2
+                }
               }
             }
           },
           "optional": {
             "operator": "*",
-            "right": 2
+            "right": {
+              "type": "number",
+              "body": 2
+            }
           }
         }
       }
@@ -56,7 +74,10 @@
           "left": {
             "type": "expression",
             "body": {
-              "left": 1,
+              "left": {
+                "type": "number",
+                "body": 1
+              },
               "optional": {}
             }
           },
@@ -65,9 +86,15 @@
             "right": {
               "type": "expression",
               "body": {
-                "left": 2,
+                "left": {
+                  "type": "number",
+                  "body": 2
+                },
                 "operator": "*",
-                "right": 2
+                "right": {
+                  "type": "number",
+                  "body": 2
+                }
               }
             }
           }

@@ -7,10 +7,16 @@
       "body": {
         "type": "expression",
         "body": {
-          "left": true,
+          "left": {
+            "type": "boolean",
+            "body": true
+          },
           "optional": {
             "operator": "==",
-            "right": false
+            "right": {
+              "type": "boolean",
+              "body": false
+            }
           }
         }
       }
@@ -21,16 +27,25 @@
       "body": {
         "type": "expression",
         "body": {
-          "left": false,
+          "left": {
+            "type": "boolean",
+            "body": false
+          },
           "optional": {
             "operator": "!=",
             "right": {
               "type": "expression",
               "body": {
-                "left": true,
+                "left": {
+                  "type": "boolean",
+                  "body": true
+                },
                 "optional": {
                   "operator": "+",
-                  "right": false
+                  "right": {
+                    "type": "boolean",
+                    "body": true
+                  }
                 }
               }
             }
