@@ -1,0 +1,55 @@
+[
+  {
+    "type": "string",
+    "body": "value"
+  },
+  {
+    "type": "number",
+    "body": -123
+  },
+  {
+    "type": "boolean",
+    "body": true
+  },
+  {
+    "type": "list",
+    "body": []
+  },
+  {
+    "type": "map",
+    "body": [
+      {
+        "type": "key",
+        "body": "value"
+      }
+    ]
+  },
+  {
+    "type": "program",
+    "body": []
+  },
+  {
+    "type": "definition",
+    "name": "stringName",
+    "body": {}
+  },
+  {
+    "type": "function",
+    "body": {
+      "stack": [
+      ]
+    },
+    "return": {
+      "type": "string",
+      "body": ""
+    }
+  },
+  {
+    "type": "put",
+    "body": ""
+  },
+  {
+    "type": "get",
+    "body": ""
+  }
+]
