@@ -8,23 +8,19 @@
         "type": "number-expression",
         "body": {
           "left": 2,
-          "optional": [
-            {
-              "operator": "+",
-              "right": {
-                "type": "number-expression",
-                "body": {
-                  "left": 2,
-                  "optional": [
-                    {
-                      "operator": "*",
-                      "right": 3
-                    }
-                  ]
+          "optional": {
+            "operator": "+",
+            "right": {
+              "type": "number-expression",
+              "body": {
+                "left": 2,
+                "optional": {
+                  "operator": "*",
+                  "right": 3
                 }
               }
             }
-          ]
+          }
         }
       }
     },
@@ -38,20 +34,16 @@
             "type": "expression",
             "body": {
               "left": 1,
-              "optional": [
-                {
-                  "operator": "+",
-                  "right": 2
-                }
-              ]
+              "optional": {
+                "operator": "+",
+                "right": 2
+              }
             }
           },
-          "optional": [
-            {
-              "operator": "*",
-              "right": 2
-            }
-          ]
+          "optional": {
+            "operator": "*",
+            "right": 2
+          }
         }
       }
     },
@@ -65,26 +57,20 @@
             "type": "expression",
             "body": {
               "left": 1,
-              "optional": []
+              "optional": {}
             }
           },
-          "optional": [
-            {
-              "operator": "+",
-              "right": {
-                "type": "expression",
-                "body": {
-                  "left": 2,
-                  "optional": [
-                    {
-                      "operator": "*",
-                      "right": 2
-                    }
-                  ]
-                }
+          "optional": {
+            "operator": "+",
+            "right": {
+              "type": "expression",
+              "body": {
+                "left": 2,
+                "operator": "*",
+                "right": 2
               }
             }
-          ]
+          }
         }
       }
     }

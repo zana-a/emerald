@@ -1,4 +1,42 @@
 {
   "type": "program",
-  "body": []
+  "body": [
+    {
+      "type": "definition",
+      "name": "a",
+      "body": {
+        "type": "expression",
+        "body": {
+          "left": true,
+          "optional": {
+            "operator": "==",
+            "right": false
+          }
+        }
+      }
+    },
+    {
+      "type": "definition",
+      "name": "b",
+      "body": {
+        "type": "expression",
+        "body": {
+          "left": false,
+          "optional": {
+            "operator": "!=",
+            "right": {
+              "type": "expression",
+              "body": {
+                "left": true,
+                "optional": {
+                  "operator": "+",
+                  "right": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

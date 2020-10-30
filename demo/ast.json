@@ -57,12 +57,10 @@
     "type": "expression",
     "body": {
       "left": 1,
-      "optional": [
-        {
-          "operator": "+",
-          "right": 2
-        }
-      ]
+      "optional": {
+        "operator": "+",
+        "right": 2
+      }
     }
   }
 ]
