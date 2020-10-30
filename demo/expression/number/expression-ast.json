@@ -1,0 +1,92 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "definition",
+      "name": "a",
+      "body": {
+        "type": "number-expression",
+        "body": {
+          "left": 2,
+          "optional": [
+            {
+              "operator": "+",
+              "right": {
+                "type": "number-expression",
+                "body": {
+                  "left": 2,
+                  "optional": [
+                    {
+                      "operator": "*",
+                      "right": 3
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "definition",
+      "name": "b",
+      "body": {
+        "type": "expression",
+        "body": {
+          "left": {
+            "type": "expression",
+            "body": {
+              "left": 1,
+              "optional": [
+                {
+                  "operator": "+",
+                  "right": 2
+                }
+              ]
+            }
+          },
+          "optional": [
+            {
+              "operator": "*",
+              "right": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "definition",
+      "name": "c",
+      "body": {
+        "type": "expression",
+        "body": {
+          "left": {
+            "type": "expression",
+            "body": {
+              "left": 1,
+              "optional": []
+            }
+          },
+          "optional": [
+            {
+              "operator": "+",
+              "right": {
+                "type": "expression",
+                "body": {
+                  "left": 2,
+                  "optional": [
+                    {
+                      "operator": "*",
+                      "right": 2
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

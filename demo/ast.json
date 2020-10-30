@@ -54,11 +54,15 @@
     "body": ""
   },
   {
-    "type": "number-expression",
+    "type": "expression",
     "body": {
       "left": 1,
-      "operator": "+",
-      "right": 2
+      "optional": [
+        {
+          "operator": "+",
+          "right": 2
+        }
+      ]
     }
   }
 ]
