@@ -15,7 +15,7 @@
 # ~> Math.pow(2)
 # ~> Math.puts()
 
-defmodule Pythagoras do
+module Pythagoras do
   def run() do
     a =
       IO.gets("a>")
