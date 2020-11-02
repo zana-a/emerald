@@ -10,4 +10,5 @@ module Convert do
 end
 
 Convert.bin_to_dec([1, 0, 0, 1])
-# => 9
+~> IO.puts() # => 9
+
