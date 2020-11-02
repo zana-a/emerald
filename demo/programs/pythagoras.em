@@ -19,18 +19,18 @@ defmodule Pythagoras do
   def run() do
     a =
       IO.gets("a>")
-      |> clean()
+      ~> clean()
 
     b =
       IO.gets("b>")
-      |> clean()
+      ~> clean()
 
     c =
       IO.gets("c>")
-      |> clean()
+      ~> clean()
 
     (a + b)
-    |> is_pythagorean(c)
+    ~> is_pythagorean(c)
   end
 
   def is_pythagorean(left, right) do
@@ -39,11 +39,11 @@ defmodule Pythagoras do
 
   def clean(string) do
     string
-    |> String.trim()
-    |> String.to_integer()
-    |> Math.pow(2)
+    ~> String.trim()
+    ~> String.to_integer()
+    ~> Math.pow(2)
   end
 end
 
 Pythagoras.run()
-|> IO.puts()
+~> IO.puts()
