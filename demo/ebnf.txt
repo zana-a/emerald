@@ -1,0 +1,76 @@
+program = { if }
+        | { do }
+        | { expression }
+        | { function }
+        | { module }
+
+bool = true
+     | false
+
+bool_op = "=="
+        | "!="
+
+bool_expression = bool
+                | bool, { bool_op, bool }
+                | "(", bool_expression, ")"
+
+zero_numeric = "0"
+
+none_zero_numeric = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+numeric = zero_numeric | none_zero_numeric
+
+integer = none_zero_numeric, { numeric }
+
+integer_op = "+" | "-" | "!" | "*"
+
+lower_alpha = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" |
+              "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" |
+
+upper_alpha = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" |
+              "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+
+alpha = lower_alpha | upper_alpha
+
+alphanumeric = alpha | numeric
+
+identifier = alpha, { alphanumeric }
+
+type = bool
+     | integer
+     | list
+     | string
+
+math_expression = integer
+                | integer, { integer_op, integer }
+                | "(", math_expression, ")"
+
+expressions = expression, { ";", expression }
+
+expression  = bool_expression
+            | math_expression
+            | function
+
+if = "if", bool_expression "->" expressions
+   | { "|", bool_expression "->" expressions }
+   "fi"
+
+do = "do", bool_expression "->" expressions
+   | { bool_expression "->" expressions }
+   "od"
+
+param = identifier
+
+function = "fn", identifier, "(", param, ")", expression, "nf"
+
+assignment = identifier, ":=", type
+
+module_identifier = upper_alpha, { alphanumeric }
+
+module = "mod", module_identifier, { function }, "dom"
+
+list_item = type, { ",", type }
+
+list = "[", { list_item }, "]"
+
+string = "\"", { alphanumeric }, "\""
