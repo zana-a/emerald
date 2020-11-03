@@ -11,6 +11,7 @@ The following could be incorporated into the language:
 - data structures (list/map)
 - definition (assignment)
 - function
+- pattern matching
 - module (grouping)
 - import
 - structs
