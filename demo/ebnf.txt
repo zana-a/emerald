@@ -24,6 +24,10 @@ integer = none_zero_numeric, { numeric }
 
 integer_op = "+" | "-" | "!" | "*"
 
+whitespace = " "
+           | "\n"
+           | "\t"
+
 lower_alpha = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" |
               "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" |
 
@@ -49,6 +53,7 @@ expressions = expression, { ";", expression }
 
 expression  = bool_expression
             | math_expression
+            | string_expression
             | function
 
 if = "if", bool_expression "->" expressions
@@ -73,4 +78,12 @@ list_item = type, { ",", type }
 
 list = "[", { list_item }, "]"
 
-string = "\"", { alphanumeric }, "\""
+string_body = { alphanumeric }
+            | { whitespace }
+
+string = "\"", { string_body }, "\""
+
+string_op = "+"
+
+string_expression = string
+                  | string, { string_op, string }
