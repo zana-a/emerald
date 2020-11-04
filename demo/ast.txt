@@ -1,0 +1,49 @@
+// 1 == 1
+
+program {
+  body: [
+
+    bool_expression {
+      left: {
+        integer: 1
+      }
+      optional: {
+        op: EqEq
+        right: {
+          integer: 1
+        }
+      }
+    }
+
+
+  ]
+}
+
+zero_numeric
+none_zero_numeric
+numeric
+integer
+integer_op
+whitespace
+lower_alpha
+upper_alpha
+alpha
+alphanumeric
+identifier
+type
+math_expression
+expressions
+expression
+if
+do
+param
+function
+assignment
+module_identifier
+module
+list_item
+list
+string_body
+string
+string_op
+string_expression

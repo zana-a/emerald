@@ -12,19 +12,25 @@ bool_op = "=="
 
 bool_bool_expression = bool
                         | bool, { bool_op, bool }
-                        | "(", bool_bool_expression, ")"
+                        | "(", bool_bool_expression, ")", { bool_op, bool_bool_expression }
 
-string_bool_expression = string, "==", string
-                       | string, "!=", string
-                       | "(", string_bool_expression, ")"
+string_bool_expression = string, bool_op, string
+                       | string, bool_op, string
+                       | "(", string_bool_expression, ")", { bool_op, string_bool_expression }
 
-integer_bool_expression = integer, "==", integer
-                       | integer, "!=", integer
-                       | integer, "<", integer
-                       | integer, ">", integer
-                       | integer, "<=", integer
-                       | integer, ">=", integer
-                       | "(", integer_bool_expression, ")"
+integer_op = bool_op
+           | "<",
+           | ">",
+           | "<="
+           | ">="
+
+integer_bool_expression = integer, integer_op, integer
+                       | integer, integer_op, integer
+                       | integer, integer_op integer
+                       | integer, integer_op integer
+                       | integer, integer_op, integer
+                       | integer, integer_op, integer
+                       | "(", integer_bool_expression, ")", { integer_op, integer_bool_expression }
 
 (* results in a bool value *)
 bool_expression = bool_bool_expression
