@@ -6,7 +6,7 @@ mod Module
   nf
 dom
 
-if name == "Zana" -> print(Module.hello(name))
+if name == "Zana" -> do true -> print(Module.hello(name)) od
  | true -> print(Module.hello("Bob"))
 fi
 
