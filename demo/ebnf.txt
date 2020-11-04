@@ -10,9 +10,22 @@ bool = true
 bool_op = "=="
         | "!="
 
-bool_expression = bool
-                | bool, { bool_op, bool }
-                | "(", bool_expression, ")"
+bool_bool_expression = bool
+                        | bool, { bool_op, bool }
+                        | "(", bool_bool_expression, ")"
+
+string_bool_expression = string, "==", string
+                       | string, "!=", string
+                       | "(", string_bool_expression, ")"
+
+integer_bool_expression = integer, "==", integer
+                       | integer, "!=", integer
+                       | "(", integer_bool_expression, ")"
+
+(* results in a bool value *)
+bool_expression = bool_bool_expression
+                | string_bool_expression
+                | integer_bool_expression
 
 zero_numeric = "0"
 
