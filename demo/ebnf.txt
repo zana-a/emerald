@@ -20,6 +20,10 @@ string_bool_expression = string, "==", string
 
 integer_bool_expression = integer, "==", integer
                        | integer, "!=", integer
+                       | integer, "<", integer
+                       | integer, ">", integer
+                       | integer, "<=", integer
+                       | integer, ">=", integer
                        | "(", integer_bool_expression, ")"
 
 (* results in a bool value *)
