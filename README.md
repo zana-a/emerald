@@ -1,3 +1,3 @@
-# Emerald
+# ZAPL
 
-A Guarded Command Language developed using Scala.
+
