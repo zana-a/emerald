@@ -1,4 +1,4 @@
-name := "emerald"
+name := "zapl"
 
 version := "0.1"
 
