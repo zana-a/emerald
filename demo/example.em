@@ -1,4 +1,6 @@
 name := "Zana"
+a_list := [1, 2, 3]
+
 
 mod Module
   fn hello(name)
@@ -15,3 +17,5 @@ dom
 if name == "Zana" -> do true -> print(Module.hello(name)) od
  | true -> print(Module.factorial(1))
 fi
+
+if a_list[0] == 1 -> print(true) fi
