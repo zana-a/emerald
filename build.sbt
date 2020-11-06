@@ -8,4 +8,4 @@ libraryDependencies +=
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
 
 libraryDependencies +=
-  "org.scalatest" %% "scalatest" % "3.0.8" % Test
+  "com.novocode" % "junit-interface" % "0.8" % "test->default"
