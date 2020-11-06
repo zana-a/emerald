@@ -1,4 +1,4 @@
-package io.zana.emerald
+package io.zana.zapl
 
 import scala.util.parsing.combinator._
 
