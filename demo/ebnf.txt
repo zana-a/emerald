@@ -41,7 +41,8 @@ zero_numeric = "0"
 
 none_zero_numeric = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
-numeric = zero_numeric | none_zero_numeric
+numeric = zero_numeric
+        | none_zero_numeric
 
 integer = none_zero_numeric, { numeric }
 
@@ -101,8 +102,9 @@ list_item = type, { ",", type }
 
 list = "[", { list_item }, "]"
 
-string_body = { alphanumeric }
-            | { whitespace }
+list_access = identifier, "[", integer, "]"
+
+string_body = (? any possible character sequence - ensuring escapable chars are escaped ?)
 
 string = "\"", { string_body }, "\""
 
