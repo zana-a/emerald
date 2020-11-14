@@ -70,7 +70,7 @@ type = bool
      | string
 
 math_expression = integer
-                | integer, { integer_op, integer }
+                | integer, { integer_op, math_expression }
                 | "(", math_expression, ")"
 
 expressions = expression, { ";", expression }
@@ -111,4 +111,4 @@ string = "\"", { string_body }, "\""
 string_op = "+"
 
 string_expression = string
-                  | string, { string_op, string }
+                  | string, { string_op, string_expression }

@@ -1,13 +1,7 @@
 package io.zana.zapl
 
-import scala.util.parsing.combinator._
+object Main extends App {
 
-object Main {
+  object GeneralParser extends
 
-  def hello(name: String) = s"Hello, $name"
-
-  def main(args: Array[String]): Unit = {
-    val greet = hello("Zana")
-    print(greet)
-  }
 }
