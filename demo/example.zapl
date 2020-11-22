@@ -1,3 +1,11 @@
-a := 123 + (234)
-b := 3
-c := 23 + (123 + 34 + 2) / 2
+mod Hello
+
+  fn hello(name)
+  {
+    print("Hello, " + name + "!");
+  };
+  nf;
+
+dom;
+
+Hello.

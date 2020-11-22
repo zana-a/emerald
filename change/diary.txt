@@ -1,0 +1,3 @@
+Did not care about 0 to be first number for int since it gets error checked by Scala. 
+
+No need for a boolExpression ebnf since logicExpression works on all data types. Errors are handled by Scala.

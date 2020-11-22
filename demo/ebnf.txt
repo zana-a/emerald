@@ -1,114 +1,101 @@
-program = { if }
-        | { do }
-        | { expression }
-        | { function }
-        | { module }
+program          = { runnable, whitespace, { runnable, whitespace, ";" } }
 
-bool = true
-     | false
+runnable         = statement | module
 
-bool_op = "=="
-        | "!="
+type             = integer
+                 | bool
+                 | string
+                 | list
 
-bool_bool_expression = bool
-                        | bool, { bool_op, bool }
-                        | "(", bool_bool_expression, ")", { bool_op, bool_bool_expression }
+numeric          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
-string_bool_expression = string, bool_op, string
-                       | string, bool_op, string
-                       | "(", string_bool_expression, ")", { bool_op, string_bool_expression }
+integer          = numeric | { numeric }
 
-integer_bool_op = bool_op
-           | "<",
-           | ">",
-           | "<="
-           | ">="
+mathOperator     = "+" | "-" | "*" | "/"
 
-integer_bool_expression = integer, integer_op, integer
-                       | integer, integer_op, integer
-                       | integer, integer_op integer
-                       | integer, integer_op integer
-                       | integer, integer_op, integer
-                       | integer, integer_op, integer
-                       | "(", integer_bool_expression, ")", { integer_bool_op, integer_bool_expression }
+mathExpression   = integer
+                 | mathExpression, { whitespace }, mathOperator, { whitespace }, mathExpression
+                 | "(", { whitespace }, mathExpression, { whitespace }, ")", whitespace
+                 , mathOperator, { whitespace }, mathExpression
+                 | "(", mathExpression, ")"
 
-(* results in a bool value *)
-bool_expression = bool_bool_expression
-                | string_bool_expression
-                | integer_bool_expression
+string           = "\""
+                 , ? any valid unicode chars providing that they are escaped when needed ?
+                 , "\""
 
-zero_numeric = "0"
+stringOperator   = "+"
 
-none_zero_numeric = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+stringExpression = string
+                 | stringExpression, { whitespace }, stringOperator, { whitespace }, stringExpression
+                 | "(", { whitespace }, stringExpression, { whitespace }, ")", whitespace
+                 , stringOperator, { whitespace }, stringExpression
+                 | "(", stringExpression, ")"
 
-numeric = zero_numeric
-        | none_zero_numeric
+bool             = "true"
+                 | "false"
 
-integer = none_zero_numeric, { numeric }
+logicOperator    = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
 
-integer_op = "+" | "-" | "!" | "*"
+logicExpression  = type, { whitespace }, logicOperator, { whitespace }, type
+                 | "(", { whitespace }, logicExpression, { whitespace }, ")"
+                 , { whitespace }, logicOperator, { whitespace }, logicExpression
+                 | "(", { whitespace }, logicExpression, { whitespace }, ")"
 
-whitespace = " "
-           | "\n"
-           | "\t"
+lowerAlpha       = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k"
+                 | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
+                 | "w" | "x" | "y" | "z"
 
-lower_alpha = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" |
-              "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" |
+upperAlpha       = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K"
+                 | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V"
+                 | "W" | "X" | "Y" | "Z"
 
-upper_alpha = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" |
-              "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+alpha            = lowerAlpha | upperAlpha
 
-alpha = lower_alpha | upper_alpha
+alphanumeric     = alpha | numeric
 
-alphanumeric = alpha | numeric
+whitespace       = " " | "\t" | "\n"
 
-identifier = alpha, { alphanumeric }
+identifier       = alpha, { alphanumeric }
 
-type = bool
-     | integer
-     | list
-     | string
+definition       = identifier, { whitespace }, ":=", { whitespace }, expression
 
-math_expression = integer
-                | integer, { integer_op, math_expression }
-                | "(", math_expression, ")"
+function         = "fn", { whitespace }, identifier
+                 , "(", { whitespace }, { type | type, { whitespace }, ",", whitespace }, { whitespace }, ")"
+                 , block, whitespace
+                 , "nf"
 
-expressions = expression, { ";", expression }
+expression       = mathExpression
+                 | stringExpression
+                 | logicExpression
 
-expression  = bool_expression
-            | math_expression
-            | string_expression
-            | function
+statement        = block
+                 | if
+                 | do
+                 | function
+                 | definition
 
-if = "if", bool_expression "->" expressions
-   | { "|", bool_expression "->" expressions }
-   "fi"
+list             = "[", { type | type, "," } "]"
 
-do = "do", bool_expression "->" expressions
-   | { bool_expression "->" expressions }
-   "od"
+block            = "{", { statement } "}"
 
-param = identifier
+do               = "if", whitespace,
+                 , expression, { whitespace }, "->", { whitespace }, block, whitespace
+                 , { "|", { whitespace }, expression, { whitespace }, "->", { whitespace }, block }
+                 , { whitespace }, "fi"
 
-function = "fn", identifier, "(", param, ")", expression, "nf"
+do               = "do", whitespace,
+                 , expression, { whitespace }, "->", { whitespace }, block, whitespace
+                 , { "|", { whitespace }, expression, { whitespace }, "->", { whitespace }, block }
+                 , { whitespace }, "od"
 
-assignment = identifier, ":=", type
+moduleIdentifier = upperAlpha, { alphanumeric }
 
-module_identifier = upper_alpha, { alphanumeric }
+module           = "mod", { whitespace }, moduleIdentifier, whitespace
+                 , { function }
+                 , "dom"
 
-module = "mod", module_identifier, { function }, "dom"
+// Are these statements or expressions
 
-list_item = type, { ",", type }
-
-list = "[", { list_item }, "]"
-
-list_access = identifier, "[", integer, "]"
-
-string_body = (? any possible character sequence - ensuring escapable chars are escaped ?)
-
-string = "\"", { string_body }, "\""
-
-string_op = "+"
-
-string_expression = string
-                  | string, { string_op, string_expression }
+functionCall     = identifier, "(", { type | type, "," }, ")"
+listIndexCall    = identifier, "[", { integer }, "]"
+moduleCall       = moduleIdentifier, ".", functionCall

@@ -24,7 +24,8 @@ object Main extends App {
 
   trait MathExpression extends JavaTokenParsers {
 
-    def expr: Parser[Any] = "(" ~> expr <~ ")" ~ operator ~ expr | "(" ~> expr <~ ")" | integer ~ operator ~ expr | integer
+    def expr: Parser[Any] =
+      "(" ~> expr <~ ")" ~ operator ~ expr | "(" ~> expr <~ ")" | integer ~ operator ~ expr | integer
 
     def operator: Parser[String] = "+" | "-" | "*" | "/"
 
@@ -43,4 +44,3 @@ object Main extends App {
     print(s"The given path ${args(0)} does not exist!")
 
 }
-
