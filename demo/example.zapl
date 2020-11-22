@@ -1,11 +1,8 @@
-mod Hello
+fn hello(name)
+{
+  print("Hello, " + name + "!");
+};
+nf;
 
-  fn hello(name)
-  {
-    print("Hello, " + name + "!");
-  };
-  nf;
 
-dom;
-
-Hello.
+Hello.hello("Zana")
