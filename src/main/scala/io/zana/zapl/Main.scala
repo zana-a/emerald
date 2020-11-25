@@ -72,5 +72,7 @@ object Main {
     // Result:
     // If(List(Guard(Express(List(Integer(32), +, Integer(14))),Skip), Guard(Express(List(Bool(true), &&, Bool(false))),Skip)))
     // If(List(Guard(Express(List(Integer(32), +, Integer(14))),Skip), Guard(Express(List(Bool(true), &&, Bool(false))),Skip)))
+    // ()
+    // ()
   }
 }
