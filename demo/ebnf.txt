@@ -36,7 +36,7 @@ bool             = "true"
 
 logicOperator    = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
 
-logicExpression  = type, { whitespace }, logicOperator, { whitespace }, type
+logicExpression  = bool, { whitespace }, logicOperator, { whitespace }, bool
                  | "(", { whitespace }, logicExpression, { whitespace }, ")"
                  , { whitespace }, logicOperator, { whitespace }, logicExpression
                  | "(", { whitespace }, logicExpression, { whitespace }, ")"
@@ -97,5 +97,9 @@ module           = "mod", { whitespace }, moduleIdentifier, whitespace
 // Are these statements or expressions: includes block.
 
 functionCall     = identifier, "(", { type | type, "," }, ")"
+
 listIndexCall    = identifier, "[", { integer }, "]"
+
 moduleCall       = moduleIdentifier, ".", functionCall
+
+variableCall     = identifier

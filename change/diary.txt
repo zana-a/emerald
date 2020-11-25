@@ -1,3 +1,12 @@
 Did not care about 0 to be first number for int since it gets error checked by Scala. 
 
 No need for a boolExpression ebnf since logicExpression works on all data types. Errors are handled by Scala.
+
+LogicExpression in ast was changed from bool to Type since theoretically you can check any logic for any of the types unless some can't be checked as they have no check-worthy data. This is handled by Scala.
+
+Reorganised to companion objects to separate out different parts of the program. ~Not needed for any other reason.~ Further objects and case class uses traits to identify what they accept
+
+~Using functions for easier creation of objects for ast. This is better since it avoids collisions~ this was removed because it caused too much unneeded code. However packages made it easier to work with
+
+
+Changed type to bool in the ebnf for "logicExpression" 
