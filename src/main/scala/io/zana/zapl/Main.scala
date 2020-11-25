@@ -1,10 +1,8 @@
 package io.zana.zapl
 
-
 import io.zana.zapl.ast.Expression._
 import io.zana.zapl.ast.Statement._
 import io.zana.zapl.ast.Type._
-
 
 object Main {
 
@@ -14,7 +12,7 @@ object Main {
         If(
           scala.List(
             Guard(
-              Math.Expression(
+              Math.Express(
                 scala.List(
                   Integer(32),
                   Operator.+,
@@ -24,7 +22,32 @@ object Main {
               Skip
             ),
             Guard(
-              Logic.Expression(
+              Logic.Express(
+                scala.List(
+                  Bool(true),
+                  Operator.&&,
+                  Bool(false)
+                )
+              ),
+              Skip
+            )
+          )
+        ),
+
+        If(
+          scala.List(
+            Guard(
+              Math.Express(
+                scala.List(
+                  Integer(32),
+                  Operator.+,
+                  Integer(14)
+                )
+              ),
+              Skip
+            ),
+            Guard(
+              Logic.Express(
                 scala.List(
                   Bool(true),
                   Operator.&&,
@@ -38,6 +61,16 @@ object Main {
       )
     )
 
-    print(program)
+    val b = for {
+      statement <- program.statements
+    } yield println(statement)
+
+    val c = for {
+      i <- b
+    } yield println(i)
+
+    // Result:
+    // If(List(Guard(Express(List(Integer(32), +, Integer(14))),Skip), Guard(Express(List(Bool(true), &&, Bool(false))),Skip)))
+    // If(List(Guard(Express(List(Integer(32), +, Integer(14))),Skip), Guard(Express(List(Bool(true), &&, Bool(false))),Skip)))
   }
 }

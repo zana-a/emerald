@@ -1,14 +1,17 @@
 package io.zana.zapl.ast
 
+import io.zana.zapl.ast.Expression.Math.Accepted
 import io.zana.zapl.ast.Type._
 
 object Expression {
 
-  trait Expressor
+  trait Expression
+
+  case class Definition(identifier: String, ue: Type) extends Expression
 
   object Call {
 
-    trait Callable extends Expressor {
+    trait Callable extends Expression {
       val identifier: java.lang.String
 
       override def toString: java.lang.String =
@@ -26,11 +29,11 @@ object Expression {
 
   object Operator {
 
-    protected trait Operator
-
     trait Math extends Operator
 
     trait Logic extends Operator
+
+    protected trait Operator
 
     case object + extends Math with Math.Accepted
 
@@ -65,7 +68,7 @@ object Expression {
 
     case class Bracket(expression: scala.List[Accepted]) extends Accepted
 
-    case class Expression(expression: scala.List[Accepted]) extends Expressor
+    case class Express(expression: scala.List[Accepted]) extends Expression
 
   }
 
@@ -76,16 +79,14 @@ object Expression {
 
     case class Bracket(expression: scala.List[Accepted]) extends Accepted
 
-    case class Expression(expression: scala.List[Accepted]) extends Expressor
+    case class Express(expression: scala.List[Accepted]) extends Expression
 
   }
 
   object String {
 
-    case class Expression(strings: scala.List[String]) extends Expressor
+    case class Express(strings: scala.List[String]) extends Expression
 
   }
-
-  case class Definition(identifier: String, value: Type) extends Expressor
 
 }
