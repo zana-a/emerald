@@ -1,12 +1,13 @@
 package io.zana.zapl
 
+import io.zana.zapl.generator.Generator.Generate
 import io.zana.zapl.parser.Parser._
 
 object Main {
 
   final val sampleCode: String =
     """
-      |aNumber := 32
+      |aNumber := "hello world"
       |"""
       .stripLeading
       .stripTrailing
@@ -14,6 +15,11 @@ object Main {
 
   def main(args: Array[String]): Unit = {
 
-    println(parse(definition, sampleCode))
+    parse(definition, sampleCode) match {
+      case Success(result, _) => println(Generate.definition(result))
+      case Failure(msg, _) => println(msg)
+      case Error(msg, _) => println(msg)
+    }
+
   }
 }

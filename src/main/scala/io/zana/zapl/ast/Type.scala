@@ -6,12 +6,12 @@ object Type {
 
   trait Type
 
-  case class Integer(i: Int) extends Type with Math.Accepted
+  case class Integer(value: Int) extends Type with Math.Accepted
 
-  case class Bool(b: Boolean) extends Type with Logic.Accepted
+  case class Bool(value: Boolean) extends Type with Logic.Accepted
 
-  case class String(s: java.lang.String) extends Type
+  case class String(value: java.lang.String) extends Type
 
-  case class List(l: scala.List[Type]) extends Type
+  case class List(values: scala.List[Type]) extends Type
 
 }
