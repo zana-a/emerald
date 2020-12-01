@@ -1,11 +1,11 @@
 package io.zana.zapl.parser
 
-import io.zana.zapl.ast.Expression.Definition
 import io.zana.zapl.ast.{Expression, Type}
 
 import scala.util.parsing.combinator._
 
-object Parser extends JavaTokenParsers {
+object Parser extends RegexParsers {
+
   def lowerAlpha: Parser[String] = "[a-z]".r
 
   def upperAlpha: Parser[String] = "[A-Z]".r
@@ -42,16 +42,22 @@ object Parser extends JavaTokenParsers {
     case t => Type.Bool(t.toBoolean)
   }
 
-
   def `false`: Parser[Type.Bool] = "false" ^^ {
     case t => Type.Bool(t.toBoolean)
   }
 
   def bool: Parser[Type.Bool] = `true` | `false`
 
-  def `type`: Parser[Type.Type] = string | integer | bool
+  def list: Parser[Type.List] = "[" ~> `type` ~ opt(rep("," ~> `type`)) <~ "]" ^^ {
+    case one ~ many => many match {
+      case Some(values) => Type.List(List(one).concat(values))
+      case None => Type.List(List(one))
+    }
+  }
 
-  def definition: Parser[Definition] = identifier ~ ":=" ~ `type` ^^ {
+  def `type`: Parser[Type.Type] = string | integer | bool | list
+
+  def definition: Parser[Expression.Definition] = identifier ~ ":=" ~ `type` ^^ {
     case identifier ~ _ ~ t => Expression.Definition(identifier, t)
   }
 }

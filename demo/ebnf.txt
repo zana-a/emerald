@@ -94,8 +94,6 @@ module           = "mod", { whitespace }, moduleIdentifier, whitespace
                  , { function }
                  , "dom"
 
-// Are these statements or expressions: includes block.
-
 functionCall     = identifier, "(", { type | type, "," }, ")"
 
 listIndexCall    = identifier, "[", { integer }, "]"

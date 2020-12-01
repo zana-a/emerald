@@ -7,7 +7,7 @@ object Main {
 
   final val sampleCode: String =
     """
-      |aNumber := "hello world"
+      |aNumber := ["1 s s s s ", false ,3,4,5, [12,[3]]]
       |"""
       .stripLeading
       .stripTrailing
@@ -24,6 +24,5 @@ object Main {
       case Failure(msg, _) => println(msg)
       case Error(msg, _) => println(msg)
     }
-
   }
 }
