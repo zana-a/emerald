@@ -6,7 +6,7 @@ object Expression {
 
   trait Expression
 
-  case class Definition(identifier: String, value: Type) extends Expression
+  case class Definition(identifier: java.lang.String, value: Type) extends Expression
 
   object Call {
 
@@ -32,7 +32,7 @@ object Expression {
 
     trait Logic extends Operator
 
-    protected trait Operator
+    abstract trait Operator
 
     case object + extends Math with Math.Accepted
 
