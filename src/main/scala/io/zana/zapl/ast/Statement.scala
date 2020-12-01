@@ -20,3 +20,4 @@ object Statement {
   case object Skip extends Statement
 
 }
+

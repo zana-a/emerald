@@ -16,7 +16,11 @@ object Main {
   def main(args: Array[String]): Unit = {
 
     parse(definition, sampleCode) match {
-      case Success(result, _) => println(Generate.definition(result))
+      case Success(result, _) => {
+        println("AST:\n" + result)
+        println
+        println("Scala Code:\n" + Generate.definition(result))
+      }
       case Failure(msg, _) => println(msg)
       case Error(msg, _) => println(msg)
     }

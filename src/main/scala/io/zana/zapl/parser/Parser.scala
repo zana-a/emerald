@@ -42,6 +42,7 @@ object Parser extends JavaTokenParsers {
     case t => Type.Bool(t.toBoolean)
   }
 
+
   def `false`: Parser[Type.Bool] = "false" ^^ {
     case t => Type.Bool(t.toBoolean)
   }
