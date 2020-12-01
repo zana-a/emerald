@@ -1,13 +1,12 @@
 package io.zana.zapl.ast
 
-import io.zana.zapl.ast.Expression.Math.Accepted
 import io.zana.zapl.ast.Type._
 
 object Expression {
 
   trait Expression
 
-  case class Definition(identifier: String, ue: Type) extends Expression
+  case class Definition(identifier: String, value: Type) extends Expression
 
   object Call {
 
@@ -61,7 +60,6 @@ object Expression {
 
   }
 
-  // accepts the following: math.bracket, math operators and integers
   object Math {
 
     trait Accepted
@@ -72,7 +70,6 @@ object Expression {
 
   }
 
-  // accepts the following: logic.bracket, logic operators and booleans
   object Logic {
 
     trait Accepted
