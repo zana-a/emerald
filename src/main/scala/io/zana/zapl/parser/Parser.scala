@@ -48,16 +48,20 @@ object Parser extends RegexParsers {
 
   def bool: Parser[Type.Bool] = `true` | `false`
 
-  def list: Parser[Type.List] = "[" ~> `type` ~ opt(rep("," ~> `type`)) <~ "]" ^^ {
-    case one ~ many => many match {
-      case Some(values) => Type.List(List(one).concat(values))
-      case None => Type.List(List(one))
+  def list: Parser[Type.List] = {
+    "[" ~> `type` ~ opt(rep("," ~> `type`)) <~ "]" ^^ {
+      case one ~ many => many match {
+        case Some(values) => Type.List(List(one).concat(values))
+        case None => Type.List(List(one))
+      }
     }
   }
 
   def `type`: Parser[Type.Type] = string | integer | bool | list
 
-  def definition: Parser[Expression.Definition] = identifier ~ ":=" ~ `type` ^^ {
-    case identifier ~ _ ~ t => Expression.Definition(identifier, t)
+  def definition: Parser[Expression.Definition] = {
+    identifier ~ ":=" ~ `type` ^^ {
+      case identifier ~ _ ~ t => Expression.Definition(identifier, t)
+    }
   }
 }
