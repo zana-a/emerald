@@ -22,13 +22,13 @@ class IdentifierTest {
   def `alpha followed by numeric` = {
     val result = Parser.parse(Parser.identifier, "a1")
     result match {
-      case Parser.Success(result, _) => assertEquals("a", result)
+      case Parser.Success(result, _) => assertEquals("a1", result)
       case Parser.Failure(msg, _) => assert(false, msg)
       case Parser.Error(msg, _) => assert(false, msg)
     }
   }
 
-  @Test()
+  @Test
   def `numeric followed by alpha` = {
     val result = Parser.parse(Parser.identifier, "1a")
     result match {

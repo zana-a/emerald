@@ -5,9 +5,7 @@ import io.zana.zapl.ast.Type._
 object Expression {
 
   trait Expression
-
-  case class Definition(identifier: java.lang.String, value: Type) extends Expression
-
+  
   object Call {
 
     trait Callable extends Expression {

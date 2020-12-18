@@ -1,1 +1,18 @@
 
+mod A do
+  fn a() do
+    if
+      true -> do
+
+      end
+
+      1 == 1 -> do
+        println()
+      end
+
+      false -> do
+
+      end
+    end
+  end
+end

@@ -1,6 +1,6 @@
 package io.zana.zapl.parser
 
-import io.zana.zapl.ast.{Expression, Type}
+import io.zana.zapl.ast.{Expression, Statement, Type}
 
 import scala.util.parsing.combinator._
 
@@ -33,7 +33,7 @@ object Parser extends RegexParsers {
 
   // TODO: only alphanumeric. what about any char?
   def string: Parser[Type.String] = {
-    "\"" ~> opt(rep(alphanumeric | whiteSpace)) <~ "\"" ^^ {
+    "\"" ~> opt(rep(alphanumeric)) <~ "\"" ^^ {
       case string => string match {
         case Some(value) => Type.String(value.mkString)
         case None => Type.String("")
@@ -51,7 +51,6 @@ object Parser extends RegexParsers {
 
   def bool: Parser[Type.Bool] = `true` | `false`
 
-
   def list: Parser[Type.List] = {
     "[" ~> repsep(`type`, ",") <~ "]" ^^ {
       case result => Type.List(result)
@@ -60,9 +59,9 @@ object Parser extends RegexParsers {
 
   def `type`: Parser[Type.Type] = string | integer | bool | list
 
-  def definition: Parser[Expression.Definition] = {
+  def definition: Parser[Statement.Definition] = {
     identifier ~ ":" ~ "=" ~ `type` ^^ {
-      case identifier ~ _ ~ _ ~ t => Expression.Definition(identifier, t)
+      case identifier ~ _ ~ _ ~ t => Statement.Definition(identifier, t)
     }
   }
 }

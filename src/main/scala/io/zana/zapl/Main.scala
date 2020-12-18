@@ -7,6 +7,6 @@ import io.zana.zapl.translator.Translator.Generate
 object Main {
 
   def main(args: Array[String]): Unit = {
-    Repl.start
+    println()
   }
 }

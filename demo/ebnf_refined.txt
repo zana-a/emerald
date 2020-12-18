@@ -64,7 +64,7 @@ definition       = identifier, ":=", expression
 function         = "fn", identifier
                  , "(", { type | type, "," }, ")"
                  , block
-                 , "nf"
+                 , "end"
 
 expression       = mathExpression
                  | stringExpression
@@ -78,30 +78,28 @@ statement        = block
 
 list             = "[", { type | type, "," } "]"
 
-block            = "{"
-                 , { statement }
-                 , "}"
+block            = "do", { statement }, "end"
 
 if               = "if",
                  , expression, "->", block
                  , { "|", expression, "->", block }
-                 , "fi"
+                 , "end"
 
-do               = "do",
-                 , expression, "->", block
-                 , { "|", expression, "->", block }
-                 , "od"
+loop               = "loop",
+                 , expression, "->", ( block | statement )
+                 , { "|", expression, "->", ( block | statement ) }
+                 , "end"
 
 moduleIdentifier = upperAlpha, { alphanumeric }
 
 module           = "mod", moduleIdentifier
                  , { function }
-                 , "dom"
+                 , "end"
 
-functionCall     = identifier, "(", { type | type, "," }, ")"
+funcCall         = identifier, "(", { type | type, "," }, ")"
 
 listIndexCall    = identifier, "[", { integer }, "]"
 
-moduleCall       = moduleIdentifier, ".", functionCall
+moduleFuncCall   = moduleIdentifier, ".", functionCall
 
 variableCall     = identifier

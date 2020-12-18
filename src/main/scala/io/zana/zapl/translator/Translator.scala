@@ -1,7 +1,6 @@
 package io.zana.zapl.translator
 
-import io.zana.zapl.ast.Expression.{String, _}
-import io.zana.zapl.ast.Type
+import io.zana.zapl.ast.{Statement, Type}
 
 object Translator {
 
@@ -18,7 +17,7 @@ object Translator {
   }
 
   object Generate {
-    def definition(definition: Definition): String = {
+    def definition(definition: Statement.Definition): String = {
       val result =
         definition.value match {
           case Type.Integer(i) => (
