@@ -32,10 +32,12 @@ object Parser extends RegexParsers {
   }
 
   // TODO: only alphanumeric. what about any char?
-  def string: Parser[Type.String] = "\"" ~> opt(rep(alphanumeric)) <~ "\"" ^^ {
-    case string => string match {
-      case Some(value) => Type.String(value.mkString)
-      case None => Type.String("")
+  def string: Parser[Type.String] = {
+    "\"" ~> opt(rep(alphanumeric | whiteSpace)) <~ "\"" ^^ {
+      case string => string match {
+        case Some(value) => Type.String(value.mkString)
+        case None => Type.String("")
+      }
     }
   }
 

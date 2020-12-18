@@ -1,8 +1,1 @@
-fn hello(name)
-{
-  print("Hello, " + name + "!");
-};
-nf;
 
-
-Hello.hello("Zana")
