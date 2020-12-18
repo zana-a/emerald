@@ -31,6 +31,7 @@ object Parser extends RegexParsers {
     }
   }
 
+  // TODO: only alphanumeric. what about any char?
   def string: Parser[Type.String] = "\"" ~> opt(rep(alphanumeric)) <~ "\"" ^^ {
     case string => string match {
       case Some(value) => Type.String(value.mkString)
@@ -48,20 +49,18 @@ object Parser extends RegexParsers {
 
   def bool: Parser[Type.Bool] = `true` | `false`
 
+
   def list: Parser[Type.List] = {
-    "[" ~> `type` ~ opt(rep("," ~> `type`)) <~ "]" ^^ {
-      case one ~ many => many match {
-        case Some(values) => Type.List(List(one).concat(values))
-        case None => Type.List(List(one))
-      }
+    "[" ~> repsep(`type`, ",") <~ "]" ^^ {
+      case result => Type.List(result)
     }
   }
 
   def `type`: Parser[Type.Type] = string | integer | bool | list
 
   def definition: Parser[Expression.Definition] = {
-    identifier ~ ":=" ~ `type` ^^ {
-      case identifier ~ _ ~ t => Expression.Definition(identifier, t)
+    identifier ~ ":" ~ "=" ~ `type` ^^ {
+      case identifier ~ _ ~ _ ~ t => Expression.Definition(identifier, t)
     }
   }
 }

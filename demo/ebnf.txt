@@ -1,4 +1,4 @@
-program          = { runnable, whitespace, { runnable, whitespace, ";" } }
+program          = { runnable, { runnable, ";" } }
 
 runnable         = statement | module
 
@@ -7,16 +7,18 @@ type             = integer
                  | string
                  | list
 
-numeric          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+numeric          = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
-integer          = numeric | { numeric }
+zero             = "0"
+
+integer          = numeric | { numeric | zero }
 
 mathOperator     = "+" | "-" | "*" | "/"
 
 mathExpression   = integer
-                 | mathExpression, { whitespace }, mathOperator, { whitespace }, mathExpression
-                 | "(", { whitespace }, mathExpression, { whitespace }, ")", whitespace
-                 , mathOperator, { whitespace }, mathExpression
+                 | mathExpression, mathOperator, mathExpression
+                 | "(", mathExpression, ")"
+                 , mathOperator, mathExpression
                  | "(", mathExpression, ")"
 
 string           = "\""
@@ -26,9 +28,9 @@ string           = "\""
 stringOperator   = "+"
 
 stringExpression = string
-                 | stringExpression, { whitespace }, stringOperator, { whitespace }, stringExpression
-                 | "(", { whitespace }, stringExpression, { whitespace }, ")", whitespace
-                 , stringOperator, { whitespace }, stringExpression
+                 | stringExpression, stringOperator, stringExpression
+                 | "(", stringExpression, ")"
+                 , stringOperator, stringExpression
                  | "(", stringExpression, ")"
 
 bool             = "true"
@@ -36,10 +38,10 @@ bool             = "true"
 
 logicOperator    = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
 
-logicExpression  = bool, { whitespace }, logicOperator, { whitespace }, bool
-                 | "(", { whitespace }, logicExpression, { whitespace }, ")"
-                 , { whitespace }, logicOperator, { whitespace }, logicExpression
-                 | "(", { whitespace }, logicExpression, { whitespace }, ")"
+logicExpression  = bool, logicOperator, bool
+                 | "(", logicExpression, ")"
+                 , logicOperator, logicExpression
+                 | "(", logicExpression, ")"
 
 lowerAlpha       = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k"
                  | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
@@ -57,11 +59,11 @@ whitespace       = " " | "\t" | "\n"
 
 identifier       = alpha, { alphanumeric }
 
-definition       = identifier, { whitespace }, ":=", { whitespace }, expression
+definition       = identifier, ":=", expression
 
-function         = "fn", { whitespace }, identifier
-                 , "(", { whitespace }, { type | type, { whitespace }, ",", whitespace }, { whitespace }, ")"
-                 , block, whitespace
+function         = "fn", identifier
+                 , "(", { type | type, "," }, ")"
+                 , block
                  , "nf"
 
 expression       = mathExpression
@@ -78,19 +80,19 @@ list             = "[", { type | type, "," } "]"
 
 block            = "{", { statement } "}"
 
-do               = "if", whitespace,
-                 , expression, { whitespace }, "->", { whitespace }, block, whitespace
-                 , { "|", { whitespace }, expression, { whitespace }, "->", { whitespace }, block }
-                 , { whitespace }, "fi"
+if               = "if",
+                 , expression, "->", block
+                 , { "|", expression, "->", block }
+                 , "fi"
 
-do               = "do", whitespace,
-                 , expression, { whitespace }, "->", { whitespace }, block, whitespace
-                 , { "|", { whitespace }, expression, { whitespace }, "->", { whitespace }, block }
-                 , { whitespace }, "od"
+do               = "do",
+                 , expression, "->", block
+                 , { "|", expression, "->", block }
+                 , "od"
 
 moduleIdentifier = upperAlpha, { alphanumeric }
 
-module           = "mod", { whitespace }, moduleIdentifier, whitespace
+module           = "mod", moduleIdentifier
                  , { function }
                  , "dom"
 

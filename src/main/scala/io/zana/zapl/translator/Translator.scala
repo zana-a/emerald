@@ -1,9 +1,9 @@
-package io.zana.zapl.generator
+package io.zana.zapl.translator
 
 import io.zana.zapl.ast.Expression.{String, _}
 import io.zana.zapl.ast.Type
 
-object Generator {
+object Translator {
 
   object Extract {
 
@@ -43,7 +43,7 @@ object Generator {
             "java.lang.String",
             "\"" + i + "\""
           )
-          case Type.List(i) => (
+          case Type.List(items) => (
             List
               .getClass
               .getName
@@ -52,12 +52,12 @@ object Generator {
               .concat("[Any]")
               .mkString,
             for {
-              item <- i
+              item <- items
             } yield Extract.function(item)
           )
         }
 
-      s"var ${definition.identifier}: ${result._1} = ${result._2}"
+      s"var ${definition.identifier} = ${result._2}"
     }
   }
 
