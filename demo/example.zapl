@@ -1,0 +1,19 @@
+mod A do
+  def hello(name) do
+    cond do
+      true -> do
+        puts(name)
+      end
+
+      false -> puts("Oops, Something went wrong")
+    end
+
+    loop do
+      true -> do
+        puts(name)
+      end
+
+      false -> puts("Oops, Something went wrong")
+    end
+  end
+end

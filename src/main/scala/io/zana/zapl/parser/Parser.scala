@@ -97,11 +97,9 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def module: Parser[Any] = {
-    // TODO: Static type change & return result as something more useful
-    "mod" ~ moduleIdent ~ "do" ~ opt(rep(function)) ~ "end" ^^ {
-      case _ ~ name ~ _ ~ body ~ _ =>
-        println(s"module of ${name}: ${body}")
-    }
+    // TODO: Static type change
+    "mod" ~ moduleIdent ~ "do" ~ opt(rep(function)) ~ "end"
+
   }
 
   /**
@@ -114,7 +112,7 @@ object Parser extends JavaTokenParsers {
    */
   def blockBody: Parser[Any] = {
     // TODO: Static type change
-    opt(rep(variable | function | block))
+    opt(rep(variable | function | block | functionCall | `if` | loop))
   }
 
   /**
@@ -148,12 +146,33 @@ object Parser extends JavaTokenParsers {
     "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ block
   }
 
+
+  def guard: Parser[Any] = {
+    bool ~ "->" ~ (block | functionCall)
+  }
+
+  def `if`: Parser[Any] = {
+    "cond" ~ "do" ~ opt(rep(guard)) ~ "end"
+  }
+
+  def loop: Parser[Any] = {
+    "loop" ~ "do" ~ opt(rep(guard)) ~ "end"
+  }
+
+  def functionCallBody: Parser[Any] = {
+    repsep(`type` | ident, ",")
+  }
+
+  def functionCall = {
+    ident ~ "(" ~ opt(functionCallBody) ~ ")"
+  }
+
   /**
    * The entry point of the parser in accordance to the project's EBNF.
    *
    * @return TODO: add return
    */
   def program: Parser[Any] = {
-    opt(rep(module | function | block | variable))
+    opt(rep(`if` | loop | module | function | block | variable | functionCall))
   }
 }
