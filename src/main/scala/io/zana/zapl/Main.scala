@@ -1,12 +1,7 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.Parser
-import io.zana.zapl.repl.Repl
-import io.zana.zapl.translator.Translator.Generate
+import io.zana.zapl.interactive.Repl
 
-object Main {
-
-  def main(args: Array[String]): Unit = {
-    println()
-  }
+object Main extends App {
+  Repl.start
 }

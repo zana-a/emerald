@@ -9,4 +9,6 @@ Reorganised to companion objects to separate out different parts of the program.
 ~Using functions for easier creation of objects for ast. This is better since it avoids collisions~ this was removed because it caused too much unneeded code. However packages made it easier to work with
 
 
-Changed type to bool in the ebnf for "logicExpression" 
+Changed type to bool in the ebnf for "logicExpression"
+
+changed the language ebnf to make it easier to read. some things were not needed as they were extra such as the block "{" ~ "}"
