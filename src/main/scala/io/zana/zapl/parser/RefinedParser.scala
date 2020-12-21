@@ -4,11 +4,17 @@ import io.zana.zapl.ast._
 import io.zana.zapl.parser.Parser._
 import io.zana.zapl.translator.Translator
 
-import scala.util.parsing.combinator.JavaTokenParsers
+import scala.io.Source
+import scala.util.matching.Regex
+import scala.util.parsing.combinator.syntactical.StandardTokenParsers
+import scala.util.parsing.combinator.{JavaTokenParsers, RegexParsers}
 
 object RefinedParser extends App {
 
-  object Parser extends JavaTokenParsers {
+  object Parser extends RegexParsers {
+    override def skipWhitespace: Boolean = true
+
+
     def lowerAlpha: Parser[String] = "[a-z]".r
 
     def upperAlpha: Parser[String] = "[A-Z]".r
@@ -36,7 +42,7 @@ object RefinedParser extends App {
 
     // TODO: only alphanumeric. what about any char?
     def string: Parser[Type.String] = {
-      stringLiteral ^^ {
+      "[\\\"(\\\\.|[^\"\\\\])*\\\"]".r ^^ {
         case value => Type.String(value)
       }
     }
@@ -67,7 +73,9 @@ object RefinedParser extends App {
 
     //    def expression: Parser[Expression.Expression] =
 
-    def statement: Parser[Statement.Statement] = block | definition
+    def statement: Parser[Statement.Statement] = {
+      module | function | block | definition
+    }
 
     def block: Parser[Statement.Block] = {
       "do" ~ opt(rep(statement)) ~ "end" ^^ {
@@ -88,8 +96,8 @@ object RefinedParser extends App {
         }
       }
 
-      "fn" ~ identifier ~ functionArgs ~ block ^^ {
-        case _ ~ name ~ functionArgs ~ block =>
+      "fn" ~> identifier ~ functionArgs ~ block ^^ {
+        case name ~ functionArgs ~ block =>
           Statement.Function(name, functionArgs, block)
       }
     }
@@ -101,10 +109,36 @@ object RefinedParser extends App {
         }
       }
 
-      "mod" ~> moduleIdentifier ~ rep(function) <~ "end" ^^ {
-        case name ~ functions => Statement.Module(name, functions)
+      def moduleBlock: Parser[Statement.ModuleBlock] = {
+        "do" ~> opt(rep(function)) <~ "end" ^^ {
+          case result => result match {
+            case Some(functions) => Statement.ModuleBlock(functions)
+            case None => Statement.ModuleBlock(List())
+          }
+        }
       }
+
+      phrase("mod" ~> moduleIdentifier ~ moduleBlock) ^^ {
+        //        case name ~ functions => functions match {
+        //          case Some(list) => Statement.Module(name, list)
+        //          case None => Statement.Module(name, List())
+        //        }
+        case name ~ block => Statement.Module(name, block)
+      }
+    }
+
+    def program: Parser[Any] = rep(opt(module)) ^^ {
+      case res => println(res)
     }
   }
 
+  val source = Source.fromFile("demo/example.zapl").mkString
+  //  println(source)
+
+  println(Parser.parse(Parser.program,
+    """
+      |mod A do
+      |
+      |end
+      |""".stripMargin))
 }

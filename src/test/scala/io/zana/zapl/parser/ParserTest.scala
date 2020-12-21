@@ -1,7 +1,6 @@
 package io.zana.zapl.parser
 
-import io.zana.zapl.ast.Expression._
-import io.zana.zapl.ast.Type
+import io.zana.zapl.ast.{Expression, Statement, Type}
 import io.zana.zapl.parser.Parser
 import org.junit.Assert._
 import org.junit._
@@ -56,7 +55,7 @@ class DefinitionTest {
 
   @Test
   def `lone identifier` = {
-    val result = Parser.parse(Parser.definition, "someDefinition")
+    val result = Parser.parse(Parser.definition, "someStatement.Definition")
 
     result match {
       case Parser.Success(result, _) => assert(false, result)
@@ -69,7 +68,7 @@ class DefinitionTest {
   def `definition of an integer` = {
     {
       val result = {
-        Parser.parse(Parser.definition, "someDefinition := 1") match {
+        Parser.parse(Parser.definition, "someStatement.Definition := 1") match {
           case Parser.Success(result, _) => {
             result
           }
@@ -78,11 +77,11 @@ class DefinitionTest {
         }
       }
 
-      assertEquals(Definition("someDefinition", Type.Integer(1)), result)
+      assertEquals(Statement.Definition("someStatement.Definition", Type.Integer(1)), result)
     }
     {
       val result = {
-        Parser.parse(Parser.definition, "someDefinition := 0123") match {
+        Parser.parse(Parser.definition, "someStatement.Definition := 0123") match {
           case Parser.Success(result, _) => {
             assert(false, result)
           }
@@ -93,7 +92,7 @@ class DefinitionTest {
     }
     {
       val result = {
-        Parser.parse(Parser.definition, "someDefinition := 2147483647") match {
+        Parser.parse(Parser.definition, "someStatement.Definition := 2147483647") match {
           case Parser.Success(result, _) => {
             result
           }
@@ -102,12 +101,12 @@ class DefinitionTest {
         }
       }
 
-      assertEquals(Definition("someDefinition", Type.Integer(2147483647)), result)
+      assertEquals(Statement.Definition("someStatement.Definition", Type.Integer(2147483647)), result)
     }
     //    {
     //      // TODO: How to handle??
     //      val result = {
-    //        Parser.parse(Parser.definition, "someDefinition := 214748364123") match {
+    //        Parser.parse(Parser.definition, "someStatement.Definition := 214748364123") match {
     //          case Parser.Success(result, _) => {
     //            assert(false, result)
     //          }

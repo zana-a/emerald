@@ -12,67 +12,67 @@ class TranslatorTest {
 
     assertEquals("var a = 1",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(1)),
+        Statement.Definition("a", Type.Integer(1)),
       )
     )
 
     assertEquals("var a = 2",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(2)),
+        Statement.Definition("a", Type.Integer(2)),
       )
     )
 
     assertEquals("var a = 3",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(3)),
+        Statement.Definition("a", Type.Integer(3)),
       )
     )
 
     assertEquals("var a = 4",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(4)),
+        Statement.Definition("a", Type.Integer(4)),
       )
     )
 
     assertEquals("var a = 5",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(5)),
+        Statement.Definition("a", Type.Integer(5)),
       )
     )
 
     assertEquals("var a = 6",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(6)),
+        Statement.Definition("a", Type.Integer(6)),
       )
     )
 
     assertEquals("var a = 7",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(7)),
+        Statement.Definition("a", Type.Integer(7)),
       )
     )
 
     assertEquals("var a = 8",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(8)),
+        Statement.Definition("a", Type.Integer(8)),
       )
     )
 
     assertEquals("var a = 9",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(9)),
+        Statement.Definition("a", Type.Integer(9)),
       )
     )
 
     assertEquals("var a = 0",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(0)),
+        Statement.Definition("a", Type.Integer(0)),
       )
     )
 
     assertEquals("var a = 2147483647",
       Generate.definition(
-        Expression.Definition("a", Type.Integer(2147483647))
+        Statement.Definition("a", Type.Integer(2147483647))
       )
     )
   }
@@ -80,31 +80,31 @@ class TranslatorTest {
   @Test
   def `definition for string` = {
     assertEquals("var a = \"\"", Generate.definition(
-      Expression.Definition("a", Type.String("")),
+      Statement.Definition("a", Type.String("")),
     ))
 
     assertEquals("var a = \"a\"", Generate.definition(
-      Expression.Definition("a", Type.String("a")),
+      Statement.Definition("a", Type.String("a")),
     ))
 
     assertEquals("var a = \"abcde\"", Generate.definition(
-      Expression.Definition("a", Type.String("abcde")),
+      Statement.Definition("a", Type.String("abcde")),
     ))
 
     assertEquals("var a = \"abcde abcde\"", Generate.definition(
-      Expression.Definition("a", Type.String("abcde abcde")),
+      Statement.Definition("a", Type.String("abcde abcde")),
     ))
 
     assertEquals("var a = \"a\ta\"", Generate.definition(
-      Expression.Definition("a", Type.String("a\ta")),
+      Statement.Definition("a", Type.String("a\ta")),
     ))
 
     assertEquals("var a = \"a\na\"", Generate.definition(
-      Expression.Definition("a", Type.String("a\na")),
+      Statement.Definition("a", Type.String("a\na")),
     ))
 
     assertEquals("var a = \"!=@#¡+)\"", Generate.definition(
-      Expression.Definition("a", Type.String("!=@#¡+)")),
+      Statement.Definition("a", Type.String("!=@#¡+)")),
     ))
   }
 
@@ -112,13 +112,13 @@ class TranslatorTest {
   def `definition for bool` = {
     assertEquals("var a = true",
       Generate.definition(
-        Expression.Definition("a", Type.Bool(true)),
+        Statement.Definition("a", Type.Bool(true)),
       )
     )
 
     assertEquals("var a = false",
       Generate.definition(
-        Expression.Definition("a", Type.Bool(false)),
+        Statement.Definition("a", Type.Bool(false)),
       )
     )
   }
@@ -127,13 +127,13 @@ class TranslatorTest {
   def `definition for list` = {
     assertEquals("var a = List()",
       Generate.definition(
-        Expression.Definition("a", Type.List(List())),
+        Statement.Definition("a", Type.List(List())),
       )
     )
 
     assertEquals("var a = List(1)",
       Generate.definition(
-        Expression.Definition(
+        Statement.Definition(
           "a",
           Type.List(
             List(Type.Integer(1)),
@@ -144,7 +144,7 @@ class TranslatorTest {
 
     assertEquals("var a = List(1, 2, 3)",
       Generate.definition(
-        Expression.Definition(
+        Statement.Definition(
           "a",
           Type.List(
             List(
@@ -159,7 +159,7 @@ class TranslatorTest {
 
     assertEquals("var a = List(1, \"a b c d\", List(true, false))",
       Generate.definition(
-        Expression.Definition(
+        Statement.Definition(
           "a",
           Type.List(
             List(
