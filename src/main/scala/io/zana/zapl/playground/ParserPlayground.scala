@@ -6,37 +6,6 @@ import scala.util.parsing.combinator.{JavaTokenParsers, RegexParsers}
 
 object ParserPlayground extends App {
 
-  //  object Parser extends JavaTokenParsers {
-  //
-  //    override def skipWhitespace: Boolean = false
-  //
-  //
-  //    def module: Parser[Any] = {
-  //      def moduleIdent: Parser[String] = "[A-Z]+".r ~ opt(ident) ^^ {
-  //        case first ~ optAll => optAll match {
-  //          case Some(all) => first ++ all
-  //          case None => first
-  //        }
-  //      }
-  //
-  //      def moduleBlock: Parser[Any] = phrase("do" ~ whiteSpace ~ opt(rep(variable)) ~ whiteSpace ~ "end")
-  //
-  //      phrase(("mod" ~ whiteSpace) ~> moduleIdent ~ (whiteSpace ~> moduleBlock)) ^^ {
-  //        case name ~ body =>
-  //          println(s"module of ${name}: ${body}")
-  //      }
-  //    }
-  //
-  //    def `type`: Parser[Any] = wholeNumber
-  //
-  //    def variable: Parser[Any] = {
-  //      (ident ~ opt(whiteSpace) ~
-  //        "=" ~ opt(whiteSpace) ~ `type` ~ whiteSpace)
-  //    }
-  //
-  //    def program: Parser[Any] = opt(whiteSpace) ~ phrase(opt(rep(module))) ~ opt(whiteSpace)
-  //  }
-
   object Parser extends JavaTokenParsers {
 
     def module: Parser[Any] = {
@@ -51,22 +20,25 @@ object ParserPlayground extends App {
     def `type`: Parser[Any] = wholeNumber
 
     def variable: Parser[Any] = {
-      phrase(ident ~ "=" ~ `type` ~ "\n")
+      ident ~ "=" ~ `type`
     }
 
-    def block: Parser[Any] = "do" ~ opt(variable) ~ "end"
+    def block: Parser[Any] = {
+      def blockBody: Parser[Any] = opt(rep(variable | function | block))
 
-    def function: Parser[Any] = "def" ~ ident ~ "(" ~ opt(rep(ident)) ~ ")" ~ block
+      "do" ~ blockBody ~ "end"
+    }
 
-    def program: Parser[Any] = opt(rep(module))
+    def function: Parser[Any] = "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ block
+
+    def program: Parser[Any] = opt(rep(module | function | block | variable))
   }
 
 
-  {
-    import Parser._
+  import Parser._
 
-    println(parseAll(program, Source.fromFile("demo/example.zapl").mkString))
-  }
+  println(parseAll(program, Source.fromFile("demo/example.zapl").mkString))
+
 }
 
 

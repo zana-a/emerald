@@ -13,3 +13,10 @@ project/
 
 # Scala-IDE specific
 .idea
+
+# ensime specific
+.ensime_cache/
+ensime-langserver.log
+
+# other
+pc.stdout.log
