@@ -2,7 +2,7 @@ mod Example do
   def hello(name) do
     cond do
       (name == "Zana") -> puts("Hello, Zana!")
-      (true) -> do
+      true -> do
         puts("Hello, World!")
       end
     end
