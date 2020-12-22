@@ -1,13 +1,6 @@
+do
+  println("Hello!")
 
-mod Program do
-
-  mod Something do
-
-  end
-
-  def main(args) do
-
-
-  end
+  a = a + b
+  a + 2
 end
-

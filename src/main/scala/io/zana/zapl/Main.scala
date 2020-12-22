@@ -8,7 +8,7 @@ import scala.io.Source
 object Main extends App {
   println(
     Parser.parseAll(
-      Parser.program,
+      Parser.block,
       Source.fromFile("demo/example.zapl").mkString
     )
   )

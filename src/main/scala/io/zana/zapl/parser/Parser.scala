@@ -1,6 +1,7 @@
 package io.zana.zapl.parser
 
 import io.zana.zapl.ast._
+import io.zana.zapl.parser
 
 import scala.util.parsing.combinator._
 
@@ -13,6 +14,10 @@ import scala.util.parsing.combinator._
  * @author zana-a
  */
 object Parser extends JavaTokenParsers {
+
+  def keywords: Parser[Any] = {
+    "do" | "end" | "mod" | "true" | "false" | "loop" | "cond"
+  }
 
   /**
    * Parses either the keyword true or false.
@@ -102,16 +107,17 @@ object Parser extends JavaTokenParsers {
   }
 
   /**
-   * Parses 0, 1 or more of either a [[variable]], [[function]] or [[block]].
+   * Parses a variable binding using the [[ident]] from the inherited
+   * [[JavaTokenParsers]].
    *
-   * @return a parser of either
-   *         [[variable]],
-   *         [[function]] or
-   *         [[block]].
+   * @return TODO: add return
    */
-  def blockBody: Parser[Any] = {
-    // TODO: Static type change
-    opt(rep(statement))
+  def variable: Parser[Any] = {
+    ident ~ "=" ~ expression
+  }
+
+  override def ident: parser.Parser.Parser[String] = {
+    not(keywords) ~> super.ident
   }
 
   /**
@@ -120,19 +126,9 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def block: Parser[Any] = {
-    "do" ~ blockBody ~ "end"
-  }
+    val blockBody = opt(rep(statement | expression))
 
-  /**
-   * Parses a variable binding using the [[ident]] from the inherited
-   * [[JavaTokenParsers]].
-   *
-   * Any of [[`type`]] is accepted.
-   *
-   * @return TODO: add return
-   */
-  def variable: Parser[Any] = {
-    ident ~ "=" ~ `type`
+    "do" ~ blockBody ~ "end"
   }
 
   /**
@@ -145,15 +141,9 @@ object Parser extends JavaTokenParsers {
     "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ block
   }
 
-
-  /**
-   * Parses
-   *
-   * @return
-   */
   def guardCommand: Parser[Any] = {
     // TODO: change bool to booleanExpressionr
-    bool ~ "->" ~ (statement)
+    expression ~ "->" ~ (statement | expression | block)
   }
 
   def `if`: Parser[Any] = {
@@ -164,34 +154,55 @@ object Parser extends JavaTokenParsers {
     "loop" ~ "do" ~ opt(rep(guardCommand)) ~ "end"
   }
 
-  def functionCallBody: Parser[Any] = {
-    repsep(`type` | ident, ",")
-  }
-
-
   def functionCall = {
-    ident ~ "(" ~ opt(functionCallBody) ~ ")"
+    val body = repsep(expression | ident, ",")
+
+    ident ~ "(" ~ opt(body) ~ ")"
   }
 
   def moduleFunctionCall = {
     val a = (moduleIdent ~ "::" ~ functionCall)
-    val b = (moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~ "::" ~ functionCall)
+    val b = (moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~
+      "::" ~ functionCall)
 
     a | b
   }
 
-  def statement: Parser[Any] =
-    `if` |
+  def statement: Parser[Any] = {
+    variable |
+      `if` |
       loop |
       module |
       function |
       block |
-      variable |
       functionCall |
       moduleFunctionCall
+  }
 
-  // TODO: Add other expressions
-  def expression: Parser[Any] = `type`
+  def mathExpression: Parser[Any] = {
+    val mathOperator = "+" | "-" | "*" | "/"
+
+    "(" ~ mathExpression ~ ")" ~ mathOperator ~ rep1(mathExpression) |
+      (integer | ident) ~ mathOperator ~ rep1(mathExpression) |
+      "(" ~ mathExpression ~ ")" |
+      (integer | ident)
+  }
+
+
+  def boolOperator = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
+
+  def boolExpression: Parser[Any] = {
+    val accepted = ident | functionCall | moduleFunctionCall | `type`
+
+    "(" ~ boolExpression ~ ")" ~ boolOperator ~ rep1(boolExpression) |
+      accepted ~ boolOperator ~ rep1(boolExpression) |
+      "(" ~ boolExpression ~ ")" |
+      accepted
+  }
+
+  def expression: Parser[Any] = {
+    (mathExpression | boolExpression)
+  }
 
   /**
    * The entry point of the parser in accordance to the project's EBNF.

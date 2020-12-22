@@ -25,7 +25,7 @@ string            = "\"",
                     when needed
                   ?, "\""
 
-stringOperator    = "+"
+stringOperator    = "<>"
 
 stringExpression  = string
                   | stringExpression, stringOperator, stringExpression
