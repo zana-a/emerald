@@ -1,19 +1,13 @@
-mod A do
-  def hello(name) do
-    cond do
-      true -> do
-        puts(name)
-      end
 
-      false -> puts("Oops, Something went wrong")
-    end
+mod Program do
 
-    loop do
-      true -> do
-        puts(name)
-      end
+  mod Something do
 
-      false -> puts("Oops, Something went wrong")
-    end
+  end
+
+  def main(args) do
+
+
   end
 end
+

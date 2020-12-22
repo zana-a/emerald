@@ -1,105 +1,104 @@
-program          = { runnable, { runnable, ";" } }
+program           = { statements }
 
-runnable         = statement | module
+type              = integer
+                  | bool
+                  | string
+                  | list
 
-type             = integer
-                 | bool
-                 | string
-                 | list
+numeric           = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
-numeric          = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+zero              = "0"
 
-zero             = "0"
+integer           = numeric | { numeric | zero }
 
-integer          = numeric | { numeric | zero }
+mathOperator      = "+" | "-" | "*" | "/"
 
-mathOperator     = "+" | "-" | "*" | "/"
+mathExpression    = integer
+                  | mathExpression, mathOperator, mathExpression
+                  | "(", mathExpression, ")"
+                  , mathOperator, mathExpression
+                  | "(", mathExpression, ")"
 
-mathExpression   = integer
-                 | mathExpression, mathOperator, mathExpression
-                 | "(", mathExpression, ")"
-                 , mathOperator, mathExpression
-                 | "(", mathExpression, ")"
+string            = "\"",
+                  ?
+                    any valid unicode chars providing that they are escaped
+                    when needed
+                  ?, "\""
 
-string           = "\""
-                 , ? any valid unicode chars providing that they are escaped when needed ?
-                 , "\""
+stringOperator    = "+"
 
-stringOperator   = "+"
+stringExpression  = string
+                  | stringExpression, stringOperator, stringExpression
+                  | "(", stringExpression, ")"
+                  , stringOperator, stringExpression
+                  | "(", stringExpression, ")"
 
-stringExpression = string
-                 | stringExpression, stringOperator, stringExpression
-                 | "(", stringExpression, ")"
-                 , stringOperator, stringExpression
-                 | "(", stringExpression, ")"
+bool              = "true"
+                  | "false"
 
-bool             = "true"
-                 | "false"
+logicOperator     = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
 
-logicOperator    = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
+logicExpression   = bool, logicOperator, bool
+                  | "(", logicExpression, ")"
+                  , logicOperator, logicExpression
+                  | "(", logicExpression, ")"
 
-logicExpression  = bool, logicOperator, bool
-                 | "(", logicExpression, ")"
-                 , logicOperator, logicExpression
-                 | "(", logicExpression, ")"
+lowerAlpha        = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
+                  | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t"
+                  | "u" | "v" | "w" | "x" | "y" | "z"
 
-lowerAlpha       = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k"
-                 | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
-                 | "w" | "x" | "y" | "z"
+upperAlpha        = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J"
+                  | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
+                  | "U" | "V" | "W" | "X" | "Y" | "Z"
 
-upperAlpha       = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K"
-                 | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V"
-                 | "W" | "X" | "Y" | "Z"
+alpha             = lowerAlpha | upperAlpha
 
-alpha            = lowerAlpha | upperAlpha
+alphanumeric      = alpha | numeric
 
-alphanumeric     = alpha | numeric
+whitespace        = " " | "\t" | "\n" | "\s"
 
-whitespace       = " " | "\t" | "\n"
+identifier        = alpha, { alphanumeric }
 
-identifier       = alpha, { alphanumeric }
+variable          =  identifier, "=", expression
 
-definition       = identifier, ":=", expression
+function          = "def", identifier, "(", { type | type, "," }, ")", block
 
-function         = "fn", identifier
-                 , "(", { type | type, "," }, ")"
-                 , block
-                 , "end"
+expression        = mathExpression
+                  | stringExpression
+                  | logicExpression
 
-expression       = mathExpression
-                 | stringExpression
-                 | logicExpression
+statement         = block
+                  | cond
+                  | loop
+                  | function
+                  | variable
 
-statement        = block
-                 | if
-                 | do
-                 | function
-                 | definition
+list              = "[", { type | type, "," } "]"
 
-list             = "[", { type | type, "," } "]"
+block             = "do", { statement }, "end"
 
-block            = "do", { statement }, "end"
+guardCommand      = expression, "->", ( statement | block )
 
-if               = "if",
-                 , expression, "->", block
-                 , { "|", expression, "->", block }
-                 , "end"
+cond              = "cond", "do"
+                  , { guardCommand }
+                  , "end"
 
-loop               = "loop",
-                 , expression, "->", ( block | statement )
-                 , { "|", expression, "->", ( block | statement ) }
-                 , "end"
+loop              = "loop", "do"
+                  , { guardCommand }
+                  , "end"
 
-moduleIdentifier = upperAlpha, { alphanumeric }
+moduleIdentifier  = upperAlpha, { alphanumeric }
 
-module           = "mod", moduleIdentifier
-                 , { function }
-                 , "end"
+module            = "mod", moduleIdentifier, "do"
+                  , { function | module }
+                  , "end"
 
-funcCall         = identifier, "(", { type | type, "," }, ")"
+funcCall          = identifier, "(", { type | type, "," }, ")"
 
-listIndexCall    = identifier, "[", { integer }, "]"
+listIndexCall     = identifier, "[", { integer }, "]"
 
-moduleFuncCall   = moduleIdentifier, ".", functionCall
+moduleFuncCall    = moduleIdentifier, "::", functionCall
+                  | moduleIdentifier, { "::", moduleIdentifier }, functionalCall
 
-variableCall     = identifier
+variableCall      = identifier
+
