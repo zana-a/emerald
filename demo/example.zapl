@@ -1,8 +1,12 @@
 mod Example do
   def hello(name) do
     cond do
-      name == "Zana" -> puts("Hello, Zana!")
-      true -> puts("Hello, World!")
+      (name == "Zana") -> puts("Hello, Zana!")
+      (true) -> do
+        puts("Hello, World!")
+      end
     end
   end
 end
+
+Example::hello("Zana")
