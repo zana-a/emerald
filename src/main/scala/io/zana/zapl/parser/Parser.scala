@@ -201,7 +201,12 @@ object Parser extends JavaTokenParsers {
   }
 
   def expression: Parser[Any] = {
-    (mathExpression | boolExpression)
+    val accepted = (mathExpression | boolExpression)
+
+    "(" ~ expression ~ ")" ~ boolOperator ~ rep1(expression) |
+      accepted ~ boolOperator ~ rep1(expression) |
+      "(" ~ expression ~ ")" |
+      accepted
   }
 
   /**

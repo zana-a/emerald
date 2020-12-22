@@ -1,6 +1,8 @@
-do
-  println("Hello!")
-
-  a = a + b
-  a + 2
+mod Example do
+  def hello(name) do
+    cond do
+      name == "Zana" -> puts("Hello, Zana!")
+      true -> puts("Hello, World!")
+    end
+  end
 end
