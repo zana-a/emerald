@@ -102,7 +102,6 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def module: Parser[Any] = {
-    // TODO: Static type change
     "mod" ~ moduleIdent ~ "do" ~ opt(rep(function | module)) ~ "end"
   }
 
@@ -138,16 +137,19 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def function: Parser[Any] = {
-    "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ block
+    "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ "->" ~ (moduleFunctionCall | functionCall | expression | block)
   }
 
   def guardCommand: Parser[Any] = {
-    // TODO: change bool to booleanExpressionr
-    expression ~ "->" ~ (statement | expression | block)
+    expression ~ "->" ~ (functionCall | moduleFunctionCall | expression | statement | block)
   }
 
-  def `if`: Parser[Any] = {
-    "cond" ~ "do" ~ opt(rep(guardCommand)) ~ "end"
+  def defaultGuardCommand: Parser[Any] = {
+    "_" ~ "->" ~ (functionCall | moduleFunctionCall | expression | statement | block)
+  }
+
+  def cond: Parser[Any] = {
+    "cond" ~ "do" ~ opt(rep(guardCommand)) ~ opt(defaultGuardCommand) ~ "end"
   }
 
   def loop: Parser[Any] = {
@@ -155,59 +157,48 @@ object Parser extends JavaTokenParsers {
   }
 
   def functionCall = {
-    val body = repsep(expression | ident, ",")
+    val body = repsep(expression | ident | `type`, ",")
 
     ident ~ "(" ~ opt(body) ~ ")"
   }
 
   def moduleFunctionCall = {
-    val a = (moduleIdent ~ "::" ~ functionCall)
-    val b = (moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~
-      "::" ~ functionCall)
+    val a = moduleIdent ~ "::" ~ functionCall
+    val b = moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~ "::" ~ functionCall
 
     a | b
   }
 
   def statement: Parser[Any] = {
-    variable |
-      `if` |
-      loop |
-      module |
-      function |
-      block |
+    module |
+      moduleFunctionCall |
       functionCall |
-      moduleFunctionCall
+      function |
+      loop |
+      cond |
+      block |
+      variable
+
   }
 
-  def mathExpression: Parser[Any] = {
-    val mathOperator = "+" | "-" | "*" | "/"
+  def unaryExpression: Parser[Any] = {
+    def factor: Parser[Any] = constant | "(" ~ unaryExpression ~ ")"
 
-    "(" ~ mathExpression ~ ")" ~ mathOperator ~ rep1(mathExpression) |
-      (integer | ident) ~ mathOperator ~ rep1(mathExpression) |
-      "(" ~ mathExpression ~ ")" |
-      (integer | ident)
+    def constant: Parser[Any] = integer | ident
+
+    factor ~ rep("+" ~ unaryExpression | "-" ~ unaryExpression | "*" ~ unaryExpression | "/" ~ unaryExpression)
   }
 
+  def booleanExpression: Parser[Any] = {
+    def factor: Parser[Any] = "!" ~ factor | constant | "(" ~ booleanExpression ~ ")"
 
-  def boolOperator = "||" | "&&" | "<" | ">" | "<=" | ">=" | "==" | "!="
+    def constant: Parser[Any] = unaryExpression | "true" | "false" | integer | ident
 
-  def boolExpression: Parser[Any] = {
-    val accepted = ident | functionCall | moduleFunctionCall | `type`
-
-    "(" ~ boolExpression ~ ")" ~ boolOperator ~ rep1(boolExpression) |
-      accepted ~ boolOperator ~ rep1(boolExpression) |
-      "(" ~ boolExpression ~ ")" |
-      accepted
+    factor ~ rep("&&" ~ booleanExpression | "||" ~ booleanExpression | "==" ~ booleanExpression | "!=" ~ booleanExpression | "<" ~ booleanExpression | ">" ~ booleanExpression | "<=" ~ booleanExpression | ">=" ~ booleanExpression)
   }
 
-  def expression: Parser[Any] = {
-    val accepted = (mathExpression | boolExpression)
-
-    "(" ~ expression ~ ")" ~ boolOperator ~ rep1(expression) |
-      accepted ~ boolOperator ~ rep1(expression) |
-      "(" ~ expression ~ ")" |
-      accepted
-  }
+  def expression: Parser[Any] =
+    booleanExpression | unaryExpression
 
   /**
    * The entry point of the parser in accordance to the project's EBNF.
@@ -217,4 +208,5 @@ object Parser extends JavaTokenParsers {
   def program: Parser[Any] = {
     opt(rep(statement))
   }
+
 }

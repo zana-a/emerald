@@ -1,12 +1,9 @@
-mod Example do
-  def hello(name) do
-    cond do
-      (name == "Zana") -> puts("Hello, Zana!")
-      true -> do
-        puts("Hello, World!")
-      end
-    end
+def some_function() ->
+  IO::puts("Hello, World!")
+
+def greatest(a, b) -> do
+  cond do
+    a > b -> a
+    _ -> b
   end
 end
-
-Example::hello("Zana")

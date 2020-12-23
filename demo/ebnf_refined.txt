@@ -102,3 +102,20 @@ moduleFuncCall    = moduleIdentifier, "::", functionCall
 
 variableCall      = identifier
 
+================================================================================
+Expression
+================================================================================
+
+TRUE  = "true"
+FALSE = "false"
+
+AND = "and"
+OR  = "or"
+NOT = "not"
+
+LEFT_PARENTHESIS  = "("
+RIGHT_PARENTHESIS = ")"
+
+BOOLEAN = TRUE | FALSE
+OPERATOR = AND | OR | NOT
+
