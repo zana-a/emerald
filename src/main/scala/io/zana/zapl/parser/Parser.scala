@@ -112,7 +112,7 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def variable: Parser[Any] = {
-    ident ~ "=" ~ expression
+    ident ~ "=" ~ (block | expression)
   }
 
   override def ident: parser.Parser.Parser[String] = {
@@ -137,15 +137,18 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def function: Parser[Any] = {
-    "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ "->" ~ (moduleFunctionCall | functionCall | expression | block)
+    "def" ~ ident ~ "(" ~ opt(repsep(ident, ",")) ~ ")" ~ "=" ~
+      (moduleFunctionCall | functionCall | loop | cond | expression | block)
   }
 
   def guardCommand: Parser[Any] = {
-    expression ~ "->" ~ (functionCall | moduleFunctionCall | expression | statement | block)
+    expression ~ "->" ~
+      (functionCall | moduleFunctionCall | expression | statement | block)
   }
 
   def defaultGuardCommand: Parser[Any] = {
-    "_" ~ "->" ~ (functionCall | moduleFunctionCall | expression | statement | block)
+    "_" ~ "->" ~
+      (functionCall | moduleFunctionCall | expression | statement | block)
   }
 
   def cond: Parser[Any] = {
@@ -164,21 +167,21 @@ object Parser extends JavaTokenParsers {
 
   def moduleFunctionCall = {
     val a = moduleIdent ~ "::" ~ functionCall
-    val b = moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~ "::" ~ functionCall
+    val b = moduleIdent ~ "::" ~ opt(repsep(moduleIdent, "::")) ~
+      "::" ~ functionCall
 
     a | b
   }
 
   def statement: Parser[Any] = {
-    module |
+    variable |
       moduleFunctionCall |
       functionCall |
       function |
+      module |
       loop |
       cond |
-      block |
-      variable
-
+      block
   }
 
   def unaryExpression: Parser[Any] = {
@@ -186,19 +189,50 @@ object Parser extends JavaTokenParsers {
 
     def constant: Parser[Any] = integer | ident
 
-    factor ~ rep("+" ~ unaryExpression | "-" ~ unaryExpression | "*" ~ unaryExpression | "/" ~ unaryExpression)
+    factor ~
+      rep("+" ~ unaryExpression |
+        "-" ~ unaryExpression |
+        "*" ~ unaryExpression |
+        "/" ~ unaryExpression)
   }
 
   def booleanExpression: Parser[Any] = {
-    def factor: Parser[Any] = "!" ~ factor | constant | "(" ~ booleanExpression ~ ")"
+    def factor: Parser[Any] =
+      "!" ~ factor | constant | "(" ~ booleanExpression ~ ")"
 
-    def constant: Parser[Any] = unaryExpression | "true" | "false" | integer | ident
+    def constant: Parser[Any] = {
+      moduleFunctionCall |
+        functionCall |
+        unaryExpression |
+        stringExpression |
+        `type` |
+        ident |
+        "true" |
+        "false"
+    }
 
-    factor ~ rep("&&" ~ booleanExpression | "||" ~ booleanExpression | "==" ~ booleanExpression | "!=" ~ booleanExpression | "<" ~ booleanExpression | ">" ~ booleanExpression | "<=" ~ booleanExpression | ">=" ~ booleanExpression)
+    factor ~
+      rep("&&" ~ booleanExpression |
+        "||" ~ booleanExpression |
+        "==" ~ booleanExpression |
+        "!=" ~ booleanExpression |
+        "<" ~ booleanExpression |
+        ">" ~ booleanExpression |
+        "<=" ~ booleanExpression |
+        ">=" ~ booleanExpression)
+  }
+
+  def stringExpression: Parser[Any] = {
+
+    def factor: Parser[Any] = constant | "(" ~ stringExpression ~ ")"
+
+    def constant: Parser[Any] = string | ident
+
+    factor ~ rep("<>" ~ stringExpression)
   }
 
   def expression: Parser[Any] =
-    booleanExpression | unaryExpression
+    booleanExpression | unaryExpression | stringExpression
 
   /**
    * The entry point of the parser in accordance to the project's EBNF.
@@ -206,7 +240,7 @@ object Parser extends JavaTokenParsers {
    * @return TODO: add return
    */
   def program: Parser[Any] = {
-    opt(rep(statement))
+    opt(rep(statement | expression))
   }
 
 }

@@ -1,9 +1,5 @@
-def some_function() ->
-  IO::puts("Hello, World!")
-
-def greatest(a, b) -> do
-  cond do
-    a > b -> a
-    _ -> b
-  end
+a = do
+  println()
 end
+
+b = 3
