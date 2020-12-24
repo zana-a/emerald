@@ -4,6 +4,8 @@ import io.zana.zapl.structure.{Auxillery, Statement, Type}
 
 object Parser extends Base {
 
+  override def ident: Parser[String] = not(Keyword.keywords) ~> super.ident
+
   protected object Keyword {
     val DO = "do"
 
@@ -15,21 +17,13 @@ object Parser extends Base {
 
     val FALSE = "false"
 
-    val LOOP = "loop"
+    val LOOP = "while"
 
-    val COND = "cond"
-  }
+    val COND = "if"
 
-  protected def keywords: Parser[String] = {
-    import Keyword._
-
-    DO | END | MOD | TRUE | FALSE | COND | LOOP
-  }
-
-  //  ----------------------
-
-  override def ident: Parser[String] = {
-    not(keywords) ~> super.ident
+    def keywords: Parser[String] = {
+      DO | END | MOD | TRUE | FALSE | COND | LOOP
+    }
   }
 
   //  ----------------------
@@ -48,14 +42,12 @@ object Parser extends Base {
       t | f ^^ (result => result)
     }
 
-    def string: Parser[Type.String] = {
-      stringLiteral ^^ (result => Type.String(result))
+    def string: Parser[Type.String] = stringLiteral ^^ {
+      result => Type.String(result)
     }
 
-    def list: Parser[Type.List] = {
-      "[" ~> repsep(`type`, ",") <~ "]" ^^ {
-        result => Type.List(result)
-      }
+    def list: Parser[Type.List] = "[" ~> repsep(`type`, ",") <~ "]" ^^ {
+      result => Type.List(result)
     }
 
     def integer: Parser[Type.Integer] = wholeNumber ^^ {
