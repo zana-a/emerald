@@ -1,5 +1,4 @@
-package io.zana.zapl
-package structure
+package io.zana.zapl.structure
 
 object Type {
 

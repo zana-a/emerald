@@ -1,5 +1,4 @@
-package io.zana.zapl
-package parser
+package io.zana.zapl.parser
 
 import scala.util.parsing.combinator.JavaTokenParsers
 
@@ -8,6 +7,75 @@ object Parser extends JavaTokenParsers {
   def identifier: Parser[String] = {
     import Keyword.keywords
     not(keywords) ~> super.ident
+  }
+
+  object Operator {
+    val LEFT_PARENTHESIS = "("
+
+    val RIGHT_PARENTHESIS = ")"
+
+    val LEFT_BRACKET = "["
+
+    val RIGHT_BRACKET = "]"
+
+    val DQUOTE = "\""
+
+    val UNDERSCORE = "_"
+
+    val FAT_ARROW = "=>"
+
+    val COMMA = ","
+
+    val PLUS = "+"
+
+    val MULTIPLICATION = "*"
+
+    val MINUS = "-"
+
+    val DIVISION = "/"
+
+    val AND = "&&"
+
+    val OR = "||"
+
+    val EQEQ = "=="
+
+    val NEQ = "!="
+
+    val LT = "<"
+
+    val GT = ">"
+
+    val LTEQ = "<="
+
+    val GTEQ = ">="
+
+    val NOT = "!"
+
+    val BOX = "::"
+
+    val EQ = "="
+  }
+
+  object Keyword {
+    val TRUE = "true"
+
+    val FALSE = "false"
+
+    val DEF = "def"
+
+    val DO = "do"
+
+    val END = "end"
+
+    val IF = "if"
+
+    val WHILE = "while"
+
+    val MOD = "mod"
+
+    def keywords: Parser[String] =
+      TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
   }
 
   object Block {
@@ -110,27 +178,6 @@ object Parser extends JavaTokenParsers {
     }
   }
 
-  object Keyword {
-    val TRUE = "true"
-
-    val FALSE = "false"
-
-    val DEF = "def"
-
-    val DO = "do"
-
-    val END = "end"
-
-    val IF = "if"
-
-    val WHILE = "while"
-
-    val MOD = "mod"
-
-    def keywords: Parser[String] =
-      TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
-  }
-
   object Module {
 
     import Function._
@@ -143,58 +190,10 @@ object Parser extends JavaTokenParsers {
       MOD ~ moduleIdentifier ~ DO ~ opt(rep(function)) ~ END
   }
 
-  object Operator {
-    val LEFT_PARENTHESIS = "("
-
-    val RIGHT_PARENTHESIS = ")"
-
-    val LEFT_BRACKET = "["
-
-    val RIGHT_BRACKET = "]"
-
-    val DQUOTE = "\""
-
-    val UNDERSCORE = "_"
-
-    val FAT_ARROW = "=>"
-
-    val COMMA = ","
-
-    val PLUS = "+"
-
-    val MULTIPLICATION = "*"
-
-    val MINUS = "-"
-
-    val DIVISION = "/"
-
-    val AND = "&&"
-
-    val OR = "||"
-
-    val EQEQ = "=="
-
-    val NEQ = "!="
-
-    val LT = "<"
-
-    val GT = ">"
-
-    val LTEQ = "<="
-
-    val GTEQ = ">="
-
-    val NOT = "!"
-
-    val BOX = "::"
-
-    val EQ = "="
-  }
-
   object Primitive {
 
     import Keyword._
-    import structure.Type
+    import io.zana.zapl.structure.Type
 
     def boolean: Parser[Type.Boolean] = {
       def t: Parser[Type.Boolean] = TRUE ^^ {

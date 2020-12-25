@@ -1,11 +1,12 @@
 package io.zana.zapl
+package parser
 
 import org.junit.Test
 
-class ExampleTest {
+class Block {
 
   @Test
-  def `test 1`: Unit = {
+  def testSomething(): Unit = {
     assert(true)
   }
 }
