@@ -93,8 +93,6 @@ list    = LEFT_BRACKET, ( type, { COMMA, type } ) RIGHT_BRACKET
 
 integer = ( NUMBER | ZERO ), { NUMBER | ZERO  }
 
-type = string | boolean | list | integer
-
 ================================================================================
 EXPRESSION
 ================================================================================
@@ -201,5 +199,7 @@ statement  = function | module
 call       = module_fn_call | fn_call 
 
 program    = { statement | expression | control | call } 
+
+type       = string | boolean | list | integer
 
 ```
