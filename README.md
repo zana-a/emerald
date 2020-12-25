@@ -129,7 +129,7 @@ logic_factor        = NOT, logic_factor
 logic_constant      = arith_expression | boolean | integer | identifier
 
 ================================================================================
-CALLER
+CALL
 ================================================================================
 
 fn_call_params = { type
@@ -189,6 +189,12 @@ AUXILIARY
 
 identifier = ( UPPER_ALPHA | LOWER_ALPHA ) 
           , { UPPER_ALPHA | UNDERSCORE | NUMBER | ZERO }
+
+================================================================================
+Variable
+================================================================================
+
+variable = identifier, EQ, ( type | expression | control | call | block )
 
 ================================================================================
 TOP LEVEL COMBINATORS
