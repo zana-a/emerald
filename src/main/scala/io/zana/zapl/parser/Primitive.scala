@@ -3,7 +3,7 @@ package parser
 
 import structure.Type
 
-trait Primitive extends Base with Keyword {
+trait Primitive extends Base {
 
   def boolean: Parser[Type.Boolean] = {
     def t: Parser[Type.Boolean] = TRUE ^^ {

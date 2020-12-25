@@ -27,6 +27,10 @@ END               = "end"
 
 IF                = "if"
 
+WHILE             = "WHILE"
+
+MOD               = "mod"
+
 UPPER_ALPHA       = ? any char between A to Z ?
 
 LOWER_ALPHA       = ? any char between a to z ? 

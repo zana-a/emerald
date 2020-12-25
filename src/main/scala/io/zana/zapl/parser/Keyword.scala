@@ -1,22 +1,20 @@
 package io.zana.zapl
 package parser
 
-trait Keyword extends Base {
-  val DO = "do"
-
-  val END = "end"
-
-  val MOD = "mod"
-
+trait Keyword {
   val TRUE = "true"
 
   val FALSE = "false"
 
-  val LOOP = "while"
+  val DEF = "def"
 
-  val COND = "if"
+  val DO = "do"
 
-  def keywords: Parser[String] = {
-    DO | END | MOD | TRUE | FALSE | COND | LOOP
-  }
+  val END = "end"
+
+  val IF = "if"
+
+  val WHILE = "WHILE"
+
+  val MOD = "MOD"
 }

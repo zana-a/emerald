@@ -1,6 +1,6 @@
 package io.zana.zapl
 package parser
 
-trait Variable extends Base {
+trait Call extends Base {
 
 }
