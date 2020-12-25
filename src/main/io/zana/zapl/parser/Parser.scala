@@ -1,8 +1,6 @@
 package io.zana.zapl
 package parser
 
-import io.zana.zapl.structure.Type
-
 import scala.util.parsing.combinator.JavaTokenParsers
 
 object Parser extends JavaTokenParsers {
@@ -108,7 +106,7 @@ object Parser extends JavaTokenParsers {
     def function: Parser[Any] = {
       DEF ~
         identifier ~ LEFT_PARENTHESIS ~ opt(rep(identifier)) ~ RIGHT_PARENTHESIS ~
-        EQ ~ (identifier | `type` | call | control | expression | block)
+        EQ ~ (`type` | block | call | control | expression | identifier)
     }
   }
 
@@ -125,9 +123,9 @@ object Parser extends JavaTokenParsers {
 
     val IF = "if"
 
-    val WHILE = "WHILE"
+    val WHILE = "while"
 
-    val MOD = "MOD"
+    val MOD = "mod"
 
     def keywords: Parser[String] =
       TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
@@ -196,6 +194,7 @@ object Parser extends JavaTokenParsers {
   object Primitive {
 
     import Keyword._
+    import structure.Type
 
     def boolean: Parser[Type.Boolean] = {
       def t: Parser[Type.Boolean] = TRUE ^^ {

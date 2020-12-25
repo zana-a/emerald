@@ -4,10 +4,10 @@ object Main extends App {
 
   import parser.Parser
 
-  println(Parser.parseAll(Parser.Program.build,
+  println(Parser.parseAll(Parser.Function.function,
     """
-      |module A do
+      |  def a() = do
       |
-      |end
+      |  end
       |""".stripMargin))
 }
