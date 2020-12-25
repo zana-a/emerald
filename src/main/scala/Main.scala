@@ -1,7 +1,7 @@
 package io.zana.zapl
 
-import scala.util.parsing.combinator.JavaTokenParsers
+import parser.Parser
 
 object Main extends App {
-
+  println("Hello, World!")
 }
