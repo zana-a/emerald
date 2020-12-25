@@ -7,7 +7,7 @@ library.
 ## EBNF
 
 The language takes some designs from languages such as Ruby, Elixir and
-smalltalk for a concise yet expressive design.
+smalltalk for a concise yet expressive syntax.
 
 ```text
 ================================================================================
