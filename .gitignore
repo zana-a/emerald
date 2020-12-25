@@ -13,7 +13,9 @@ project/
 .bsp
 
 # Scala-IDE specific
-.idea
+.idea/
+.metals/
+.vscode/
 
 # ensime specific
 .ensime_cache/
