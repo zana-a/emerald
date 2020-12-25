@@ -1,4 +1,5 @@
-package io.zana.zapl.parser
+package io.zana.zapl
+package parser
 
 trait Function {
 
