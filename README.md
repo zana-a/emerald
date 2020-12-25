@@ -98,10 +98,10 @@ EXPRESSION
 ================================================================================
 
 arith_expression    = arith_factor, {
-                        PLUS ~ arith_expression 
-                      | MINUS ~ arith_expression 
-                      | MULTIPLICATION ~ arith_expression 
-                      | DIVISION ~ arith_expression }
+                        PLUS, arith_expression 
+                      | MINUS, arith_expression 
+                      | MULTIPLICATION, arith_expression 
+                      | DIVISION, arith_expression }
 
 arith_factor        = arith_constant 
                     | LEFT_PARENTHESIS, arith_expression, RIGHT_PARENTHESIS
@@ -134,13 +134,13 @@ fn_call_params = { type
                | module_fn_call }
 
 fn_call        = identifier 
-               ~ LEFT_PARENTHESIS
-               ~ fn_call_params
-               ~ RIGHT_PARENTHESIS
+               , LEFT_PARENTHESIS
+               , fn_call_params
+               , RIGHT_PARENTHESIS
 
-module_fn_call_identifier = module_identifier ~ { BOX ~ module_identifier}
+module_fn_call_identifier = module_identifier, { BOX, module_identifier}
 
-module_fn_call            = module_fn_call_identifier ~ BOX ~ fn_call
+module_fn_call            = module_fn_call_identifier, BOX, fn_call
 
 ================================================================================
 CONTROL
@@ -150,19 +150,19 @@ guard             = logic_expression
 
 command           = identifier | type | expression | block
 
-condition         = guard ~ FAT_ARROW ~ command
+condition         = guard, FAT_ARROW, command
 
-default_condition = UNDERSCORE ~ FAT_ARROW ~ command
+default_condition = UNDERSCORE, FAT_ARROW, command
 
-if                = IF ~ DO ~ { condition } ~ default_condition ~ END
+if                = IF, DO, { condition }, default_condition, END
 
-while             = WHILE ~ DO ~ { condition } ~ default_condition ~ END
+while             = WHILE, DO, { condition }, default_condition, END
 
 ================================================================================
 BLOCK
 ================================================================================
 
-block             = DO ~ ( expression | function | control | call ) ~ END
+block             = DO, ( expression | function | control | call ), END
 
 ================================================================================
 FUNCTION
@@ -175,16 +175,16 @@ function = DEF, identifier, LEFT_PARENTHESIS, { identifier }, RIGHT_PARENTHESIS
 MODULE
 ================================================================================
 
-module_identifier = UPPER_ALPHA ~ identifier
+module_identifier = UPPER_ALPHA, identifier
 
-module            = MOD ~ module_identifier ~ DO ~ { function } ~END
+module            = MOD, module_identifier, DO, { function }, END
 
 ================================================================================
 AUXILIARY
 ================================================================================
 
 identifier = ( UPPER_ALPHA | LOWER_ALPHA ) 
-           ~ { UPPER_ALPHA | UNDERSCORE | NUMBER | ZERO }
+          , { UPPER_ALPHA | UNDERSCORE | NUMBER | ZERO }
 
 ================================================================================
 TOP LEVEL COMBINATORS
