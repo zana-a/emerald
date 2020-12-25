@@ -14,38 +14,71 @@ smalltalk for a concise yet expressive design.
 CONSTANT
 ================================================================================
 
+
 TRUE              = "true"
+
 FALSE             = "false"
+
 DEF               = "def"
+
 DO                = "do"
+
 END               = "end"
+
 IF                = "if"
+
 UPPER_ALPHA       = ? any char between A to Z ?
+
 LOWER_ALPHA       = ? any char between a to z ? 
+
 NUMBER            = ? any char between 1 to 9 ?
+
 ZERO              = "0"
+
 LEFT_PARENTHESIS  = "("
+
 RIGHT_PARENTHESIS = ")"
+
 LEFT_BRACKET      = "["
+
 RIGHT_BRACKET     = "]"
+
 DQUOTE            = "\""
+
 UNDERSCORE        = "_"
+
 FAT_ARROW         = "=>"
+
 COMMA             = ","
+
 PLUS              = "+"
+
 MULTIPLICATION    = "*"
+
 MINUS             = "-"
+
 DIVISION          = "/"
+
 AND               = "&&"
+
 OR                = "||"
+
 EQEQ              = "=="
+
 NEQ               = "!="
+
 LT                = "<"
+
 GT                = ">"
+
 LTEQ              = "<="
+
 GTEQ              = ">="
+
 NOT               = "!"
+
 BOX               = "::"
+
 EQ                = "="
 
 ================================================================================
@@ -156,13 +189,17 @@ identifier = ( UPPER_ALPHA | LOWER_ALPHA )
            ~ { UPPER_ALPHA | UNDERSCORE | NUMBER | ZERO }
 
 ================================================================================
-OTHER
+TOP LEVEL COMBINATORS
 ================================================================================
 
 control    = if | while
+
 expression = logic_expression | arith_expression
+
 statement  = function | module
+
 call       = module_fn_call | fn_call 
+
 program    = { statement | expression | control | call } 
 
 ```
