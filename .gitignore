@@ -10,6 +10,7 @@ target/
 lib_managed/
 src_managed/
 project/
+.bsp
 
 # Scala-IDE specific
 .idea
