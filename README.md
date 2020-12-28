@@ -1,7 +1,7 @@
 # ZAPL
 
 ZAPL is a program based on the guarded command language based on Edsger
-Dijkstra's designs. It is written in Scala 2 using the io.zana.zapl.parser combinator
+Dijkstra's designs. It is written in Scala 2 using the Scala Parser Combinator
 library.
 
 ## EBNF
