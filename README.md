@@ -166,7 +166,7 @@ while             = WHILE, DO, { condition }, default_condition, END;
 BLOCK
 ================================================================================
 
-block             = DO, ( expression | function | control | call ), END;
+block             = DO, ( expression | control | call ), END;
 
 ================================================================================
 FUNCTION
@@ -188,7 +188,7 @@ AUXILIARY
 ================================================================================
 
 identifier = ( UPPER_ALPHA | LOWER_ALPHA ) 
-          , { UPPER_ALPHA | UNDERSCORE | NUMBER | ZERO };
+          , { UPPER_ALPHA | LOWER_ALPHA | UNDERSCORE | NUMBER | ZERO };
 
 ================================================================================
 Variable

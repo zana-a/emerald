@@ -1,0 +1,13 @@
+mod A do
+  def hello(name) = do
+    if do
+      name == "Zana" => 
+      	IO::puts(String::join(["Hello", "Zana"]))
+      
+      _ => IO::puts("Hello, World!")
+    end
+  end
+end
+
+A::hello("Zana")
+

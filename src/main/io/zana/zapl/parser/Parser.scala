@@ -88,7 +88,7 @@ object Parser extends JavaTokenParsers {
     import io.zana.zapl.structure
 
     def block: Parser[Any] = {
-      DO ~> opt(rep(expression | function | control | call)) <~ END ^^ {
+      DO ~> opt(rep(expression | control | call)) <~ END ^^ {
         case Some(values) => structure.Block(values)
         case None => structure.Block(List())
       }
