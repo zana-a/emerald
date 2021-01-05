@@ -1,6 +1,6 @@
 package io.zana.zapl.translator
 
-import io.zana.zapl.structure.Type
+import io.zana.zapl.structure
 import org.junit.Assert._
 import org.junit.Test
 
@@ -8,14 +8,14 @@ class Type {
 
   @Test
   def `test integer`(): Unit = {
-    val source = Type.Integer(1)
+    val source = structure.Type.Integer(1)
     val result = Translator.`type`(source)
     assertEquals(source.value.toString, result)
   }
 
   @Test
   def `test string`(): Unit = {
-    val source = Type.String("hello, world!")
+    val source = structure.Type.String("hello, world!")
     val result = Translator.`type`(source)
     assertEquals(source.value, result)
   }
@@ -23,13 +23,13 @@ class Type {
   @Test
   def `test boolean`(): Unit = {
     {
-      val source = Type.Boolean(true)
+      val source = structure.Type.Boolean(true)
       val result = Translator.`type`(source)
       assertEquals(source.value.toString, result)
     }
 
     {
-      val source = Type.Boolean(false)
+      val source = structure.Type.Boolean(false)
       val result = Translator.`type`(source)
       assertEquals(source.value.toString, result)
     }
@@ -39,18 +39,18 @@ class Type {
   def `test list`(): Unit = {
     {
       // Empty list
-      val source = Type.List(List())
+      val source = structure.Type.List(List())
       val result = Translator.`type`(source)
       assertEquals("List()", result)
     }
     {
       // List with primitive types
       val source =
-        Type.List(
+        structure.Type.List(
           List(
-            Type.Integer(1),
-            Type.String("hello, world!"),
-            Type.Boolean(true)
+            structure.Type.Integer(1),
+            structure.Type.String("hello, world!"),
+            structure.Type.Boolean(true)
           )
         )
 
@@ -60,27 +60,27 @@ class Type {
     {
       // Deep Lists
       val source =
-        Type.List(
+        structure.Type.List(
           List(
-            Type.List(
+            structure.Type.List(
               List(
-                Type.List(List()),
-                Type.List(List()),
-                Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
               )
             ),
-            Type.List(
+            structure.Type.List(
               List(
-                Type.List(List()),
-                Type.List(List()),
-                Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
               )
             ),
-            Type.List(
+            structure.Type.List(
               List(
-                Type.List(List()),
-                Type.List(List()),
-                Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
+                structure.Type.List(List()),
               )
             ),
           )

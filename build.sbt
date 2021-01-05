@@ -1,11 +1,17 @@
-name := "zapl"
+val dottyVersion = "3.0.0-M3"
 
-version := "0.1"
+lazy val root = project
+  .in(file("."))
+  .settings(
+    name := "dotty-simple",
+    version := "0.1.0",
 
-scalaVersion := "2.13.4"
+    scalaVersion := dottyVersion,
 
-libraryDependencies +=
-  "org.scala-lang.modules" %% "scala-io.zana.zapl.parser-combinators" % "1.1.2"
-
-libraryDependencies +=
-  "com.novocode" % "junit-interface" % "0.8" % "test->default"
+    libraryDependencies += "com.novocode" %
+      "junit-interface" % "0.11" % "test",
+      
+    libraryDependencies +=
+      "org.scala-lang.modules" %%
+        "scala-parser-combinators" % "1.2.0-M1" 
+  )

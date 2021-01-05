@@ -1,7 +1,6 @@
 package io.zana.zapl.parser
 
-import io.zana.zapl.parser.Parser.Operator
-import io.zana.zapl.structure.{Block, Expression, Type}
+import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
 
@@ -19,7 +18,7 @@ class Block {
   @Test
   def `test empty block`(): Unit = {
     val source = "do end"
-    val expected = Block(List())
+    val expected = structure.Block(List())
 
     result(source) match {
       case Left(result) => assertEquals(expected, result)
@@ -31,7 +30,11 @@ class Block {
   def `test expression block`(): Unit = {
     {
       val source = "do 1 end"
-      val expected = Block(List(Expression.Expression(List(Type.Integer(1)))))
+      val expected = structure.Block(
+        List(structure.Expression.Expression(
+          List(structure.Type.Integer(1)))
+        )
+      )
 
       result(source) match {
         case Left(result) => assertEquals(expected, result)
@@ -42,13 +45,13 @@ class Block {
     {
       val source = "do 1 + 1 end"
       val expected =
-        Block(
+        structure.Block(
           List(
-            Expression.Expression(
+            structure.Expression.Expression(
               List(
-                Type.Integer(1),
-                Operator.PLUS,
-                Type.Integer(1)
+                structure.Type.Integer(1),
+                parser.Parser.Operator.PLUS,
+                structure.Type.Integer(1)
               )
             )
           )
@@ -63,19 +66,19 @@ class Block {
     {
       val source = "do (1 + 1) + 1 end"
       val expected =
-        Block(
+        structure.Block(
           List(
-            Expression.Expression(
+            structure.Expression.Expression(
               List(
-                Expression.Grouping(
+                structure.Expression.Grouping(
                   List(
-                    Type.Integer(1),
-                    Operator.PLUS,
-                    Type.Integer(1)
+                    structure.Type.Integer(1),
+                    parser.Parser.Operator.PLUS,
+                    structure.Type.Integer(1)
                   ),
                 ),
-                Operator.PLUS,
-                Type.Integer(1)
+                parser.Parser.Operator.PLUS,
+                structure.Type.Integer(1)
               )
             )
           )
@@ -89,7 +92,7 @@ class Block {
 
     {
       val source = "do true end"
-      val expected = Block(List(Type.Boolean(true)))
+      val expected = structure.Block(List(structure.Type.Boolean(true)))
 
       result(source) match {
         case Left(result) => assertEquals(expected, result)
@@ -99,7 +102,13 @@ class Block {
 
     {
       val source = "do true && false end"
-      val expected = Block(List(Type.Boolean(true), Operator.AND, Type.Boolean(false)))
+      val expected = structure.Block(
+        List(
+          structure.Type.Boolean(true),
+          parser.Parser.Operator.AND,
+          structure.Type.Boolean(false)
+        )
+      )
 
       result(source) match {
         case Left(result) => assertEquals(expected, result)
@@ -109,7 +118,13 @@ class Block {
 
     {
       val source = "do [1, 2, 3] end"
-      val expected = Block(List(Type.List(List(1, 2, 3))))
+      val expected = structure.Block(
+        List(
+          structure.Type.List(
+            List(1, 2, 3)
+          )
+        )
+      )
 
       result(source) match {
         case Left(result) => assertEquals(expected, result)
