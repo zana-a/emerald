@@ -1,13 +1,18 @@
 package io.zana.zapl
 
-object Main extends App {
+import io.zana.zapl.parser.Parser
 
-  import parser.Parser
+object Main {
 
-  println(Parser.parseAll(Parser.Function.function,
+  val source = {
     """
-      |  def a() = do
+      |def a() = do
       |
-      |  end
-      |""".stripMargin))
+      |end
+      |""".stripMargin
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(Parser.parseAll(Parser.Program.build, source))
+  }
 }
