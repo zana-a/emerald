@@ -17,6 +17,15 @@ class BlockTest {
 		}
 	}
 
+	def result(source: String): Either[Any, String] = {
+		val result = Base.parse(parser.Block.block, source)
+		result match {
+			case Base.Success(result, _) => Left(result)
+			case Base.Failure(msg, _) => Right("Failure: " + msg)
+			case Base.Error(msg, _) => Right("Error: " + msg)
+		}
+	}
+
 	@Test
 	def `test expression block`(): Unit = {
 		{
@@ -121,15 +130,6 @@ class BlockTest {
 				case Left(result) => assertEquals(expected, result)
 				case Right(error) => assert(assertion = false, error)
 			}
-		}
-	}
-
-	def result(source: String): Either[Any, String] = {
-		val result = Base.parse(parser.Block.block, source)
-		result match {
-			case Base.Success(result, _) => Left(result)
-			case Base.Failure(msg, _) => Right("Failure: " + msg)
-			case Base.Error(msg, _) => Right("Error: " + msg)
 		}
 	}
 
