@@ -2,49 +2,49 @@ package io.zana.zapl.parser
 
 object Operator {
 
-	val LEFT_PARENTHESIS = "("
+  val LEFT_PARENTHESIS = "("
 
-	val RIGHT_PARENTHESIS = ")"
+  val RIGHT_PARENTHESIS = ")"
 
-	val LEFT_BRACKET = "["
+  val LEFT_BRACKET = "["
 
-	val RIGHT_BRACKET = "]"
+  val RIGHT_BRACKET = "]"
 
-	val DQUOTE = "\""
+  val DQUOTE = "\""
 
-	val UNDERSCORE = "_"
+  val UNDERSCORE = "_"
 
-	val FAT_ARROW = "=>"
+  val FAT_ARROW = "=>"
 
-	val COMMA = ","
+  val COMMA = ","
 
-	val PLUS = "+"
+  val PLUS = "+"
 
-	val MULTIPLICATION = "*"
+  val MULTIPLICATION = "*"
 
-	val MINUS = "-"
+  val MINUS = "-"
 
-	val DIVISION = "/"
+  val DIVISION = "/"
 
-	val AND = "&&"
+  val AND = "&&"
 
-	val OR = "||"
+  val OR = "||"
 
-	val EQEQ = "=="
+  val EQEQ = "=="
 
-	val NEQ = "!="
+  val NEQ = "!="
 
-	val LT = "<"
+  val LT = "<"
 
-	val GT = ">"
+  val GT = ">"
 
-	val LTEQ = "<="
+  val LTEQ = "<="
 
-	val GTEQ = ">="
+  val GTEQ = ">="
 
-	val NOT = "!"
+  val NOT = "!"
 
-	val BOX = "::"
+  val BOX = "::"
 
-	val EQ = "="
+  val EQ = "="
 }

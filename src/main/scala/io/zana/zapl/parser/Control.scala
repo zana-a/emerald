@@ -10,17 +10,17 @@ import io.zana.zapl.parser.Primitive._
 object Control {
 
 
-	def guard: Parser[Any] = logicExpression
+  def guard: Parser[Any] = logicExpression
 
-	def command: Parser[Any] = identifier | `type` | expression | block
+  def command: Parser[Any] = identifier | `type` | expression | block
 
-	def condition: Parser[Any] = guard ~ FAT_ARROW ~ command
+  def condition: Parser[Any] = guard ~ FAT_ARROW ~ command
 
-	def defaultCondition: Parser[Any] = UNDERSCORE ~ FAT_ARROW ~ command
+  def defaultCondition: Parser[Any] = UNDERSCORE ~ FAT_ARROW ~ command
 
-	def `if`: Parser[Any] = IF ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
+  def `if`: Parser[Any] = IF ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
 
-	def `while`: Parser[Any] = WHILE ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
+  def `while`: Parser[Any] = WHILE ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
 
-	def control: Parser[Any] = `if` | `while`
+  def control: Parser[Any] = `if` | `while`
 }

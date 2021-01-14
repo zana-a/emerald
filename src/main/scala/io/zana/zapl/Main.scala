@@ -4,8 +4,8 @@ import io.zana.zapl.parser.{Base, Program}
 
 object Main {
 
-	val source = {
-		"""
+  val source = {
+    """
 			|mod A do
 			|  def add(a) = do
 			|    a + b
@@ -14,9 +14,9 @@ object Main {
 			|
 			|A::add(1)
 			|""".stripMargin
-	}
+  }
 
-	def main(args: Array[String]): Unit = {
-		println(Base.parseAll(Program.build, source))
-	}
+  def main(args: Array[String]): Unit = {
+    println(Base.parseAll(Program.build, source))
+  }
 }

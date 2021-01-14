@@ -6,9 +6,9 @@ import io.zana.zapl.parser.Keyword._
 
 object Module {
 
-	def module: Parser[Any] =
-		MOD ~ moduleIdentifier ~ DO ~ opt(rep(function)) ~ END
+  def module: Parser[Any] =
+    MOD ~ moduleIdentifier ~ DO ~ opt(rep(function)) ~ END
 
-	def moduleIdentifier: Parser[String] =
-		"""^([A-Z])(\w?)+(\d?)+""".r
+  def moduleIdentifier: Parser[String] =
+    """^([A-Z])(\w?)+(\d?)+""".r
 }

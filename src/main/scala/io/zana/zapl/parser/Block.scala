@@ -10,10 +10,10 @@ import io.zana.zapl.structure
 
 object Block {
 
-	def block: Parser[Any] = {
-		DO ~> opt(rep(expression | control | call)) <~ END ^^ {
-			case Some(values) => structure.Block(values)
-			case None => structure.Block(List())
-		}
-	}
+  def block: Parser[Any] = {
+    DO ~> opt(rep(expression | control | call)) <~ END ^^ {
+      case Some(values) => structure.Block(values)
+      case None => structure.Block(List())
+    }
+  }
 }

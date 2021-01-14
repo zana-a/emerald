@@ -6,7 +6,7 @@ import scala.util.parsing.combinator.JavaTokenParsers
 
 object Base extends JavaTokenParsers {
 
-	def identifier: Parser[String] = {
-		not(keywords) ~> super.ident
-	}
+  def identifier: Parser[String] = {
+    not(keywords) ~> super.ident
+  }
 }

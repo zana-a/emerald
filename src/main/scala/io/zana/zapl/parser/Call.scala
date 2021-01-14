@@ -7,14 +7,14 @@ import io.zana.zapl.parser.Primitive._
 
 object Call {
 
-	def call: Parser[Any] = moduleFnCall | fnCall
+  def call: Parser[Any] = moduleFnCall | fnCall
 
-	def fnCallParams: Parser[Any] = opt(rep(`type` | identifier | fnCall | moduleFnCall))
+  def fnCallParams: Parser[Any] = opt(rep(`type` | identifier | fnCall | moduleFnCall))
 
-	def fnCall: Parser[Any] = identifier ~ LEFT_PARENTHESIS ~ fnCallParams ~ RIGHT_PARENTHESIS
+  def fnCall: Parser[Any] = identifier ~ LEFT_PARENTHESIS ~ fnCallParams ~ RIGHT_PARENTHESIS
 
-	def moduleFnCallIdentifier: Parser[Any] = moduleIdentifier ~ opt(rep(BOX ~ moduleIdentifier))
+  def moduleFnCallIdentifier: Parser[Any] = moduleIdentifier ~ opt(rep(BOX ~ moduleIdentifier))
 
-	def moduleFnCall: Parser[Any] = moduleFnCallIdentifier ~ BOX ~ fnCall
+  def moduleFnCall: Parser[Any] = moduleFnCallIdentifier ~ BOX ~ fnCall
 
 }

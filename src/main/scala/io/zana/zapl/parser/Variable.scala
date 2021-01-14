@@ -10,6 +10,6 @@ import io.zana.zapl.parser.Primitive._
 
 object Variable {
 
-	def variable: Parser[Any] =
-		identifier ~ EQ ~ (`type` | expression | control | call | block)
+  def variable: Parser[Any] =
+    identifier ~ EQ ~ (`type` | expression | control | call | block)
 }

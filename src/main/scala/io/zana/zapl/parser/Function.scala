@@ -12,9 +12,9 @@ import io.zana.zapl.parser.Primitive._
 object Function {
 
 
-	def function: Parser[Any] = {
-		DEF ~
-			identifier ~ LEFT_PARENTHESIS ~ opt(rep(identifier)) ~ RIGHT_PARENTHESIS ~
-			EQ ~ (`type` | block | call | control | expression | identifier)
-	}
+  def function: Parser[Any] = {
+    DEF ~
+      identifier ~ LEFT_PARENTHESIS ~ opt(rep(identifier)) ~ RIGHT_PARENTHESIS ~
+      EQ ~ (`type` | block | call | control | expression | identifier)
+  }
 }
