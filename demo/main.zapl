@@ -1,0 +1,13 @@
+use IO
+
+mod A do
+  def hello(name) = do
+    if do
+      name == "" => "Hello, World!"
+      name == "Zana" => "Oh... it is you..."
+      _ => "Hello, ${name}"
+    end
+  end
+end
+
+IO::puts(hello("")):wq

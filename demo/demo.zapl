@@ -1,0 +1,29 @@
+
+def ltoetz(num) = do
+  if do 
+    num <= 5 => true
+    _ => false
+  end
+end
+
+def makes_ten(a, b) = do
+  if do
+    a == 10 => true
+    b == 10 => true
+    a + b == 10 => true
+    _ => false
+  end
+end
+
+def partial_sort(list) do
+  if do 
+    List.empty(list) => []
+    _ => do
+    
+    end
+  end
+end
+
+def sort(list, flow) = do
+
+end
