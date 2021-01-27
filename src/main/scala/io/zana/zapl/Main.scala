@@ -1,6 +1,6 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.{Base, Program}
+import io.zana.zapl.parser.{Base, Primitive, Program}
 
 object Main {
 
