@@ -8,13 +8,24 @@ import io.zana.zapl.parser.Expression._
 import io.zana.zapl.parser.Keyword._
 import io.zana.zapl.parser.Operator._
 import io.zana.zapl.parser.Primitive._
+import io.zana.zapl.structure
 
 object Function {
 
 
   def function: Parser[Any] = {
-    DEF ~
-      identifier ~ LEFT_PARENTHESIS ~ opt(rep(identifier)) ~ RIGHT_PARENTHESIS ~
-      EQ ~ (`type` | block | call | control | expression | identifier)
+    (DEF ~> identifier) ~
+      ((LEFT_PARENTHESIS ~> repsep(identifier, ",")) <~
+        RIGHT_PARENTHESIS) ~ (EQ ~>
+      (`type` | block | identifier /*TODO| call | control | expression*/))
+    ^^ {
+      case id ~ params ~ body => {
+        structure.Function(
+          id,
+          params,
+          body
+        )
+      }
+    }
   }
 }

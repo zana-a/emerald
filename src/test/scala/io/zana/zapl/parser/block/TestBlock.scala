@@ -4,7 +4,6 @@ import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
 
-
 class TestBlock {
   def testBlock(input: String, expected: structure.Block) = {
     parser.Base.parse(parser.Block.block, input) match {
