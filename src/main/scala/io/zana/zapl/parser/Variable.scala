@@ -7,9 +7,14 @@ import io.zana.zapl.parser.Control._
 import io.zana.zapl.parser.Expression._
 import io.zana.zapl.parser.Operator._
 import io.zana.zapl.parser.Primitive._
+import io.zana.zapl.structure
 
 object Variable {
 
-  def variable: Parser[Any] =
-    identifier ~ EQ ~ (`type` | expression | control | call | block)
+  def variable: Parser[Any] = {
+    (identifier <~ EQ) ~ (`type` /*TODO| expression | control | call | block*/)
+    ^^ {
+      case id ~ t => structure.Variable(structure.Identifier(id), t)
+    }
+  }
 }
