@@ -6,10 +6,6 @@ import io.zana.zapl.structure.primitive
 
 object Primitive {
 
-  def alpha: Parser[String] = "a" | "b" | "c" ^^ {
-    _.toString
-  }
-
   def string: Parser[primitive.String] = {
     stringLiteral ^^ {
       case result => primitive.String(result)
