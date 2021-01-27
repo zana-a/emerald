@@ -6,7 +6,6 @@ import io.zana.zapl.parser.Primitive._
 
 object Expression {
 
-
   def arithExpression: Parser[Any] = {
     arithFactor ~ opt(rep(
       PLUS ~ arithExpression
@@ -23,7 +22,7 @@ object Expression {
   def arithConstant: Parser[Any] = integer | identifier
 
   def logicExpression: Parser[Any] = {
-    logic_factor ~ opt(rep(
+    logicFactor ~ opt(rep(
       AND ~ logicExpression
         | OR ~ logicExpression
         | EQEQ ~ logicExpression
@@ -35,13 +34,13 @@ object Expression {
     ))
   }
 
-  def logic_factor: Parser[Any] = {
-    NOT ~ logic_factor |
-      logic_constant |
+  def logicFactor: Parser[Any] = {
+    NOT ~ logicFactor |
+      logicConstant |
       LEFT_PARENTHESIS ~ logicExpression ~ RIGHT_PARENTHESIS
   }
 
-  def logic_constant: Parser[Any] = {
+  def logicConstant: Parser[Any] = {
     arithExpression | boolean | integer | identifier
   }
 
