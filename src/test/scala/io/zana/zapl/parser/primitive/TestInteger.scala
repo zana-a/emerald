@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestInteger {
 
-  def testString(input: String, expected: structure.primitive.Type) = {
+  def testInteger(input: String, expected: structure.primitive.Type) = {
     parser.Base.parse(parser.Primitive.integer, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
       case parser.Base.Failure(s, _) => assert(false, s)
@@ -23,7 +23,7 @@ class TestInteger {
         .stripMargin
         .trim
 
-    testString(subject, structure.primitive.Integer(1))
+    testInteger(subject, structure.primitive.Integer(1))
   }
 
   @Test
@@ -35,7 +35,7 @@ class TestInteger {
         .stripMargin
         .trim
 
-    testString(subject, structure.primitive.Integer(132))
+    testInteger(subject, structure.primitive.Integer(132))
   }
 
 
@@ -48,7 +48,7 @@ class TestInteger {
         .stripMargin
         .trim
 
-    testString(subject, structure.primitive.Integer(Int.MinValue))
+    testInteger(subject, structure.primitive.Integer(Int.MinValue))
   }
 
   @Test
@@ -60,6 +60,6 @@ class TestInteger {
         .stripMargin
         .trim
 
-    testString(subject, structure.primitive.Integer(Int.MaxValue))
+    testInteger(subject, structure.primitive.Integer(Int.MaxValue))
   }
 }
