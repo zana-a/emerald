@@ -6,6 +6,12 @@ import io.zana.zapl.structure.primitive
 
 object Primitive {
 
+  def string: Parser[primitive.String] = {
+    "(\")((?:\\\\\\1|(?:(?!\\1).))*)\\1".r ^^ {
+      result => primitive.String(result)
+    }
+  }
+
   def boolean: Parser[primitive.Boolean] = {
     def t: Parser[primitive.Boolean] = TRUE ^^ {
       result => primitive.Boolean(result.toBoolean)
@@ -15,11 +21,7 @@ object Primitive {
       result => primitive.Boolean(result.toBoolean)
     }
 
-    t | f ^^ (result => result)
-  }
-
-  def string: Parser[primitive.String] = stringLiteral ^^ {
-    result => primitive.String(result)
+    phrase(t | f) ^^ (result => result)
   }
 
   def list: Parser[primitive.List] = "[" ~> repsep(`type`, ",") <~ "]" ^^ {
