@@ -5,7 +5,7 @@ import org.junit.Assert._
 import org.junit.Test
 
 class TestString {
-  def testString(input: String, expected: structure.primitive.Type) = {
+  def testString(input: String, expected: structure.primitive.String) = {
     parser.Base.parse(parser.Primitive.string, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
       case parser.Base.Failure(s, _) => assert(false, s)

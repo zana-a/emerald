@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestInteger {
 
-  def testInteger(input: String, expected: structure.primitive.Type) = {
+  def testInteger(input: String, expected: structure.primitive.Integer) = {
     parser.Base.parse(parser.Primitive.integer, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
       case parser.Base.Failure(s, _) => assert(false, s)

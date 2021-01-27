@@ -21,7 +21,7 @@ object Primitive {
       result => primitive.Boolean(result.toBoolean)
     }
 
-    phrase(t | f) ^^ (result => result)
+    t | f ^^ (result => result)
   }
 
   def list: Parser[primitive.List] = "[" ~> repsep(`type`, ",") <~ "]" ^^ {
