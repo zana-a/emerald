@@ -7,18 +7,28 @@ import org.junit.Test
 
 class BooleanTest {
 
-  def template(s: String, shouldFail: Boolean) = {
+  def template(s: String, shouldFail: Boolean, errorMessage: String = "") = {
     if (shouldFail) {
       parse(Primitive.boolean, s) match {
-        case Success(s, _) => assert(false, s) // Success: Parsed -> $s
-        case Failure(f, _) => assert(true, s"\n\tFailure: $f")
-        case Error(e, _) => assert(false, s"\n\tError: $e")
+        case Success(s, _) =>
+          assert(false, s"\n\tFailure: ${s}\n\tMessage:${errorMessage}")
+
+        case Failure(f, _) =>
+          assert(true)
+
+        case Error(e, _) =>
+          assert(false, s"\n\tError: $e")
       }
     } else {
       parse(Primitive.boolean, s) match {
-        case Success(s, _) => assert(true) // Success: Parsed -> $s
-        case Failure(f, _) => assert(false, s"\n\tFailure: $f")
-        case Error(e, _) => assert(false, s"\n\tError: $e")
+        case Success(s, _) =>
+          assert(true) // Success: Parsed -> $s
+
+        case Failure(f, _) =>
+          assert(false, s"\n\tFailure: ${f}\n\tMessage:${errorMessage}")
+
+        case Error(e, _) =>
+          assert(false, s"\n\tError: $e")
       }
     }
   }

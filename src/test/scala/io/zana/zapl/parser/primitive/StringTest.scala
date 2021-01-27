@@ -6,13 +6,18 @@ import org.junit.Test
 
 class StringTest {
 
-  def template(s: String) = {
+  def template(s: String, errorMessage: String = "") = {
     import io.zana.zapl.parser.Base._
 
     parse(Primitive.string, "\"" + s + "\"") match {
-      case Success(s, _) => assert(true) // Success: Parsed -> $s
-      case Failure(f, _) => assert(false, s"Failure: $f")
-      case Error(e, _) => assert(false, s"Error: $e")
+      case Success(s, _) =>
+        assert(true) // Success: Parsed -> $s
+
+      case Failure(f, _) =>
+        assert(false, s"Failure: ${f}\n\tMessage:${errorMessage}")
+
+      case Error(e, _) =>
+        assert(false, s"\n\tError: $e")
     }
   }
 
