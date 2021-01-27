@@ -6,14 +6,16 @@ object Main {
 
   val source = {
     """
-			|mod A do
-			|  def add(a) = do
-			|    a + b
-			|  end
-			|end
-			|
-			|A::add(1)
-			|""".stripMargin
+      |mod A do
+      |  def add(a, b) = do
+      |    a + b
+      |  end
+      |
+      |  def sub(a, b) = do
+      |    a - b
+      |  end
+      |end
+      |""".stripMargin
   }
 
   def main(args: Array[String]): Unit = {
