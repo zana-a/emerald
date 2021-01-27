@@ -2,33 +2,33 @@ package io.zana.zapl.parser
 
 import io.zana.zapl.parser.Base._
 import io.zana.zapl.parser.Keyword._
-import io.zana.zapl.structure.Type
+import io.zana.zapl.structure.primitive
 
 object Primitive {
 
-  def boolean: Parser[Type.Boolean] = {
-    def t: Parser[Type.Boolean] = TRUE ^^ {
-      result => Type.Boolean(result.toBoolean)
+  def boolean: Parser[primitive.Boolean] = {
+    def t: Parser[primitive.Boolean] = TRUE ^^ {
+      result => primitive.Boolean(result.toBoolean)
     }
 
-    def f: Parser[Type.Boolean] = FALSE ^^ {
-      result => Type.Boolean(result.toBoolean)
+    def f: Parser[primitive.Boolean] = FALSE ^^ {
+      result => primitive.Boolean(result.toBoolean)
     }
 
     t | f ^^ (result => result)
   }
 
-  def string: Parser[Type.String] = stringLiteral ^^ {
-    result => Type.String(result)
+  def string: Parser[primitive.String] = stringLiteral ^^ {
+    result => primitive.String(result)
   }
 
-  def list: Parser[Type.List] = "[" ~> repsep(`type`, ",") <~ "]" ^^ {
-    result => Type.List(result)
+  def list: Parser[primitive.List] = "[" ~> repsep(`type`, ",") <~ "]" ^^ {
+    result => primitive.List(result)
   }
 
-  def integer: Parser[Type.Integer] = wholeNumber ^^ {
-    result => Type.Integer(result.toInt)
+  def integer: Parser[primitive.Integer] = wholeNumber ^^ {
+    result => primitive.Integer(result.toInt)
   }
 
-  def `type`: Parser[Type.Type[_]] = string | integer | list | boolean
+  def `type`: Parser[primitive.Type] = string | integer | list | boolean
 }
