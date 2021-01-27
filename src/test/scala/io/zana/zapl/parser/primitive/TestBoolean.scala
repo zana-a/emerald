@@ -13,4 +13,28 @@ class TestBoolean {
       case parser.Base.Error(s, _) => assert(false, s)
     }
   }
+
+  @Test
+  def testTrue = {
+    val subject =
+      """
+        |true
+        |"""
+        .stripMargin
+        .trim
+
+    testBoolean(subject, structure.primitive.Boolean(true))
+  }
+
+  @Test
+  def testFalse = {
+    val subject =
+      """
+        |false
+        |"""
+        .stripMargin
+        .trim
+
+    testBoolean(subject, structure.primitive.Boolean(false))
+  }
 }
