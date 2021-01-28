@@ -13,7 +13,7 @@ object Call {
 
   def fnCall: Parser[Any] = identifier ~ LEFT_PARENTHESIS ~ fnCallParams ~ RIGHT_PARENTHESIS
 
-  def moduleFnCallIdentifier: Parser[Any] = identifier ~ opt(rep(BOX ~ identifier))
+  def moduleFnCallIdentifier: Parser[Any] = moduleIdentifier ~ opt(rep(BOX ~ moduleIdentifier))
 
   def moduleFnCall: Parser[Any] = moduleFnCallIdentifier ~ BOX ~ fnCall
 
