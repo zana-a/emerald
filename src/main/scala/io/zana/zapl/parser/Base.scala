@@ -1,7 +1,7 @@
 package io.zana.zapl.parser
 
 import io.zana.zapl.parser.Keyword._
-import io.zana.zapl.structure.Identifier
+import io.zana.zapl.structure.common.Identifier
 
 import scala.util.parsing.combinator.JavaTokenParsers
 

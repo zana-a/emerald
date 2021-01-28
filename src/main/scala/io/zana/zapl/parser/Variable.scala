@@ -14,7 +14,7 @@ object Variable {
   def variable: Parser[Any] = {
     (identifier <~ EQ) ~ (`type` /*TODO| expression | control | call | block*/)
     ^^ {
-      case id ~ t => structure.Variable(id, t)
+      case id ~ t => structure.variable.Variable(id, t)
     }
   }
 }

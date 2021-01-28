@@ -13,8 +13,8 @@ object Block {
 
   def block: Parser[Any] = {
     DO ~> opt(rep(variable | expression | control | call)) <~ END ^^ {
-      case Some(values) => structure.Block(values)
-      case None => structure.Block(List())
+      case Some(values) => structure.block.Block(values)
+      case None => structure.block.Block(List())
     }
   }
 }

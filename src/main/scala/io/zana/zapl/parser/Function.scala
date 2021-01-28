@@ -19,7 +19,7 @@ object Function {
       (`type` | block | identifier /*TODO| call | control | expression*/))
     ^^ {
       case id ~ params ~ body => {
-        structure.Function(
+        structure.function.Function(
           id,
           params,
           body

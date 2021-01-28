@@ -7,6 +7,5 @@ import io.zana.zapl.parser.Expression._
 import io.zana.zapl.parser.Statement._
 
 object Program {
-
   def build: Parser[Any] = opt(rep(statement | expression | control | call))
 }

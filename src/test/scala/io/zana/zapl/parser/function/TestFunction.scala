@@ -1,12 +1,15 @@
 package io.zana.zapl.parser.function
 
+import io.zana.zapl.structure.block.Block
+import io.zana.zapl.structure.common.Identifier
+import io.zana.zapl.structure.{common, function}
 import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
 
-class FunctionTest {
+class TestFunction {
 
-  def testFunction(input: String, expected: structure.Function) = {
+  def testFunction(input: String, expected: function.Function) = {
     parser.Base.parse(parser.Function.function, input) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
       case parser.Base.Failure(s, _) => assert(false, s)
@@ -25,8 +28,8 @@ class FunctionTest {
 
     testFunction(
       subjectInteger,
-      structure.Function(
-        structure.Identifier("integer"),
+      function.Function(
+        Identifier("integer"),
         List(),
         structure.primitive.Integer(1)
       ),
@@ -41,8 +44,8 @@ class FunctionTest {
 
     testFunction(
       subjectString,
-      structure.Function(
-        structure.Identifier("string"),
+      function.Function(
+        common.Identifier("string"),
         List(),
         structure.primitive.String("\"hello!\"")
       ),
@@ -57,8 +60,8 @@ class FunctionTest {
 
     testFunction(
       subjectBoolean,
-      structure.Function(
-        structure.Identifier("boolean"),
+      function.Function(
+        common.Identifier("boolean"),
         List(),
         structure.primitive.Boolean(true)
       ),
@@ -73,8 +76,8 @@ class FunctionTest {
 
     testFunction(
       subjectList,
-      structure.Function(
-        structure.Identifier("list"),
+      function.Function(
+        common.Identifier("list"),
         List(),
         structure.primitive.List(List())
       ),
@@ -94,10 +97,10 @@ class FunctionTest {
 
     testFunction(
       subject,
-      structure.Function(
-        structure.Identifier("block"),
+      function.Function(
+        common.Identifier("block"),
         List(),
-        structure.Block(List())
+        Block(List())
       ),
     )
   }
@@ -113,10 +116,10 @@ class FunctionTest {
 
     testFunction(
       subject,
-      structure.Function(
-        structure.Identifier("f"),
+      function.Function(
+        common.Identifier("f"),
         List(),
-        structure.Identifier("some_id")
+        common.Identifier("some_id")
       ),
     )
   }
@@ -132,10 +135,10 @@ class FunctionTest {
 
     testFunction(
       subject,
-      structure.Function(
-        structure.Identifier("f"),
+      function.Function(
+        common.Identifier("f"),
         List(
-          structure.Identifier("one")
+          common.Identifier("one")
         ),
         structure.primitive.List(List())
       ),
@@ -153,12 +156,12 @@ class FunctionTest {
 
     testFunction(
       subject,
-      structure.Function(
-        structure.Identifier("f"),
+      function.Function(
+        common.Identifier("f"),
         List(
-          structure.Identifier("one"),
-          structure.Identifier("two"),
-          structure.Identifier("three"),
+          common.Identifier("one"),
+          common.Identifier("two"),
+          common.Identifier("three"),
         ),
         structure.primitive.List(List())
       ),
