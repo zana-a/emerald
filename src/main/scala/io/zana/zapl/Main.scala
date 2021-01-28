@@ -9,6 +9,7 @@ object Main {
       |mod A do
       |  def add(a, b) = do
       |    a + b
+      |    a = []
       |  end
       |
       |  def sub(a, b) = do

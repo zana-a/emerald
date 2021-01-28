@@ -12,7 +12,6 @@ import io.zana.zapl.structure
 
 object Function {
 
-
   def function: Parser[Any] = {
     (DEF ~> identifier) ~
       ((LEFT_PARENTHESIS ~> repsep(identifier, ",")) <~

@@ -1,5 +1,6 @@
 package io.zana.zapl.parser.block
 
+import io.zana.zapl.structure.Identifier
 import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
@@ -25,5 +26,25 @@ class TestBlock {
     testBlock(subject, structure.Block(List()))
   }
 
-  // TODO: Add tests for one function, and many functions
+  @Test
+  def testVariableInBlock = {
+    val subject =
+      """
+        |do
+        |  a = "hello!"
+        |  a = 1
+        |  a = true
+        |  a = []
+        |end
+        |"""
+        .stripMargin
+        .trim
+    testBlock(subject, structure.Block(List(
+      structure.Variable(Identifier("a"),
+        structure.primitive.String("\"hello!\"")),
+      structure.Variable(Identifier("a"), structure.primitive.Integer(1)),
+      structure.Variable(Identifier("a"), structure.primitive.Boolean(true)),
+      structure.Variable(Identifier("a"), structure.primitive.List(List()))
+    )))
+  }
 }
