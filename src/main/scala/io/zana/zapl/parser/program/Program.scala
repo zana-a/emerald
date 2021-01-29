@@ -9,5 +9,5 @@ import io.zana.zapl.parser.statement.Statement._
 
 object Program {
   def build: Parser[Any] =
-    rep(singleLineComment | statement | expression | control | call)
+    rep(singleLineComment | call | statement | expression | control)
 }

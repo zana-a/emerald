@@ -6,7 +6,7 @@ import io.zana.zapl.parser.primitive.Primitive._
 object Expression {
 
   object Logic {
-    def expression: Parser[Any] =
+    def expression: Parser[Any] = {
       factor ~ opt(
         rep(
           Keyword.AND ~ expression
@@ -19,13 +19,16 @@ object Expression {
             | Keyword.GTEQ ~ expression
         )
       )
+    }
 
-    def factor: Parser[Any] =
+    def factor: Parser[Any] = {
       Keyword.NOT ~ factor | constant |
         Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS
+    }
 
-    def constant: Parser[Any] =
+    def constant: Parser[Any] = {
       Arithmetic.expression | boolean | integer | identifier
+    }
   }
 
   object Arithmetic {
@@ -40,12 +43,12 @@ object Expression {
       )
     }
 
-    def factor: Parser[Any] =
+    def factor: Parser[Any] = {
       constant | Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS
+    }
 
     def constant: Parser[Any] = integer | identifier
   }
-
 
   def expression: Parser[Any] =
     Logic.expression | Arithmetic.expression ^^ {
