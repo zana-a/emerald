@@ -1,3 +1,9 @@
-def f(a, b) = do
+mod Program do
+  def add(a, b) = do
+    a = 2
+  end
 
+  def sub(a, b) = do
+    a = 123
+  end
 end
