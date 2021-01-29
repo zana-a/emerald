@@ -1,9 +1,4 @@
-mod Program do
-  def add(a, b) = do
-    a = 2
-  end
-
-  def sub(a, b) = do
-    a = 123
-  end
+# adds two numbers
+def add(a, b) = do
+  a + b
 end

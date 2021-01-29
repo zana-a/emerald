@@ -3,6 +3,7 @@ package io.zana.zapl.parser
 import io.zana.zapl.parser.Base._
 import io.zana.zapl.parser.Operator._
 import io.zana.zapl.parser.Primitive._
+import io.zana.zapl.structure
 
 object Expression {
 
@@ -13,7 +14,6 @@ object Expression {
         | MULTIPLICATION ~ arithExpression
         | DIVISION ~ arithExpression))
   }
-
 
   def arithFactor: Parser[Any] = {
     arithConstant | LEFT_PARENTHESIS ~ arithExpression ~ RIGHT_PARENTHESIS
@@ -45,6 +45,14 @@ object Expression {
   }
 
   def expression: Parser[Any] = {
-    logicExpression | arithExpression
+    logicExpression | arithExpression ^^ {
+      case expression => expression
+    }
   }
+
+  //1
+  //1 + 2
+  //(1) + 1
+  //1 + (1 + 1 + (1))
+
 }
