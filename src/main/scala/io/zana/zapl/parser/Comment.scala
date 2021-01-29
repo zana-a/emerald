@@ -5,7 +5,7 @@ import io.zana.zapl.structure.comment
 
 object Comment {
 
-  def singleLine: Parser[comment.LineComment] =
+  def singleLineComment: Parser[comment.LineComment] =
     """#.*""".r ^^ {
       case c => comment.LineComment(c.drop(1))
     }
