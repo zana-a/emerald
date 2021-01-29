@@ -1,4 +1,4 @@
-package io.zana.zapl.parser
+package io.zana.zapl.parser.program
 
 import io.zana.zapl.parser.Base._
 import io.zana.zapl.parser.call.Call._

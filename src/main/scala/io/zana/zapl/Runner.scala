@@ -1,8 +1,8 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.{Base, Program}
+import io.zana.zapl.parser.Base
+import io.zana.zapl.parser.program.Program
 
-import java.net.URI
 import scala.io.Source
 
 object Runner {

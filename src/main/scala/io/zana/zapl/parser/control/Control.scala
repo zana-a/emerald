@@ -8,7 +8,7 @@ import io.zana.zapl.parser.primitive.Primitive._
 object Control {
 
   def guard: Parser[Any] =
-    logicExpression
+    Logic.expression
 
   def command: Parser[Any] =
     identifier | `type` | expression | block

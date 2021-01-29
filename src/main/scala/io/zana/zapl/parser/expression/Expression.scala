@@ -5,41 +5,50 @@ import io.zana.zapl.parser.primitive.Primitive._
 
 object Expression {
 
-  def arithExpression: Parser[Any] = {
-    arithFactor ~ opt(rep(
-      Keyword.PLUS ~ arithExpression
-        | Keyword.MINUS ~ arithExpression
-        | Keyword.MULTIPLICATION ~ arithExpression
-        | Keyword.DIVISION ~ arithExpression))
+  object Logic {
+    def expression: Parser[Any] =
+      factor ~ opt(
+        rep(
+          Keyword.AND ~ expression
+            | Keyword.OR ~ expression
+            | Keyword.EQEQ ~ expression
+            | Keyword.NEQ ~ expression
+            | Keyword.LT ~ expression
+            | Keyword.GT ~ expression
+            | Keyword.LTEQ ~ expression
+            | Keyword.GTEQ ~ expression
+        )
+      )
+
+    def factor: Parser[Any] =
+      Keyword.NOT ~ factor | constant |
+        Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS
+
+    def constant: Parser[Any] =
+      Arithmetic.expression | boolean | integer | identifier
   }
 
-  def arithFactor: Parser[Any] =
-    arithConstant | Keyword.LEFT_PARENTHESIS ~ arithExpression ~ Keyword.RIGHT_PARENTHESIS
+  object Arithmetic {
+    def expression: Parser[Any] = {
+      factor ~ opt(
+        rep(
+          Keyword.PLUS ~ expression
+            | Keyword.MINUS ~ expression
+            | Keyword.MULTIPLICATION ~ expression
+            | Keyword.DIVISION ~ expression
+        )
+      )
+    }
 
-  def arithConstant: Parser[Any] = integer | identifier
+    def factor: Parser[Any] =
+      constant | Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS
 
-  def logicExpression: Parser[Any] =
-    logicFactor ~ opt(rep(
-      Keyword.AND ~ logicExpression
-        | Keyword.OR ~ logicExpression
-        | Keyword.EQEQ ~ logicExpression
-        | Keyword.NEQ ~ logicExpression
-        | Keyword.LT ~ logicExpression
-        | Keyword.GT ~ logicExpression
-        | Keyword.LTEQ ~ logicExpression
-        | Keyword.GTEQ ~ logicExpression
-    ))
+    def constant: Parser[Any] = integer | identifier
+  }
 
-  def logicFactor: Parser[Any] =
-    Keyword.NOT ~ logicFactor |
-      logicConstant |
-      Keyword.LEFT_PARENTHESIS ~ logicExpression ~ Keyword.RIGHT_PARENTHESIS
-
-  def logicConstant: Parser[Any] =
-    arithExpression | boolean | integer | identifier
 
   def expression: Parser[Any] =
-    logicExpression | arithExpression ^^ {
+    Logic.expression | Arithmetic.expression ^^ {
       case expression => expression
     }
 }
