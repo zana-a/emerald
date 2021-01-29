@@ -1,18 +1,11 @@
 package io.zana.zapl.parser.module
 
+import io.zana.zapl.parser.module
 import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
 
 class TestModule {
-
-  def testModule(input: String, expected: structure.module.Module) = {
-    parser.Base.parse(parser.Module.module, input) match {
-      case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
 
   @Test
   def testEmptyModule = {
@@ -148,6 +141,14 @@ class TestModule {
         )
       )
     )
+  }
+
+  def testModule(input: String, expected: structure.module.Module) = {
+    parser.Base.parse(module.Module.module, input) match {
+      case parser.Base.Success(s, _) => assertEquals(expected, s)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

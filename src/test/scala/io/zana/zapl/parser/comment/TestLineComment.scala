@@ -1,19 +1,11 @@
 package io.zana.zapl.parser.comment
 
+import io.zana.zapl.parser.module
 import io.zana.zapl.{parser, structure}
 import org.junit.Assert._
 import org.junit.Test
 
 class TestLineComment {
-
-  def testLineComment(input: String,
-                      expected: List[Any]) = {
-    parser.Base.parse(parser.Program.build, input) match {
-      case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
 
   @Test
   def testEmptyComment = {
@@ -25,6 +17,15 @@ class TestLineComment {
         .trim
 
     testLineComment(subject, List(structure.comment.LineComment("")))
+  }
+
+  def testLineComment(input: String,
+                      expected: List[Any]) = {
+    parser.Base.parse(parser.Program.build, input) match {
+      case parser.Base.Success(s, _) => assertEquals(expected, s)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test
@@ -60,7 +61,7 @@ class TestLineComment {
       )
     )
 
-    parser.Base.parse(parser.Module.module, subject) match {
+    parser.Base.parse(module.Module.module, subject) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
       case parser.Base.Failure(s, _) => assert(false, s)
       case parser.Base.Error(s, _) => assert(false, s)

@@ -1,8 +1,3 @@
-# An example module
-mod A do
-
-  # Adds a and b numbers together
-  def add(a, b) = do
-    a + b
-  end
+def is_true(a_bool) = do
+  a_bool == true
 end

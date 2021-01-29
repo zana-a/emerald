@@ -5,14 +5,6 @@ import org.junit.Assert._
 import org.junit.Test
 
 class TestList {
-  def testList(input: String, expected: structure.primitive.List) = {
-    parser.Base.parse(parser.Primitive.list, input) match {
-      case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testEmptyList = {
     val subject =
@@ -95,6 +87,14 @@ class TestList {
         structure.primitive.Integer(3)
       ))
     )
+  }
+
+  def testList(input: String, expected: structure.primitive.List) = {
+    parser.Base.parse(Primitive.list, input) match {
+      case parser.Base.Success(result, _) => assertEquals(expected, result)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

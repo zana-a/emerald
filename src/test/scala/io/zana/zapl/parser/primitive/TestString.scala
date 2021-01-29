@@ -5,14 +5,6 @@ import org.junit.Assert._
 import org.junit.Test
 
 class TestString {
-  def testString(input: String, expected: structure.primitive.String) = {
-    parser.Base.parse(parser.Primitive.string, input) match {
-      case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testEmptyString = {
     val subject =
@@ -23,6 +15,14 @@ class TestString {
         .trim
 
     testString(subject, structure.primitive.String(subject))
+  }
+
+  def testString(input: String, expected: structure.primitive.String) = {
+    parser.Base.parse(Primitive.string, input) match {
+      case parser.Base.Success(result, _) => assertEquals(expected, result)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

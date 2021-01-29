@@ -9,14 +9,6 @@ import org.junit.Test
 
 class TestVariable {
 
-  def testVariable(input: String, expected: Variable) = {
-    parser.Base.parse(parser.Variable.variable, input) match {
-      case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testStringVariable = {
     val subject =
@@ -69,6 +61,14 @@ class TestVariable {
         structure.primitive.Boolean(true)
       )
     )
+  }
+
+  def testVariable(input: String, expected: Variable) = {
+    parser.Base.parse(parser.variable.Variable.variable, input) match {
+      case parser.Base.Success(s, _) => assertEquals(expected, s)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

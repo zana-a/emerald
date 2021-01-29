@@ -6,14 +6,6 @@ import org.junit.Test
 
 class TestInteger {
 
-  def testInteger(input: String, expected: structure.primitive.Integer) = {
-    parser.Base.parse(parser.Primitive.integer, input) match {
-      case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testSingleDigit = {
     val subject =
@@ -38,6 +30,13 @@ class TestInteger {
     testInteger(subject, structure.primitive.Integer(132))
   }
 
+  def testInteger(input: String, expected: structure.primitive.Integer) = {
+    parser.Base.parse(Primitive.integer, input) match {
+      case parser.Base.Success(result, _) => assertEquals(expected, result)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
+  }
 
   @Test
   def testLowerBound = {

@@ -9,14 +9,6 @@ import org.junit.Test
 
 class TestFunction {
 
-  def testFunction(input: String, expected: function.Function) = {
-    parser.Base.parse(parser.Function.function, input) match {
-      case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testPrimitiveFunction = {
     val subjectInteger =
@@ -143,6 +135,14 @@ class TestFunction {
         structure.primitive.List(List())
       ),
     )
+  }
+
+  def testFunction(input: String, expected: function.Function) = {
+    parser.Base.parse(parser.function.Function.function, input) match {
+      case parser.Base.Success(s, _) => assertEquals(expected, s)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

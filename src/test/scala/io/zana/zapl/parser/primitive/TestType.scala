@@ -5,14 +5,6 @@ import org.junit.Assert._
 import org.junit.Test
 
 class TestType {
-  def testType(input: String, expected: structure.primitive.Type) = {
-    parser.Base.parse(parser.Primitive.`type`, input) match {
-      case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
-    }
-  }
-
   @Test
   def testStringType = {
     val subject =
@@ -23,6 +15,14 @@ class TestType {
         .trim
 
     testType(subject, structure.primitive.String("\"\""))
+  }
+
+  def testType(input: String, expected: structure.primitive.Type) = {
+    parser.Base.parse(Primitive.`type`, input) match {
+      case parser.Base.Success(result, _) => assertEquals(expected, result)
+      case parser.Base.Failure(s, _) => assert(false, s)
+      case parser.Base.Error(s, _) => assert(false, s)
+    }
   }
 
   @Test

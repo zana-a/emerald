@@ -1,7 +1,7 @@
 package io.zana.zapl.parser.expression
 
 
-import io.zana.zapl.parser.{Base, Expression}
+import io.zana.zapl.parser.Base
 import io.zana.zapl.structure.expression.{Expression => Expressor}
 import org.junit.Assert._
 import org.junit.Test

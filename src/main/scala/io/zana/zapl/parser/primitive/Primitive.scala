@@ -1,7 +1,6 @@
-package io.zana.zapl.parser
+package io.zana.zapl.parser.primitive
 
 import io.zana.zapl.parser.Base._
-import io.zana.zapl.parser.Keyword._
 import io.zana.zapl.structure.primitive
 
 object Primitive {
@@ -13,11 +12,11 @@ object Primitive {
   }
 
   def boolean: Parser[primitive.Boolean] = {
-    def t: Parser[primitive.Boolean] = TRUE ^^ {
+    def t: Parser[primitive.Boolean] = Keyword.TRUE ^^ {
       result => primitive.Boolean(result.toBoolean)
     }
 
-    def f: Parser[primitive.Boolean] = FALSE ^^ {
+    def f: Parser[primitive.Boolean] = Keyword.FALSE ^^ {
       result => primitive.Boolean(result.toBoolean)
     }
 
