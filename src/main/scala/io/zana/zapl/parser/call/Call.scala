@@ -1,32 +1,42 @@
 package io.zana.zapl.parser.call
 
-import io.zana.zapl.parser.Base
 import io.zana.zapl.parser.Base.{identifier => baseIdentifier, _}
 import io.zana.zapl.parser.primitive._
+import io.zana.zapl.structure.call.Caller
 
 object Call {
 
   object Function {
-    def params: Parser[Any] = {
-      repsep(
-        Primitive.`type` | baseIdentifier | Module.call | call,
-        Keyword.COMMA
-      )
+
+    import io.zana.zapl.structure.call.{Function => Result}
+
+    def call: Parser[Result] = {
+      baseIdentifier ~
+        (Keyword.LEFT_PARENTHESIS ~> params <~ Keyword.RIGHT_PARENTHESIS) ^^ {
+        case id ~ params => Result(id, params)
+      }
     }
 
-    def call: Parser[Any] = {
-      baseIdentifier ~
-        Keyword.LEFT_PARENTHESIS ~ params ~ Keyword.RIGHT_PARENTHESIS
+    def params: Parser[List[Any]] = {
+      repsep(
+        Primitive.`type` | call | Module.call | baseIdentifier,
+        Keyword.COMMA
+      )
     }
   }
 
   object Module {
-    def call: Parser[Any] = {
-      repsep(baseIdentifier, Keyword.BOX) ~ Function.call
+
+    import io.zana.zapl.structure.call.{Module => Result}
+
+    def call: Parser[Result] = {
+      rep(baseIdentifier <~ Keyword.BOX) ~ Function.call ^^ {
+        case ids ~ caller => Result(ids, caller)
+      }
     }
   }
 
-  def call: Parser[Any] = {
-    Module.call | Function.call
+  def call: Parser[Caller] = {
+    Function.call | Module.call
   }
 }

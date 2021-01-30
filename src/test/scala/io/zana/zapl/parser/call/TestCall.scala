@@ -1,6 +1,5 @@
 package io.zana.zapl.parser.call
 
-import io.zana.zapl.structure.call
 import org.junit.Assert._
 import org.junit.Test
 
@@ -73,15 +72,21 @@ class TestCall {
             primitive.Boolean(true)
           ),
         ),
+        call.Function(
+          Identifier("f"),
+          List(
+            Identifier("a")
+          ),
+        ),
         //TODO Expression here
         call.Function(
           Identifier("f"),
           List(
             call.Function(
-              Identifier("f"),
-              List(),
+              Identifier("e"),
+              List()
             )
-          ),
+          )
         )
       )
     )
@@ -131,8 +136,8 @@ class TestCall {
   @Test
   def testModuleFunctionCall = {
 
+    import io.zana.zapl.structure.call
     import io.zana.zapl.structure.common.Identifier
-    import io.zana.zapl.structure.{call, primitive}
 
     val subject =
       """
