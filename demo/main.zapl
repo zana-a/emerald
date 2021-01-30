@@ -1,1 +1,5 @@
-A::B::C::D::hello()
+mod Math do
+
+  # The sum of the numbers 'a' and 'b'
+  def add(a, b) = a + b
+end
