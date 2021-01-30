@@ -6,8 +6,9 @@ import io.zana.zapl.parser.comment.Comment._
 import io.zana.zapl.parser.control.Control._
 import io.zana.zapl.parser.expression.Expression._
 import io.zana.zapl.parser.statement.Statement._
+import io.zana.zapl.parser.variable.Variable._
 
 object Program {
   def build: Parser[Any] =
-    rep(singleLineComment | call | statement | expression | control)
+    rep(singleLineComment | variable | statement | expression | control | call)
 }

@@ -1,5 +1,6 @@
 package io.zana.zapl.parser.call
 
+import io.zana.zapl.parser.Base
 import io.zana.zapl.parser.Base.{identifier => baseIdentifier, _}
 import io.zana.zapl.parser.primitive._
 
@@ -7,10 +8,9 @@ object Call {
 
   object Function {
     def params: Parser[Any] = {
-      opt(
-        rep(
-          Primitive.`type` | baseIdentifier | call | Module.call
-        )
+      repsep(
+        Primitive.`type` | baseIdentifier | call | Module.call,
+        Keyword.COMMA
       )
     }
 
@@ -21,7 +21,7 @@ object Call {
 
   object Module {
     def identifier: Parser[Any] =
-      baseIdentifier ~ opt(rep(Keyword.BOX ~ identifier))
+      baseIdentifier ~ rep(Keyword.BOX ~> baseIdentifier)
 
     def call: Parser[Any] =
       identifier ~ Keyword.BOX ~ Function.call
