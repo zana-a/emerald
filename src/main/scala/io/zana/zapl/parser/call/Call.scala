@@ -22,7 +22,7 @@ object Call {
 
   object Module {
     def call: Parser[Any] = {
-      repsep(baseIdentifier, Keyword.BOX)
+      repsep(baseIdentifier, Keyword.BOX) ~ Function.call
     }
   }
 

@@ -10,5 +10,5 @@ import io.zana.zapl.parser.variable.Variable._
 
 object Program {
   def build: Parser[Any] =
-    rep(singleLineComment | call | variable | statement | expression | control)
+      rep(singleLineComment | call | variable | statement | expression | control)
 }
