@@ -6,12 +6,6 @@ import scala.util.parsing.combinator.JavaTokenParsers
 
 object Base extends JavaTokenParsers {
 
-  def identifier: Parser[Identifier] = {
-    not(Keyword.keywords) ~> super.ident ^^ {
-      case id => Identifier(id)
-    }
-  }
-
   object Keyword {
 
     val TRUE = "true"
@@ -76,9 +70,12 @@ object Base extends JavaTokenParsers {
 
     val EQ = "="
 
-    def keywords: Parser[String] =
+    def noneSymbol: Parser[String] =
       TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
 
   }
 
+  def identifier: Parser[Identifier] = {
+    not(Keyword.noneSymbol) ~> super.ident ^^ (id => Identifier(id))
+  }
 }

@@ -6,5 +6,7 @@ import io.zana.zapl.parser.module.Module._
 
 object Statement {
 
-  def statement: Parser[Any] = module | function
+  def statement: Parser[Any] = {
+    module | function
+  }
 }

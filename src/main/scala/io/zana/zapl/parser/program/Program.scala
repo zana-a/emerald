@@ -9,6 +9,13 @@ import io.zana.zapl.parser.statement.Statement._
 import io.zana.zapl.parser.variable.Variable._
 
 object Program {
-  def build: Parser[Any] =
-      rep(singleLineComment | call | variable | statement | expression | control)
+  def build: Parser[Any] = {
+    rep(singleLineComment
+      | call
+      | variable
+      | statement
+      | expression
+      | control
+    )
+  }
 }
