@@ -9,25 +9,24 @@ object Call {
   object Function {
     def params: Parser[Any] = {
       repsep(
-        Primitive.`type` | baseIdentifier | call | Module.call,
+        Primitive.`type` | baseIdentifier | Module.call | call,
         Keyword.COMMA
       )
     }
 
     def call: Parser[Any] = {
-      baseIdentifier ~ Keyword.LEFT_PARENTHESIS ~ params ~ Keyword.RIGHT_PARENTHESIS
+      baseIdentifier ~
+        Keyword.LEFT_PARENTHESIS ~ params ~ Keyword.RIGHT_PARENTHESIS
     }
   }
 
   object Module {
-    def identifier: Parser[Any] =
-      baseIdentifier ~ rep(Keyword.BOX ~> baseIdentifier)
-
-    def call: Parser[Any] =
-      identifier ~ Keyword.BOX ~ Function.call
+    def call: Parser[Any] = {
+      repsep(baseIdentifier, Keyword.BOX)
+    }
   }
 
-  def call: Parser[Any] =
+  def call: Parser[Any] = {
     Module.call | Function.call
-
+  }
 }

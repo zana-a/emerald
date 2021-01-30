@@ -95,7 +95,7 @@ class TestCall {
 
     val subject =
       """
-        |f(1, true, a, e())
+        |f(1, true, a, e(), A::f())
         |"""
         .stripMargin
         .trim
@@ -112,15 +112,24 @@ class TestCall {
             call.Function(
               Identifier("e"),
               List()
+            ),
+            call.Module(
+              List(
+                Identifier("A")
+              ),
+              call.Function(
+                Identifier("f"),
+                List()
+              )
             )
-          ),
+          )
         )
       )
     )
   }
 
   @Test
-  def testModuleFunctionCallNoParam = {
+  def testModuleFunctionCall = {
 
     import io.zana.zapl.structure.common.Identifier
     import io.zana.zapl.structure.{call, primitive}
@@ -128,6 +137,8 @@ class TestCall {
     val subject =
       """
         |A::f()
+        |A::B::f()
+        |A::B::C::f()
         |"""
         .stripMargin
         .trim
@@ -143,7 +154,28 @@ class TestCall {
             Identifier("f"),
             List(),
           )
-        )
+        ),
+        call.Module(
+          List(
+            Identifier("A"),
+            Identifier("B"),
+          ),
+          call.Function(
+            Identifier("f"),
+            List(),
+          )
+        ),
+        call.Module(
+          List(
+            Identifier("A"),
+            Identifier("B"),
+            Identifier("C"),
+          ),
+          call.Function(
+            Identifier("f"),
+            List(),
+          )
+        ),
       )
     )
   }
