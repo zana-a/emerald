@@ -7,15 +7,18 @@ import scala.io.Source
 
 object Runner {
 
-  def fromFile(path: String) = {
-    parse(Source.fromFile(path).mkString)
+  def fromFile(path: String): Base.ParseResult[Any] = {
+    val io = Source.fromFile(path)
+    val source = io.mkString
+    io.close
+    parse(source)
   }
 
-  def fromSource(input: String) = {
+  def fromSource(input: String): Base.ParseResult[Any] = {
     parse(input)
   }
 
-  private def parse(input: String) = {
+  private def parse(input: String): Base.ParseResult[Any] = {
     Base.parseAll(Program.build, input)
   }
 }

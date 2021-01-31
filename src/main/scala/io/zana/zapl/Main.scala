@@ -1,8 +1,20 @@
 package io.zana.zapl
 
-object Main extends App {
+import pprint.pprintln
 
-  println(
-    Runner.fromFile("demo/main.zapl")
-  )
+object Main {
+
+  def main(args: Array[String]): Unit = {
+
+    if (args.length > 0) {
+      pprintln(
+        Runner.fromFile(args(0)),
+        width = 2,
+        indent = 2,
+      )
+    } else {
+      println("No input given")
+    }
+  }
 }
+
