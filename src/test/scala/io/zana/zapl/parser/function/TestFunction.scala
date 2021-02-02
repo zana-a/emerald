@@ -10,7 +10,7 @@ import org.junit.Test
 class TestFunction {
 
   @Test
-  def testPrimitiveFunction = {
+  def testPrimitiveFunction(): Unit = {
     val subjectInteger =
       """
         |def integer() = 1
@@ -77,7 +77,7 @@ class TestFunction {
   }
 
   @Test
-  def testBlockFunction = {
+  def testBlockFunction(): Unit = {
     val subject =
       """
         |def block() = do
@@ -98,7 +98,7 @@ class TestFunction {
   }
 
   @Test
-  def testIdentiferFunction = {
+  def testIdentiferFunction(): Unit = {
     val subject =
       """
         |def f() = some_id
@@ -117,7 +117,7 @@ class TestFunction {
   }
 
   @Test
-  def testOneParamFunction = {
+  def testOneParamFunction(): Unit = {
     val subject =
       """
         |def f(one) = []
@@ -137,16 +137,16 @@ class TestFunction {
     )
   }
 
-  def testFunction(input: String, expected: function.Function) = {
+  def testFunction(input: String, expected: function.Function): Unit = {
     parser.Base.parse(parser.function.Function.function, input) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testMultiParamFunction = {
+  def testMultiParamFunction(): Unit = {
     val subject =
       """
         |def f(one, two, three) = []

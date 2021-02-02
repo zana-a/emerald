@@ -16,13 +16,12 @@ object Function {
       ((Keyword.LEFT_PARENTHESIS ~> repsep(identifier, ",")) <~
         Keyword.RIGHT_PARENTHESIS) ~ (Keyword.EQ ~>
       (`type` | expression | block | identifier | call /* todo: control  */)) ^^ {
-      case id ~ params ~ body => {
+      case id ~ params ~ body =>
         Result(
           id,
           params,
           body
         )
-      }
     }
 }
 

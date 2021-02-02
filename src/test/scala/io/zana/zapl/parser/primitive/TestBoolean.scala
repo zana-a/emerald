@@ -7,7 +7,7 @@ import org.junit.Test
 class TestBoolean {
 
   @Test
-  def testTrue = {
+  def testTrue(): Unit = {
     val subject =
       """
         |true
@@ -19,7 +19,7 @@ class TestBoolean {
   }
 
   @Test
-  def testFalse = {
+  def testFalse(): Unit = {
     val subject =
       """
         |false
@@ -30,11 +30,11 @@ class TestBoolean {
     testBoolean(subject, structure.primitive.Boolean(false))
   }
 
-  def testBoolean(input: String, expected: structure.primitive.Type) = {
+  def testBoolean(input: String, expected: structure.primitive.Type): Unit = {
     parser.Base.parse(Primitive.boolean, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 }

@@ -44,14 +44,13 @@ object Expression {
     }
 
     def factor: Parser[Any] = {
-      constant | Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS
+      (constant
+        | Keyword.LEFT_PARENTHESIS ~ expression ~ Keyword.RIGHT_PARENTHESIS)
     }
 
     def constant: Parser[Any] = integer | identifier
   }
 
   def expression: Parser[Any] =
-    Logic.expression | Arithmetic.expression ^^ {
-      case expression => expression
-    }
+    Logic.expression | Arithmetic.expression ^^ (expression => expression)
 }

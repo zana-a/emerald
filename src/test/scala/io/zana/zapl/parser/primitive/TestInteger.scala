@@ -7,7 +7,7 @@ import org.junit.Test
 class TestInteger {
 
   @Test
-  def testSingleDigit = {
+  def testSingleDigit(): Unit = {
     val subject =
       """
         |1
@@ -19,7 +19,7 @@ class TestInteger {
   }
 
   @Test
-  def testMultipleDigit = {
+  def testMultipleDigit(): Unit = {
     val subject =
       """
         |132
@@ -30,16 +30,16 @@ class TestInteger {
     testInteger(subject, structure.primitive.Integer(132))
   }
 
-  def testInteger(input: String, expected: structure.primitive.Integer) = {
+  def testInteger(input: String, expected: structure.primitive.Integer): Unit = {
     parser.Base.parse(Primitive.integer, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testLowerBound = {
+  def testLowerBound(): Unit = {
     val subject =
       """
         |-2147483648
@@ -51,7 +51,7 @@ class TestInteger {
   }
 
   @Test
-  def testUpperBound = {
+  def testUpperBound(): Unit = {
     val subject =
       """
         |2147483647

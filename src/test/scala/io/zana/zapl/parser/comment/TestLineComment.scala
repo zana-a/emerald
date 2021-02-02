@@ -9,7 +9,7 @@ import org.junit.Test
 class TestLineComment {
 
   @Test
-  def testEmptyComment = {
+  def testEmptyComment(): Unit = {
     val subject =
       """
         |#
@@ -21,16 +21,16 @@ class TestLineComment {
   }
 
   def testLineComment(input: String,
-                      expected: List[Any]) = {
+                      expected: List[Any]): Unit = {
     parser.Base.parse(Program.build, input) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testValidCodeComment = {
+  def testValidCodeComment(): Unit = {
     val subject =
       """
         |#mod A do end
@@ -45,7 +45,7 @@ class TestLineComment {
   }
 
   @Test
-  def testInnerModuleComment = {
+  def testInnerModuleComment(): Unit = {
     val subject =
       """
         |mod A do
@@ -64,13 +64,13 @@ class TestLineComment {
 
     parser.Base.parse(module.Module.module, subject) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testInnerBlockComment = {
+  def testInnerBlockComment(): Unit = {
     val subject =
       """
         |def f() = do
@@ -97,7 +97,7 @@ class TestLineComment {
   }
 
   @Test
-  def testAbnoxiouslyPlacedComment = {
+  def testObnoxiouslyPlacedComment(): Unit = {
     val subject =
       """
         |def a() = 1 # comment

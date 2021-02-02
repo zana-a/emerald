@@ -10,7 +10,7 @@ import org.junit.Test
 class TestVariable {
 
   @Test
-  def testStringVariable = {
+  def testStringVariable(): Unit = {
     val subject =
       """
         |a = "hello!"
@@ -28,7 +28,7 @@ class TestVariable {
   }
 
   @Test
-  def testIntegerVariable = {
+  def testIntegerVariable(): Unit = {
     val subject =
       """
         |a = 1
@@ -46,7 +46,7 @@ class TestVariable {
   }
 
   @Test
-  def testBooleanVariable = {
+  def testBooleanVariable(): Unit = {
     val subject =
       """
         |a = true
@@ -63,16 +63,16 @@ class TestVariable {
     )
   }
 
-  def testVariable(input: String, expected: Variable) = {
+  def testVariable(input: String, expected: Variable): Unit = {
     parser.Base.parse(parser.variable.Variable.variable, input) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testListVariable = {
+  def testListVariable(): Unit = {
     val subject =
       """
         |a = ["apple", 12, true, ["banana", 1]]

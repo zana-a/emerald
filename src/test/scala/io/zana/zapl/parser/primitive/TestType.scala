@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestType {
   @Test
-  def testStringType = {
+  def testStringType(): Unit = {
     val subject =
       """
         |""
@@ -17,16 +17,16 @@ class TestType {
     testType(subject, structure.primitive.String("\"\""))
   }
 
-  def testType(input: String, expected: structure.primitive.Type) = {
+  def testType(input: String, expected: structure.primitive.Type): Unit = {
     parser.Base.parse(Primitive.`type`, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testIntegerType = {
+  def testIntegerType(): Unit = {
     val subject =
       """
         |42
@@ -38,7 +38,7 @@ class TestType {
   }
 
   @Test
-  def testBooleanType = {
+  def testBooleanType(): Unit = {
     val subject =
       """
         |true
@@ -50,7 +50,7 @@ class TestType {
   }
 
   @Test
-  def testListType = {
+  def testListType(): Unit = {
     val subject =
       """
         |[]

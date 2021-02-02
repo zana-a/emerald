@@ -6,9 +6,7 @@ import io.zana.zapl.structure.primitive
 object Primitive {
 
   def string: Parser[primitive.String] = {
-    stringLiteral ^^ {
-      case result => primitive.String(result)
-    }
+    stringLiteral ^^ (result => primitive.String(result))
   }
 
   def boolean: Parser[primitive.Boolean] = {

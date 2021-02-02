@@ -8,7 +8,7 @@ import org.junit.Test
 class TestModule {
 
   @Test
-  def testEmptyModule = {
+  def testEmptyModule(): Unit = {
     val subject =
       """
         |mod A do
@@ -28,7 +28,7 @@ class TestModule {
   }
 
   @Test
-  def testSingleFunctionModule = {
+  def testSingleFunctionModule(): Unit = {
     val subject =
       """
         |mod A do
@@ -58,7 +58,7 @@ class TestModule {
   }
 
   @Test
-  def testMultiFunctionModule = {
+  def testMultiFunctionModule(): Unit = {
     val subject =
       """
         |mod A do
@@ -110,7 +110,7 @@ class TestModule {
   }
 
   @Test
-  def testNestedModule = {
+  def testNestedModule(): Unit = {
     val subject =
       """
         |mod A do
@@ -143,16 +143,16 @@ class TestModule {
     )
   }
 
-  def testModule(input: String, expected: structure.module.Module) = {
+  def testModule(input: String, expected: structure.module.Module): Unit = {
     parser.Base.parse(module.Module.module, input) match {
       case parser.Base.Success(s, _) => assertEquals(expected, s)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testNestedFunctionInModule = {
+  def testNestedFunctionInModule(): Unit = {
     val subject =
       """
         |mod A do

@@ -5,20 +5,20 @@ import org.junit.Test
 
 class TestCall {
 
-  def testCall(input: String, expected: List[Any]) = {
+  def testCall(input: String, expected: List[Any]): Unit = {
 
     import io.zana.zapl.parser.Base._
     import io.zana.zapl.parser.program._
 
     parse(Program.build, input) match {
       case Success(s, _) => assertEquals(expected, s)
-      case Failure(s, _) => assert(false, s)
-      case Error(s, _) => assert(false, s)
+      case Failure(s, _) => assert(assertion = false, s)
+      case Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testFunctionCallNoParam = {
+  def testFunctionCallNoParam(): Unit = {
 
     import io.zana.zapl.structure.call
     import io.zana.zapl.structure.common._
@@ -33,7 +33,7 @@ class TestCall {
     testCall(
       subject,
       List(
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(),
         )
@@ -42,7 +42,7 @@ class TestCall {
   }
 
   @Test
-  def testFunctionCallWithSingleParam = {
+  def testFunctionCallWithSingleParam(): Unit = {
 
     import io.zana.zapl.structure.common._
     import io.zana.zapl.structure.{call, primitive}
@@ -60,29 +60,29 @@ class TestCall {
     testCall(
       subject,
       List(
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(
             primitive.Integer(1)
           ),
         ),
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(
             primitive.Boolean(true)
           ),
         ),
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(
             Identifier("a")
           ),
         ),
         //TODO Expression here
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(
-            call.Function(
+            call.FunctionCall(
               Identifier("e"),
               List()
             )
@@ -93,7 +93,7 @@ class TestCall {
   }
 
   @Test
-  def testFunctionCallWithMultiParam = {
+  def testFunctionCallWithMultiParam(): Unit = {
 
     import io.zana.zapl.structure.common._
     import io.zana.zapl.structure.{call, primitive}
@@ -108,21 +108,21 @@ class TestCall {
     testCall(
       subject,
       List(
-        call.Function(
+        call.FunctionCall(
           Identifier("f"),
           List(
             primitive.Integer(1),
             primitive.Boolean(true),
             Identifier("a"),
-            call.Function(
+            call.FunctionCall(
               Identifier("e"),
               List()
             ),
-            call.Module(
+            call.ModuleCall(
               List(
                 Identifier("A")
               ),
-              call.Function(
+              call.FunctionCall(
                 Identifier("f"),
                 List()
               )
@@ -134,7 +134,7 @@ class TestCall {
   }
 
   @Test
-  def testModuleFunctionCall = {
+  def testModuleFunctionCall(): Unit = {
 
     import io.zana.zapl.structure.call
     import io.zana.zapl.structure.common.Identifier
@@ -151,32 +151,32 @@ class TestCall {
     testCall(
       subject,
       List(
-        call.Module(
+        call.ModuleCall(
           List(
             Identifier("A"),
           ),
-          call.Function(
+          call.FunctionCall(
             Identifier("f"),
             List(),
           )
         ),
-        call.Module(
+        call.ModuleCall(
           List(
             Identifier("A"),
             Identifier("B"),
           ),
-          call.Function(
+          call.FunctionCall(
             Identifier("f"),
             List(),
           )
         ),
-        call.Module(
+        call.ModuleCall(
           List(
             Identifier("A"),
             Identifier("B"),
             Identifier("C"),
           ),
-          call.Function(
+          call.FunctionCall(
             Identifier("f"),
             List(),
           )

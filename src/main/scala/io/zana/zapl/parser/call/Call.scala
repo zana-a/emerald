@@ -2,13 +2,13 @@ package io.zana.zapl.parser.call
 
 import io.zana.zapl.parser.Base.{identifier => baseIdentifier, _}
 import io.zana.zapl.parser.primitive._
-import io.zana.zapl.structure.call.Caller
+import io.zana.zapl.structure.call.Callable
 
 object Call {
 
   object Function {
 
-    import io.zana.zapl.structure.call.{Function => Result}
+    import io.zana.zapl.structure.call.{FunctionCall => Result}
 
     def call: Parser[Result] = {
       baseIdentifier ~
@@ -27,7 +27,7 @@ object Call {
 
   object Module {
 
-    import io.zana.zapl.structure.call.{Module => Result}
+    import io.zana.zapl.structure.call.{ModuleCall => Result}
 
     def call: Parser[Result] = {
       rep(baseIdentifier <~ Keyword.BOX) ~ Function.call ^^ {
@@ -36,7 +36,7 @@ object Call {
     }
   }
 
-  def call: Parser[Caller] = {
+  def call: Parser[Callable] = {
     Function.call | Module.call
   }
 }

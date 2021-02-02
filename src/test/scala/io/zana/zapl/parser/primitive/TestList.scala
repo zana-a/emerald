@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestList {
   @Test
-  def testEmptyList = {
+  def testEmptyList(): Unit = {
     val subject =
       """
         |[]
@@ -18,7 +18,7 @@ class TestList {
   }
 
   @Test
-  def testNestedList = {
+  def testNestedList(): Unit = {
     val subject =
       """
         |[[]]
@@ -35,7 +35,7 @@ class TestList {
   }
 
   @Test
-  def testStringList = {
+  def testStringList(): Unit = {
     val subject =
       """
         |["hello", "world"]
@@ -53,7 +53,7 @@ class TestList {
   }
 
   @Test
-  def testBooleanList = {
+  def testBooleanList(): Unit = {
     val subject =
       """
         |[true,false]
@@ -71,7 +71,7 @@ class TestList {
   }
 
   @Test
-  def testIntegerList = {
+  def testIntegerList(): Unit = {
     val subject =
       """
         |[1,2,3]
@@ -89,16 +89,16 @@ class TestList {
     )
   }
 
-  def testList(input: String, expected: structure.primitive.List) = {
+  def testList(input: String, expected: structure.primitive.List): Unit = {
     parser.Base.parse(Primitive.list, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testListList = {
+  def testListList(): Unit = {
     val subject =
       """
         |[[],[],[]]
@@ -117,7 +117,7 @@ class TestList {
   }
 
   @Test
-  def testSpacedList = {
+  def testSpacedList(): Unit = {
     val subject =
       """
         |[  [

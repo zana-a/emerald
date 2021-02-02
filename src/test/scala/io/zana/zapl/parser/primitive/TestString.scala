@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestString {
   @Test
-  def testEmptyString = {
+  def testEmptyString(): Unit = {
     val subject =
       """
         |""
@@ -17,16 +17,16 @@ class TestString {
     testString(subject, structure.primitive.String(subject))
   }
 
-  def testString(input: String, expected: structure.primitive.String) = {
+  def testString(input: String, expected: structure.primitive.String): Unit = {
     parser.Base.parse(Primitive.string, input) match {
       case parser.Base.Success(result, _) => assertEquals(expected, result)
-      case parser.Base.Failure(s, _) => assert(false, s)
-      case parser.Base.Error(s, _) => assert(false, s)
+      case parser.Base.Failure(s, _) => assert(assertion = false, s)
+      case parser.Base.Error(s, _) => assert(assertion = false, s)
     }
   }
 
   @Test
-  def testSpaceyString = {
+  def testSpaceyString(): Unit = {
     val subject =
       """
         |" hello world "
@@ -38,7 +38,7 @@ class TestString {
   }
 
   @Test
-  def testEscapedInString = {
+  def testEscapedInString(): Unit = {
     val subject =
       """
         |"\"\\"
@@ -50,7 +50,7 @@ class TestString {
   }
 
   @Test
-  def testSpecialCharactersInString = {
+  def testSpecialCharactersInString(): Unit = {
     val subjectOne = {
       """
         |"! # $ % & ' \" ( ) * + , - . / : ; < = > ? @ [ ] ^ _ ` { | } ~"
@@ -63,7 +63,7 @@ class TestString {
   }
 
   @Test
-  def testNumbersInString = {
+  def testNumbersInString(): Unit = {
     val subject = {
       """
         |"0 1 2 3 4 5 6 7 8 9"
@@ -75,7 +75,7 @@ class TestString {
   }
 
   @Test
-  def testUppercaseAlphaInString = {
+  def testUppercaseAlphaInString(): Unit = {
     val subject = {
       """
         |"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z "
@@ -88,7 +88,7 @@ class TestString {
   }
 
   @Test
-  def testLowercaseAlphaInString = {
+  def testLowercaseAlphaInString(): Unit = {
     val subject = {
       """
         |"a b c d e f g h i j k l m n o p q r s t u v w x y z"
