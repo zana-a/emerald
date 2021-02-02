@@ -28,14 +28,14 @@ object Runner {
     }
   }
 
-  def runFromFile(args: Array[String]): Unit = {
+  def fromFile(args: Array[String]): Unit = {
     args.length match {
       case 0 => println("No input file given!")
       case 1 | _ => format(Parser.fromFile(args(0)))
     }
   }
 
-  def runFromSource(input: String): Unit = {
+  def fromSource(input: String): Unit = {
     format(Parser.fromSource(input))
   }
 }

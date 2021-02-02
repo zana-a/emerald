@@ -5,6 +5,7 @@ import io.zana.zapl.{parser, structure}
 object Block {
 
   import parser.Base._
+  import Keyword._
   import parser.call.Call._
   import parser.comment.Comment._
   import parser.control.Control._
@@ -13,12 +14,12 @@ object Block {
   import structure.block.{Block => Result}
 
   def block: Parser[Result] = {
-    Keyword.DO ~> rep(
+    DO ~> rep(
       lineComment
         | variable
         | expression
         | control
         | call
-    ) <~ Keyword.END ^^ (values => Result(values))
+    ) <~ END ^^ (values => Result(values))
   }
 }
