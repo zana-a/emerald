@@ -1,10 +1,12 @@
 package io.zana.zapl.parser
 
-import io.zana.zapl.structure.common.Identifier
+import io.zana.zapl.structure
 
-import scala.util.parsing.combinator.JavaTokenParsers
+import scala.util.parsing.combinator._
 
 object Base extends JavaTokenParsers {
+
+  import structure.common.Identifier
 
   object Keyword {
 
@@ -24,9 +26,9 @@ object Base extends JavaTokenParsers {
 
     val MOD = "mod"
 
-    val LEFT_PARENTHESIS = "("
+    val LEFT_PAREN = "("
 
-    val RIGHT_PARENTHESIS = ")"
+    val RIGHT_PAREN = ")"
 
     val LEFT_BRACKET = "["
 
@@ -75,7 +77,6 @@ object Base extends JavaTokenParsers {
 
   }
 
-  def identifier: Parser[Identifier] = {
+  def identifier: Parser[Identifier] =
     not(Keyword.noneSymbol) ~> super.ident ^^ (id => Identifier(id))
-  }
 }

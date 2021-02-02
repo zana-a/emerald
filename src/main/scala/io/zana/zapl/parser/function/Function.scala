@@ -1,27 +1,28 @@
 package io.zana.zapl.parser.function
 
-import io.zana.zapl.parser.Base._
-import io.zana.zapl.parser.block.Block._
-import io.zana.zapl.parser.call.Call._
-import io.zana.zapl.parser.expression.Expression._
-import io.zana.zapl.parser.primitive.Primitive._
-import io.zana.zapl.structure.function.{Function => Result}
+import io.zana.zapl.{parser, structure}
 
 object Function {
 
-  //TODO test expression in function (not block!)
+  import parser.Base._
+  import Keyword._
+  import parser.block.Block._
+  import parser.call.Call._
+  import parser.control.Control._
+  import parser.expression.Expression._
+  import parser.primitive.Primitive._
+  import structure.function.{Function => Result}
 
-  def function: Parser[Result] =
-    (Keyword.DEF ~> identifier) ~
-      ((Keyword.LEFT_PARENTHESIS ~> repsep(identifier, ",")) <~
-        Keyword.RIGHT_PARENTHESIS) ~ (Keyword.EQ ~>
-      (`type` | expression | block | identifier | call /* todo: control  */)) ^^ {
-      case id ~ params ~ body =>
-        Result(
-          id,
-          params,
-          body
-        )
+  def function: Parser[Result] = {
+    val id = DEF ~> identifier
+
+    val params =
+      LEFT_PAREN ~> repsep(identifier, ",") <~ RIGHT_PAREN
+
+    val body = EQ ~> `type` | expression | block | identifier | call | control
+
+    id ~ params ~ body ^^ {
+      case id ~ params ~ body => Result(id, params, body)
     }
+  }
 }
-

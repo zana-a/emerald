@@ -1,11 +1,15 @@
 package io.zana.zapl.parser.control
 
-import io.zana.zapl.parser.Base._
-import io.zana.zapl.parser.block.Block._
-import io.zana.zapl.parser.expression.Expression._
-import io.zana.zapl.parser.primitive.Primitive._
+import io.zana.zapl.parser
+import io.zana.zapl.parser.expression.Logic
 
 object Control {
+
+  import parser.Base._
+  import Keyword._
+  import parser.block.Block._
+  import parser.expression.Expression._
+  import parser.primitive.Primitive._
 
   def guard: Parser[Any] =
     Logic.expression
@@ -14,16 +18,16 @@ object Control {
     identifier | `type` | expression | block
 
   def condition: Parser[Any] =
-    guard ~ Keyword.FAT_ARROW ~ command
+    guard ~ FAT_ARROW ~ command
 
   def defaultCondition: Parser[Any] =
-    Keyword.UNDERSCORE ~ Keyword.FAT_ARROW ~ command
+    Keyword.UNDERSCORE ~ FAT_ARROW ~ command
 
   def `if`: Parser[Any] =
-    Keyword.IF ~ Keyword.DO ~ opt(rep(condition)) ~ defaultCondition ~ Keyword.END
+    IF ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
 
   def `while`: Parser[Any] =
-    Keyword.WHILE ~ Keyword.DO ~ opt(rep(condition)) ~ defaultCondition ~ Keyword.END
+    WHILE ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
 
   def control: Parser[Any] =
     `if` | `while`
