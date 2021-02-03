@@ -17,18 +17,18 @@ object Control {
   def command: Parser[Any] =
     identifier | `type` | expression | block
 
-  def condition: Parser[Any] =
+  def arm: Parser[Any] =
     guard ~ FAT_ARROW ~ command
 
-  def defaultCondition: Parser[Any] =
+  def default: Parser[Any] =
     Keyword.UNDERSCORE ~ FAT_ARROW ~ command
 
-  def `if`: Parser[Any] =
-    IF ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
+  def cond: Parser[Any] =
+    COND ~ DO ~ opt(rep(arm)) ~ default ~ END
 
-  def `while`: Parser[Any] =
-    WHILE ~ DO ~ opt(rep(condition)) ~ defaultCondition ~ END
+  def loop: Parser[Any] =
+    LOOP ~ DO ~ opt(rep(arm)) ~ default ~ END
 
   def control: Parser[Any] =
-    `if` | `while`
+    cond | loop
 }

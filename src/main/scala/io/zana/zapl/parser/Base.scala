@@ -20,9 +20,9 @@ object Base extends JavaTokenParsers {
 
     val END = "end"
 
-    val IF = "if"
+    val COND = "cond"
 
-    val WHILE = "while"
+    val LOOP = "loop"
 
     val MOD = "mod"
 
@@ -73,7 +73,7 @@ object Base extends JavaTokenParsers {
     val EQ = "="
 
     def nonSymbol: Parser[String] =
-      TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
+      TRUE | FALSE | DEF | DO | END | COND | LOOP | MOD
   }
 
   def identifier: Parser[Identifier] =
