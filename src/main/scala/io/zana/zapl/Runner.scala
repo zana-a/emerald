@@ -10,10 +10,7 @@ object Runner {
   import parser.program._
 
   private def format(r: Base.ParseResult[Any]): Unit = r match {
-    case Base.Success(s, _) => {
-      print("Success: ")
-      pprintln(s, width = 2, height = 1000)
-    }
+    case Base.Success(s, _) => pprintln(s, width = 2, height = 1000)
     case Base.Failure(_, _) => println(r)
     case Base.Error(_, _) => println(r)
   }

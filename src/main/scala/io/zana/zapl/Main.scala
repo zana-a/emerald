@@ -2,5 +2,7 @@ package io.zana.zapl
 
 object Main extends App {
 
-  Runner.fromFile(args)
+  import parser.expression.Arithmetic
+
+  Runner.fromFile(args, Arithmetic.expression)
 }

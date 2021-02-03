@@ -1,7 +1,1 @@
-mod Math do
-
-  # The sum of the numbers 'a' and 'b'
-  def add(a, b) = a + b
-end
-
-Math::add(1, 2)
+1 + 2 + (23 / 3)
