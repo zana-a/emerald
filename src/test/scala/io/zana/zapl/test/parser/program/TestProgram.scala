@@ -240,7 +240,7 @@ class TestProgram {
         statements = List(
           ModuleCall(
             modules = List(
-              Identifier("a")
+              Identifier("A")
             ),
             caller = FunctionCall(
               name = Identifier("f"),
