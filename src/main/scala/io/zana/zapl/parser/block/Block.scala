@@ -17,9 +17,9 @@ object Block {
     DO ~> rep(
       lineComment
         | variable
+        | call
         | expression
         | control
-        | call
     ) <~ END ^^ (values => Result(values))
   }
 }
