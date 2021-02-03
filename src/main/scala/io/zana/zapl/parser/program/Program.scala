@@ -1,6 +1,6 @@
 package io.zana.zapl.parser.program
 
-import io.zana.zapl.parser
+import io.zana.zapl.{parser, structure}
 
 object Program {
 
@@ -8,17 +8,18 @@ object Program {
   import parser.call.Call._
   import parser.comment.Comment._
   import parser.control.Control._
+  import parser.function.Function._
   import parser.module.Module._
-  import parser.expression.Expression._
   import parser.variable.Variable._
+  import structure.program.{Program => Result}
 
-  def build: Parser[Any] = {
+  def program: Parser[Result] = {
     rep(lineComment
       | module
+      | function
       | call
       | variable
-      | expression
       | control
     )
-  }
+  } ^^ (statements => Result(statements))
 }

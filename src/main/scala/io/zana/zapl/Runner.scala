@@ -34,7 +34,7 @@ object Runner {
   }
 
   def fromFile(args: Array[String],
-               parser: Base.Parser[Any] = Program.build): Unit = {
+               parser: Base.Parser[Any] = Program.program): Unit = {
     args.length match {
       case 0 => println("No input file given!")
       case 1 | _ => format(Parser.fromFile(args(0), parser))
@@ -42,6 +42,6 @@ object Runner {
   }
 
   def fromSource(input: String,
-                 parser: Base.Parser[Any] = Program.build): Unit =
+                 parser: Base.Parser[Any] = Program.program): Unit =
     format(Parser.fromSource(input, parser))
 }

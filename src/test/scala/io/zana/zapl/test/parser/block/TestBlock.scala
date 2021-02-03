@@ -12,11 +12,11 @@ class TestBlock {
   import structure.common.Identifier
   import structure.primitive
   import structure.variable.Variable
-  import test.parser.Tester._
+  import test.parser.Tester
 
   @Test
   def empty_block(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -31,7 +31,7 @@ class TestBlock {
 
   @Test
   def single_item(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -52,7 +52,7 @@ class TestBlock {
 
   @Test
   def multi_item(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -83,7 +83,7 @@ class TestBlock {
 
   @Test
   def line_comment_within_block(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -98,7 +98,7 @@ class TestBlock {
       )
     )
 
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -118,7 +118,7 @@ class TestBlock {
 
   @Test
   def variable_within_block(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -139,17 +139,17 @@ class TestBlock {
 
   @Test
   def expression_within_block(): Unit = {
-    throw new NotImplementedError
+    ???
   }
 
   @Test
   def control_within_block(): Unit = {
-    throw new NotImplementedError
+    ???
   }
 
   @Test
   def call_within_block(): Unit = {
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
@@ -167,7 +167,7 @@ class TestBlock {
       )
     )
 
-    tester(
+    Tester.tester(
       Parser.block,
       """
         |do
