@@ -16,8 +16,8 @@ object Block {
   def block: Parser[Result] = {
     DO ~> rep(
       lineComment
-        | variable
         | expression
+        | variable
         | control
         | call
     ) <~ END ^^ (values => Result(values))

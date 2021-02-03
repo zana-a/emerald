@@ -16,6 +16,4 @@ object FunctionCall {
     identifier ~ (LEFT_PAREN ~> params <~ RIGHT_PAREN) ^^ {
       case id ~ params => Result(id, params)
     }
-
-
 }

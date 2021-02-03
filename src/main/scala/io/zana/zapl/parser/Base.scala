@@ -72,11 +72,10 @@ object Base extends JavaTokenParsers {
 
     val EQ = "="
 
-    def noneSymbol: Parser[String] =
+    def nonSymbol: Parser[String] =
       TRUE | FALSE | DEF | DO | END | IF | WHILE | MOD
-
   }
 
   def identifier: Parser[Identifier] =
-    not(Keyword.noneSymbol) ~> super.ident ^^ (id => Identifier(id))
+    not(Keyword.nonSymbol) ~> super.ident ^^ (id => Identifier(id))
 }

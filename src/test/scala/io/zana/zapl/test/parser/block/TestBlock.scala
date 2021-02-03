@@ -160,7 +160,7 @@ class TestBlock {
       Structure(
         body = List(
           FunctionCall(
-            name = Identifier("a"),
+            name = Identifier("f"),
             params = List()
           )
         )

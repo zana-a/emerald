@@ -1,41 +1,47 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.Base
-import io.zana.zapl.parser.program.Program
 import pprint.pprintln
 
 import scala.io.Source
 
 object Runner {
 
-  private def format(inner: Base.ParseResult[Any]): Unit = pprintln(inner)
+  import parser.Base
+  import parser.program._
+
+  private def format(inner: Base.ParseResult[Any]): Unit = inner match {
+    case Base.Success(s, _) => print("Success: "); pprintln(s, width = 2)
+    case Base.NoSuccess(_, _) => println(s"Fail:\n$inner")
+  }
 
   object Parser {
 
-    private def parse(input: String): Base.ParseResult[Any] = {
-      Base.parseAll(Program.build, input)
-    }
+    private def parse(input: String,
+                      parser: Base.Parser[Any]): Base.ParseResult[Any] =
+      Base.parseAll(parser, input)
 
-    def fromSource(input: String): Base.ParseResult[Any] = {
-      parse(input)
-    }
+    def fromSource(input: String,
+                   parser: Base.Parser[Any]): Base.ParseResult[Any] =
+      parse(input, parser)
 
-    def fromFile(path: String): Base.ParseResult[Any] = {
+    def fromFile(path: String,
+                 parser: Base.Parser[Any]): Base.ParseResult[Any] = {
       val io = Source.fromFile(path)
       val source = io.mkString
       io.close
-      parse(source)
+      parse(source, parser)
     }
   }
 
-  def fromFile(args: Array[String]): Unit = {
+  def fromFile(args: Array[String],
+               parser: Base.Parser[Any] = Program.build): Unit = {
     args.length match {
       case 0 => println("No input file given!")
-      case 1 | _ => format(Parser.fromFile(args(0)))
+      case 1 | _ => format(Parser.fromFile(args(0), parser))
     }
   }
 
-  def fromSource(input: String): Unit = {
-    format(Parser.fromSource(input))
-  }
+  def fromSource(input: String,
+                 parser: Base.Parser[Any] = Program.build): Unit =
+    format(Parser.fromSource(input, parser))
 }
