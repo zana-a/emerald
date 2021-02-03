@@ -127,7 +127,7 @@ class TestFunction {
         |"""
         .stripMargin,
       Structure(
-        name = Identifier(""),
+        name = Identifier("f"),
         params = List(),
         body = FunctionCall(
           name = Identifier("a"),

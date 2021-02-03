@@ -19,9 +19,14 @@ object Function {
     val params =
       LEFT_PAREN ~> repsep(identifier, ",") <~ RIGHT_PAREN
 
-    val body = EQ ~> `type` | expression | block | identifier | call | control
+    val body = EQ ~> (`type`
+      | call
+      | identifier
+      | expression
+      | block
+      | control)
 
-    id ~ params ~ body ^^ {
+    (id ~ params ~ body) ^^ {
       case id ~ params ~ body => Result(id, params, body)
     }
   }
