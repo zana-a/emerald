@@ -16,8 +16,8 @@ object Program {
   def program: Parser[Result] = {
     rep(lineComment
       | module
-      | function
       | call
+      | function
       | variable
       | control
     )

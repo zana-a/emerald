@@ -113,22 +113,22 @@ class TestProgram {
       )
     )
 
-    Tester.tester(
-      Parser.program,
-      """
-        |def f() = 1 + 2
-        |"""
-        .stripMargin,
-      Structure(
-        statements = List(
-          Function(
-            name = Identifier("f"),
-            params = List(),
-            body = ???
-          )
-        )
-      )
-    )
+    //    Tester.tester(
+    //      Parser.program,
+    //      """
+    //        |def f() = 1 + 2
+    //        |"""
+    //        .stripMargin,
+    //      Structure(
+    //        statements = List(
+    //          Function(
+    //            name = Identifier("f"),
+    //            params = List(),
+    //            body = ???
+    //          )
+    //        )
+    //      )
+    //    )
 
     Tester.tester(
       Parser.program,
