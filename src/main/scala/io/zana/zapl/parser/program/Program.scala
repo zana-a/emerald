@@ -8,11 +8,13 @@ object Program {
   import parser.call.Call._
   import parser.comment.Comment._
   import parser.control.Control._
+  import parser.module.Module._
   import parser.expression.Expression._
   import parser.variable.Variable._
 
   def build: Parser[Any] = {
     rep(lineComment
+      | module
       | call
       | variable
       | expression
