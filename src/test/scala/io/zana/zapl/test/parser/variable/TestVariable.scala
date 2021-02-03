@@ -104,7 +104,9 @@ class TestVariable {
       Structure(
         name = Identifier("item"),
         body = ModuleCall(
-          modules = List(),
+          modules = List(
+            Identifier("A")
+          ),
           caller = FunctionCall(
             name = Identifier("f"),
             params = List()

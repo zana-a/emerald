@@ -24,7 +24,7 @@ class TestPrimitive {
   @Test
   def string(): Unit = {
     Tester.tester(
-      Parser.integer,
+      Parser.string,
       """
         |"test"
         |"""
@@ -36,7 +36,7 @@ class TestPrimitive {
   @Test
   def boolean(): Unit = {
     Tester.tester(
-      Parser.integer,
+      Parser.boolean,
       """
         |true
         |"""
@@ -45,7 +45,7 @@ class TestPrimitive {
     )
 
     Tester.tester(
-      Parser.integer,
+      Parser.boolean,
       """
         |false
         |"""
@@ -57,7 +57,7 @@ class TestPrimitive {
   @Test
   def list(): Unit = {
     Tester.tester(
-      Parser.integer,
+      Parser.list,
       """
         |[1, 2, 3]
         |"""
@@ -72,7 +72,7 @@ class TestPrimitive {
     )
 
     Tester.tester(
-      Parser.integer,
+      Parser.list,
       """
         |["one", "two", "three"]
         |"""
@@ -87,7 +87,7 @@ class TestPrimitive {
     )
 
     Tester.tester(
-      Parser.integer,
+      Parser.list,
       """
         |[true, false, true]
         |"""
@@ -102,7 +102,7 @@ class TestPrimitive {
     )
 
     Tester.tester(
-      Parser.integer,
+      Parser.list,
       """
         |[[], [], []]
         |"""

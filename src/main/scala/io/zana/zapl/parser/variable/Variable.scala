@@ -13,7 +13,7 @@ object Variable {
 
   def variable: Parser[Result] = {
     val id = identifier <~ EQ
-    val body = `type` | expression | call
+    val body = `type` | call | expression
 
     id ~ body ^^ { case id ~ body => Result(id, body) }
   }
