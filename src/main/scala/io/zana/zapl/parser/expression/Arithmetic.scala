@@ -9,15 +9,14 @@ object Arithmetic {
   import parser.primitive.Primitive._
 
   def expression: Parser[Any] = {
-    val constant = integer | identifier
-    val factor = constant | LEFT_PAREN ~ expression ~ RIGHT_PAREN
 
-    factor ~ opt(
-      rep(PLUS ~ expression
-        | MINUS ~ expression
-        | MULTIPLICATION ~ expression
-        | DIVISION ~ expression
-      )
-    )
+    def expr: Parser[Any] = term ~ rep(MINUS ~ term | PLUS ~ term)
+
+    def factor: Parser[Any] = integer | LEFT_PAREN ~ expr ~ RIGHT_PAREN
+
+    def term: Parser[Any] =
+      factor ~ rep(MULTIPLICATION ~ factor | DIVISION ~ factor)
+
+    expr
   }
 }
