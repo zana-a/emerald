@@ -14,10 +14,10 @@ class TestComment {
     Tester.tester(
       Parser.lineComment,
       """
-        |# Line comment
+        |# Some comment here
         |"""
         .stripMargin,
-      Structure(" Line Comment")
+      Structure(" Some comment here")
     )
   }
 }

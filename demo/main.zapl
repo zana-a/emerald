@@ -1,7 +1,9 @@
 mod Math do
 
   # The sum of the numbers 'a' and 'b'
-  def add(a, b) = a + b
+  def add(a, b) = do
+    a + b
+  end
 end
 
 Math::add(1, 2)
