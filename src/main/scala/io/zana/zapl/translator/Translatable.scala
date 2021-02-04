@@ -1,10 +1,8 @@
 package io.zana.zapl.translator
 
-import io.zana.zapl.structure
+import io.zana.zapl.structure.Structure
 
 trait Translatable {
 
-  import structure.Structure
-
-  def translate(structure: Structure): String
+  def translate[T <: Structure](structure: T): String
 }

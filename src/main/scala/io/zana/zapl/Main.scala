@@ -2,7 +2,10 @@ package io.zana.zapl
 
 object Main extends App {
 
-  import parser.expression.Arithmetic
+  import structure.primitive.{Integer => IntegerStructure}
+  import translator.primitive.{Integer => IntegerTranslator}
 
-  Runner.fromFile(args, Arithmetic.expression)
+  IntegerTranslator.translate(
+    IntegerStructure(1)
+  )
 }

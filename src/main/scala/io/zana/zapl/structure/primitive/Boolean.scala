@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.primitive
 
-case class Boolean(value: scala.Boolean) extends Type
+import io.zana.zapl.structure.Structure
+
+case class Boolean(value: scala.Boolean) extends Structure with Type
