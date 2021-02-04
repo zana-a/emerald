@@ -1,12 +1,9 @@
 package io.zana.zapl.translator.primitive
 
-import io.zana.zapl.structure
+import io.zana.zapl.structure.primitive.Integer
+import io.zana.zapl.translator.Translatable
 
-object Integer {
+object Integer extends Translatable[Integer] {
 
-  import structure.primitive
-
-  def translate(structure: primitive.Integer): String =
-    structure.value.toString
-
+  def translate(structure: Integer): String = structure.value.toString
 }
