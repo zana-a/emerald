@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.call
 
-trait Callable
+import io.zana.zapl.structure.Structure
+
+trait Callable extends Structure

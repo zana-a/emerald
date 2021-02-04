@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.block
 
-case class Block(body: List[Any])
+import io.zana.zapl.structure.Structure
+
+case class Block(body: List[Any]) extends Structure

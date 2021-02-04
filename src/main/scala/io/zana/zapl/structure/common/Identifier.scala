@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.common
 
-case class Identifier(name: String)
+import io.zana.zapl.structure.Structure
+
+case class Identifier(name: String) extends Structure

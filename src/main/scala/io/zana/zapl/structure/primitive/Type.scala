@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.primitive
 
-trait Type
+import io.zana.zapl.structure.Structure
+
+trait Type extends Structure

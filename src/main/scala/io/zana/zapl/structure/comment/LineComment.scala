@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.comment
 
-case class LineComment(comment: String)
+import io.zana.zapl.structure.Structure
+
+case class LineComment(comment: String) extends Structure
