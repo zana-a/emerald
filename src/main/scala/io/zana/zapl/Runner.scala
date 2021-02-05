@@ -34,15 +34,18 @@ object Runner {
     }
   }
 
-  def fromFile(args: Array[String],
-               parser: Base.Parser[Any] = Program.program): Unit = {
-    args.length match {
-      case 0 => println("No input file given!")
-      case 1 | _ => format(Parser.fromFile(args(0), parser))
+  object Tree {
+    def fromFile(args: Array[String],
+                 parser: Base.Parser[Any] = Program.program): Unit = {
+      args.length match {
+        case 0 => println("No input file given!")
+        case 1 | _ => format(Parser.fromFile(args(0), parser))
+      }
     }
+
+    def fromSource(input: String,
+                   parser: Base.Parser[Any] = Program.program): Unit =
+      format(Parser.fromSource(input, parser))
   }
 
-  def fromSource(input: String,
-                 parser: Base.Parser[Any] = Program.program): Unit =
-    format(Parser.fromSource(input, parser))
 }
