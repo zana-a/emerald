@@ -6,7 +6,7 @@ import io.zana.zapl.translator.Translatable
 
 object List extends Translatable[primitive.List] {
 
-  def helper(list: primitive.List, result: String = ""): List[Any] = {
+  private def helper(list: primitive.List, result: String = ""): List[Any] = {
     for {
       item <- list.value
     } yield item match {

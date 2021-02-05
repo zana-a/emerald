@@ -8,7 +8,7 @@ object Main extends App {
   val result = Base.parse(
     primitive.Primitive.list,
     """
-      |[123, 44]
+      |["zana", true]
       |"""
       .stripMargin
       .trim
