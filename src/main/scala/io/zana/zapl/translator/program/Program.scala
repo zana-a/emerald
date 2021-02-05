@@ -11,6 +11,10 @@ object Program extends Translatable[structs.program.Program] {
       case structs.variable.Variable(_, _) =>
         translator.variable.Variable
           .translate(statement.asInstanceOf[structs.variable.Variable])
+
+      case structs.function.Function(_, _, _) =>
+        translator.function.Function
+          .translate(statement.asInstanceOf[structs.function.Function])
     }
   }
 
