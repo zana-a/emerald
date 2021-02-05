@@ -4,7 +4,6 @@ import io.zana.zapl.parser.{Base, primitive}
 
 object Main extends App {
 
-
   val result = Base.parse(
     primitive.Primitive.list,
     """
