@@ -3,9 +3,9 @@ package io.zana.zapl.translator.primitive
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.translator.{Translatable, primitive => translators}
 
-object Primitive extends Translatable[primitive.Type] {
+object Primitive extends Translatable[primitive.Primitive] {
 
-  override def translate(structure: primitive.Type): String = structure match {
+  override def translate(structure: primitive.Primitive): String = structure match {
     case primitive.Integer(_) =>
       translators
         .Integer

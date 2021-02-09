@@ -1,5 +1,6 @@
 package io.zana.zapl.parser.function
 
+import io.zana.zapl.structure.function.FunctionBody
 import io.zana.zapl.{parser, structure}
 
 object Function {
@@ -8,26 +9,27 @@ object Function {
   import Keyword._
   import parser.block.Block._
   import parser.call.Call._
-  import parser.control.Control._
-  import parser.expression.Expression._
   import parser.primitive.Primitive._
   import structure.function.{Function => Result}
 
   def function: Parser[Result] = {
     val id = DEF ~> identifier
 
-    val params =
-      LEFT_PAREN ~> repsep(identifier, ",") <~ RIGHT_PAREN
+    val params = LEFT_PAREN ~> repsep(Parameter.parameter, COMMA) <~ RIGHT_PAREN
 
-    val body = EQ ~> (`type`
-      | call
-      | identifier
-      | expression
-      | block
-      | control)
+    val body: Parser[FunctionBody] = EQ ~> (
+      `type`
+        | call
+        | identifier
+        //todo        | expression
+        | block
+      // todo       | control
+      )
 
-    (id ~ params ~ body) ^^ {
-      case id ~ params ~ body => Result(id, params, body)
+    val `return` = THIN_ARROW ~> staticType
+
+    (id ~ params ~ `return` ~ body) ^^ {
+      case id ~ params ~ r ~ body => Result(id, params, r, body)
     }
   }
 }

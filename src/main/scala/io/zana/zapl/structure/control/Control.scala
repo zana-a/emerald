@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.control
 
-trait Control
+import io.zana.zapl.structure.function.FunctionBody
+
+trait Control extends FunctionBody

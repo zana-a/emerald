@@ -1,0 +1,4 @@
+mod A do
+  def hello(name: String) -> String = name
+
+end

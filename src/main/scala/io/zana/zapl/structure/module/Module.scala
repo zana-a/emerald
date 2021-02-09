@@ -1,6 +1,7 @@
 package io.zana.zapl.structure.module
 
+import io.zana.zapl.Structure
 import io.zana.zapl.structure.common.Identifier
 
-// TODO: Change Any to Specific Type: Restrict to function and mods
-case class Module(name: Identifier, body: List[Any])
+case class Module(name: Identifier, body: List[ModuleBody]) extends Structure
+  with ModuleBody
