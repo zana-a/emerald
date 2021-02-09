@@ -20,6 +20,14 @@ object Program extends Translatable[structures.program.Program] {
         translator.function.Function
           .translate(function)
 
+      case functionCall: structures.call.FunctionCall =>
+        translator.call.FunctionCall
+          .translate(functionCall)
+
+      case moduleCall: structures.call.ModuleCall =>
+        translator.call.ModuleCall
+          .translate(moduleCall)
+
       case e => s"??? translator not implemented for $e"
     }
   }

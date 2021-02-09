@@ -1,3 +1,1 @@
-mod Person do
-  def sum(a: Int, b: Int): Boolean = true
-end
+println("Hello")

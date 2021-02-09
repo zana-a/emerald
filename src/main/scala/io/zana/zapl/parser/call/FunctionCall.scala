@@ -1,5 +1,6 @@
 package io.zana.zapl.parser.call
 
+import io.zana.zapl.structure.call.CallBody
 import io.zana.zapl.{parser, structure}
 
 object FunctionCall {
@@ -9,7 +10,7 @@ object FunctionCall {
   import parser.primitive.Primitive._
   import structure.call.{FunctionCall => Result}
 
-  def params: Parser[List[Any]] =
+  def params: Parser[List[CallBody]] =
     repsep(`type` | call | ModuleCall.call | identifier, COMMA)
 
   def call: Parser[Result] =
