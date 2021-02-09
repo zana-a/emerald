@@ -7,7 +7,7 @@
 ```text 
 # Modules by convention start with Uppercase alpha character
 mod SomeModule do
-  def function() = true
+  def function(): Boolean = true
 end
 ```
 
