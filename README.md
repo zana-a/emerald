@@ -22,14 +22,14 @@ SomeModule::function()
 
 ```text
 # Function names are snake cased by convention
-def function_two() = do
+def function_two() -> Boolean = do
   false
 end
 
 # Functions are also single lined unless introduced to blocks
 def function_one() = true
 
-def add(a, b) = a + b
+def add(a: Int, b: Int) -> Int = a + b
 ```
 
 #### Call
