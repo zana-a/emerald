@@ -9,3 +9,4 @@ libraryDependencies +=
 libraryDependencies += "junit" % "junit" % "4.11" % Test
 libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
 libraryDependencies += "com.lihaoyi" %% "pprint" % "0.5.6"
+libraryDependencies += "org.scalameta" %% "scalafmt-dynamic" % "2.7.5"

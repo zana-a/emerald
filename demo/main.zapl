@@ -1,5 +1,3 @@
 mod Person do
-  def add(a: Int): Int = do
-
-  end
+  def sum(a: Int, b: Int): Boolean = true
 end
