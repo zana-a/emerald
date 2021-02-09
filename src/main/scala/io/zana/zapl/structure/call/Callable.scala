@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.call
 
-trait Callable
+import io.zana.zapl.structure.function.FunctionBody
+
+trait Callable extends FunctionBody

@@ -1,3 +1,5 @@
 package io.zana.zapl.structure.expression
 
-case class Expression(value: List[Any])
+import io.zana.zapl.structure.function.FunctionBody
+
+case class Expression(value: List[Any]) extends FunctionBody

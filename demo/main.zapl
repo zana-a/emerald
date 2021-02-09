@@ -1,1 +1,1 @@
-def function(a: String) = "String"
+def hello(name: String) -> String = name

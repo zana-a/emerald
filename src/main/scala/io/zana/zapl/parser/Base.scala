@@ -66,6 +66,8 @@ object Base extends JavaTokenParsers {
 
     val FAT_ARROW = "=>"
 
+    val THIN_ARROW = "->"
+
     val COMMA = ","
 
     val COLON = ":"

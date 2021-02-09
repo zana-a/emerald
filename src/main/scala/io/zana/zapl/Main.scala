@@ -5,10 +5,10 @@ object Main extends App {
 
   //  val result = Builder.Parser.parse(
   //    """
-  //      |def a(x: String, b: Int) = true
+  //      |def a(x: String, b: Int) -> Boolean = true
   //      |""".stripMargin,
   //    parser.function.Function.function
   //  )
-  //
+
   //  println(result)
 }
