@@ -19,28 +19,28 @@ object Variable extends Translatable[variable.Variable] {
         PrimitiveTranslator
           .translate(structure
             .body
-            .asInstanceOf[primitive.Type]
+            .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.Integer(_) =>
         PrimitiveTranslator
           .translate(structure
             .body
-            .asInstanceOf[primitive.Type]
+            .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.Boolean(_) =>
         PrimitiveTranslator
           .translate(structure
             .body
-            .asInstanceOf[primitive.Type]
+            .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.List(_) =>
         PrimitiveTranslator
           .translate(structure
             .body
-            .asInstanceOf[primitive.Type]
+            .asInstanceOf[primitive.Primitive]
           )
     }
 

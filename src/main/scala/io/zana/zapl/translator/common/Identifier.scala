@@ -6,5 +6,5 @@ import io.zana.zapl.translator.Translatable
 
 object Identifier extends Translatable[common.Identifier] {
   override def translate(structure: Identifier): String =
-    structure.name
+    structure.value
 }

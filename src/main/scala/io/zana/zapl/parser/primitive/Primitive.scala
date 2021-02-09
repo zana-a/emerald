@@ -31,5 +31,5 @@ object Primitive {
     result => Integer(result.toInt)
   }
 
-  def `type`: Parser[Type] = string | integer | list | boolean
+  def `type`: Parser[Primitive] = string | integer | list | boolean
 }
