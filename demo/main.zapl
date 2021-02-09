@@ -1,3 +1,1 @@
-mod A do
-
-end
+def function(a: String) = "String"

@@ -16,8 +16,7 @@ object Function {
   def function: Parser[Result] = {
     val id = DEF ~> identifier
 
-    val params =
-      LEFT_PAREN ~> repsep(identifier, ",") <~ RIGHT_PAREN
+    val params = LEFT_PAREN ~> repsep(Parameter.parameter, COMMA) <~ RIGHT_PAREN
 
     val body = EQ ~> (`type`
       | call
@@ -28,6 +27,7 @@ object Function {
 
     (id ~ params ~ body) ^^ {
       case id ~ params ~ body => Result(id, params, body)
+
     }
   }
 }

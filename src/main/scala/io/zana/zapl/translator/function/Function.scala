@@ -10,7 +10,7 @@ object Function extends Translatable[function.Function] {
 
     val params = for {
       param <- structure.params
-    } yield param.name ++ ": Any"
+    } yield s"${param.name.value}: ${param.static}"
 
     val body = structure.body
 
