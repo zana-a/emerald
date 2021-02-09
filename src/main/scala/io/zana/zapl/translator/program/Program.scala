@@ -19,11 +19,20 @@ object Program extends Translatable[structures.program.Program] {
       case function: structures.function.Function =>
         translator.function.Function
           .translate(function)
+
+      case e => s"??? translator not implemented for $e"
     }
   }
 
   override def translate(structure: structures.program.Program): String = {
     val result = for {i <- helper(structure)} yield i
-    result.mkString("\n")
+
+    //todo replace object name with file name possibly
+    s"""
+       |object Application extends App {
+       |${result.mkString("\n")}
+       |}
+       |"""
+      .stripMargin
   }
 }

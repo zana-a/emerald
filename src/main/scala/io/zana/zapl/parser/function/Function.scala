@@ -26,7 +26,7 @@ object Function {
       // todo       | control
       )
 
-    val `return` = THIN_ARROW ~> staticType
+    val `return` = COLON ~> staticType
 
     (id ~ params ~ `return` ~ body) ^^ {
       case id ~ params ~ r ~ body => Result(id, params, r, body)

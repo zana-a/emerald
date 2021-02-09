@@ -24,6 +24,8 @@ object Module extends Translatable[module.Module] {
 
         case module: structures.module.Module =>
           translate(module)
+
+        case e => s"??? translator not implemented for $e"
       }
 
       for {
