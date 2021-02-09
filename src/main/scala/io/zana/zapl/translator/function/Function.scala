@@ -24,7 +24,7 @@ object Function extends Translatable[structures.function.Function] {
     val body: String = structure.body match {
       case primitive: Primitive =>
         translator.primitive.Primitive.translate(primitive)
-      //      case call: Callable =>
+      //  todo    case call: Callable =>
       //        translator.primitive.Primitive.translate(primitive)
       case e => s"??? not implemented for $e"
     }
