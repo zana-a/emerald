@@ -1,32 +1,29 @@
 package io.zana.zapl.translator.program
 
 import io.zana.zapl.translator.Translatable
-import io.zana.zapl.{translator, structure => structs}
+import io.zana.zapl.{translator, structure => structures}
 
-object Program extends Translatable[structs.program.Program] {
-  private def helper(structure: structs.program.Program): List[String] = {
+object Program extends Translatable[structures.program.Program] {
+  private def helper(structure: structures.program.Program): List[String] = {
     for {
       statement <- structure.statements
     } yield statement match {
-      case structs.variable.Variable(_, _) =>
+      case variable: structures.variable.Variable =>
         translator.variable.Variable
-          .translate(statement.asInstanceOf[structs.variable.Variable])
+          .translate(variable)
 
-      case structs.module.Module(_, _) =>
+      case module: structures.module.Module =>
         translator.module.Module
-          .translate(statement.asInstanceOf[structs.module.Module])
+          .translate(module)
 
-      case structs.function.Function(_, _, _) =>
+      case function: structures.function.Function =>
         translator.function.Function
-          .translate(statement.asInstanceOf[structs.function.Function])
+          .translate(function)
     }
   }
 
-  override def translate(structure: structs.program.Program): String = {
-    val result = for {
-      i <- helper(structure)
-    } yield i ++ "\n"
-
-    result.mkString
+  override def translate(structure: structures.program.Program): String = {
+    val result = for {i <- helper(structure)} yield i
+    result.mkString("\n")
   }
 }
