@@ -30,7 +30,7 @@ object Function extends Translatable[structures.function.Function] {
     }
 
     s"""
-       |def $name(${param.mkString(Keyword.COMMA)}): ${`return`} = {
+       |def $name(${param.mkString(Keyword.COMMA ++ " ")}): ${`return`} = {
        |  $body
        |}
        |""".stripMargin

@@ -1,3 +1,5 @@
-mod A do
-  def hello(name: String) -> String = name
+mod Person do
+  def add(a: Int): Int = do
+
+  end
 end
