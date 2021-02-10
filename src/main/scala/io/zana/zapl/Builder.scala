@@ -14,8 +14,8 @@ object Builder {
     def parse(input: String, parser: Base.Parser[Any]): Any = {
       Base.parse(parser, input) match {
         case Base.Success(s, _) => s
-        case Base.Failure(f, _) => throw new Error(s"Failure: $f")
-        case Base.Error(e, _) => throw new Error(s"Error: $e")
+        case Base.Failure(f, _) => println(s"Failure: $f")
+        case Base.Error(e, _) => println(s"Error: $e")
       }
     }
   }
@@ -43,11 +43,7 @@ object Builder {
         val input = io.mkString
         io.close
 
-        val ast = try {
-          Parser.parse(input, parser.program.Program.program)
-        } catch {
-          case error: Error => println(error)
-        }
+        val ast = Parser.parse(input, parser.program.Program.program)
 
         (translator
           .program

@@ -1,6 +1,6 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.parser
+import io.zana.zapl.{parser, structure}
 
 object Logic {
 
@@ -8,7 +8,14 @@ object Logic {
   import Keyword._
   import parser.primitive.Primitive._
 
-  def expression: Parser[Any] =
+  def expression: Parser[structure.expression.Expression] = {
+
+    def factor: Parser[Any] =
+      NOT ~ factor | constant | LEFT_PAREN ~ expression ~ RIGHT_PAREN
+
+    def constant: Parser[Any] =
+      Arithmetic.expression | boolean | integer | identifier
+
     factor ~ opt(
       rep(AND ~ expression
         | OR ~ expression
@@ -19,11 +26,8 @@ object Logic {
         | LTEQ ~ expression
         | GTEQ ~ expression
       )
-    )
-
-  def factor: Parser[Any] =
-    NOT ~ factor | constant | LEFT_PAREN ~ expression ~ RIGHT_PAREN
-
-  def constant: Parser[Any] =
-    Arithmetic.expression | boolean | integer | identifier
+    ) ^^ {
+      _ => structure.expression.Expression("1 + 1")
+    }
+  }
 }

@@ -1,11 +1,11 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.parser
+import io.zana.zapl.{parser, structure}
 
 object Expression {
 
   import parser.Base._
 
-  def expression: Parser[Any] =
-    Logic.expression | Arithmetic.expression ^^ (expression => expression)
+  def expression: Parser[structure.expression.Expression] =
+    Logic.expression | Arithmetic.expression
 }

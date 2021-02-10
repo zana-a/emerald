@@ -1,8 +1,3 @@
-mod Greeter do
-  def hello(name: String): String = do
-    name
-  end
+def a(): Int = do
+  1
 end
-
-println(Greeter::hello("Zana"))
-
