@@ -5,9 +5,7 @@ object Main extends App {
 
   //  val source =
   //    """
-  //      |  def sum(a: Int, b: Int): Int = do
-  //      |    print()
-  //      |  end
+  //      |def a(a: List<Int>): List<Int> = true
   //      |""".stripMargin
   //
   //  parser.Base.parseAll(parser.program.Program.program, source) match {

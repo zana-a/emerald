@@ -20,8 +20,10 @@ object Base extends JavaTokenParsers {
     def boolean: Parser[StaticTypes.Boolean.type] =
       STATIC_T_BOOLEAN ^^ (_ => StaticTypes.Boolean)
 
-    def list: Parser[StaticTypes.List.type] =
-      STATIC_T_LIST ^^ (_ => StaticTypes.List)
+    def list: Parser[StaticTypes.List] = {
+      STATIC_T_LIST ~> (LEFT_ANGLE ~> staticType <~ RIGHT_ANGLE) ^^
+        (generic => StaticTypes.List(generic))
+    }
 
     int | string | boolean | list
   }
@@ -46,9 +48,9 @@ object Base extends JavaTokenParsers {
 
     val STATIC_T_INT = "Int"
 
-    val STATIC_T_STRING = "String.scala"
+    val STATIC_T_STRING = "String"
 
-    val STATIC_T_LIST = "List.scala"
+    val STATIC_T_LIST = "List"
 
     val STATIC_T_BOOLEAN = "Boolean"
 
@@ -59,6 +61,10 @@ object Base extends JavaTokenParsers {
     val LEFT_BRACKET = "["
 
     val RIGHT_BRACKET = "]"
+
+    val LEFT_ANGLE = "<"
+
+    val RIGHT_ANGLE = ">"
 
     val DQUOTE = "\""
 

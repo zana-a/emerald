@@ -3,9 +3,6 @@ package io.zana.zapl.translator.program
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
 
-import java.nio.file.Path
-import scala.io.Source
-
 object Program extends Translatable[structures.program.Program] {
   private def helper(structure: structures.program.Program): List[String] = {
     for {
@@ -38,53 +35,50 @@ object Program extends Translatable[structures.program.Program] {
   override def translate(structure: structures.program.Program): String = {
     val result = for {i <- helper(structure)} yield i
 
-    val IO = {
-      val source =
-        Source
-          .fromFile(
-            Path
-              .of("resources/lib/IO.scala")
-              .toAbsolutePath
-              .toUri
-          )
-
-      source.getLines().mkString("\n")
-    }
-
-    val Enum = {
-      val source =
-        Source
-          .fromFile(
-            Path
-              .of("resources/lib/Enum.scala")
-              .toAbsolutePath
-              .toUri
-          )
-
-      source.getLines().mkString("\n")
-    }
-
-
-    val String = {
-      val source =
-        Source
-          .fromFile(
-            Path
-              .of("resources/lib/String.scala")
-              .toAbsolutePath
-              .toUri
-          )
-
-      source.getLines().mkString("\n")
-    }
+    //    val IO = {
+    //      val source =
+    //        Source
+    //          .fromFile(
+    //            Path
+    //              .of("resources/lib/IO.scala")
+    //              .toAbsolutePath
+    //              .toUri
+    //          )
+    //
+    //      source.getLines().mkString("\n")
+    //    }
+    //
+    //    val Enum = {
+    //      val source =
+    //        Source
+    //          .fromFile(
+    //            Path
+    //              .of("resources/lib/Enum.scala")
+    //              .toAbsolutePath
+    //              .toUri
+    //          )
+    //
+    //      source.getLines().mkString("\n")
+    //    }
+    //
+    //
+    //    val String = {
+    //      val source =
+    //        Source
+    //          .fromFile(
+    //            Path
+    //              .of("resources/lib/String.scala")
+    //              .toAbsolutePath
+    //              .toUri
+    //          )
+    //
+    //      source.getLines().mkString("\n")
+    //    }
 
     //todo replace object name with file name possibly
     s"""
        |object Application extends App {
        |
-       |$IO
-       |$Enum
-       |$String
        |${result.mkString("\n")}
        |}
        |"""
