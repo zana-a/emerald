@@ -64,7 +64,7 @@ class TestVariable {
   def list_binding(): Unit = {
     Tester.tester(
       """
-        |var item = List()
+        |var item = List.scala()
         |"""
         .stripMargin
         .trim,

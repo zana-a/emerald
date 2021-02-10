@@ -26,7 +26,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List()
+//        statements = List.scala()
 //      )
 //    )
 //  }
@@ -40,7 +40,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          LineComment(" comment")
 //        )
 //      )
@@ -58,10 +58,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Module(
 //            name = Identifier("A"),
-//            body = List()
+//            body = List.scala()
 //          )
 //        )
 //      )
@@ -80,14 +80,14 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Module(
 //            name = Identifier("A"),
-//            body = List()
+//            body = List.scala()
 //          ),
 //          Module(
 //            name = Identifier("B"),
-//            body = List()
+//            body = List.scala()
 //          )
 //        )
 //      )
@@ -103,10 +103,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
+//            params = List.scala(),
 //            body = primitive.Integer(1)
 //          )
 //        )
@@ -120,10 +120,10 @@
 //    //        |"""
 //    //        .stripMargin,
 //    //      Structure(
-//    //        statements = List(
+//    //        statements = List.scala(
 //    //          Function(
 //    //            name = Identifier("f"),
-//    //            params = List(),
+//    //            params = List.scala(),
 //    //            body = ???
 //    //          )
 //    //        )
@@ -137,10 +137,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
+//            params = List.scala(),
 //            body = Identifier("something")
 //          )
 //        )
@@ -156,11 +156,11 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
-//            body = Block(List())
+//            params = List.scala(),
+//            body = Block(List.scala())
 //          )
 //        )
 //      )
@@ -173,13 +173,13 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
+//            params = List.scala(),
 //            body = FunctionCall(
 //              name = Identifier("g"),
-//              params = List()
+//              params = List.scala()
 //            )
 //          )
 //        )
@@ -193,17 +193,17 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
+//            params = List.scala(),
 //            body = ModuleCall(
-//              modules = List(
+//              modules = List.scala(
 //                Identifier("A")
 //              ),
 //              caller = FunctionCall(
 //                name = Identifier("g"),
-//                params = List()
+//                params = List.scala()
 //              )
 //            )
 //          )
@@ -221,10 +221,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          FunctionCall(
 //            name = Identifier("f"),
-//            params = List()
+//            params = List.scala()
 //          )
 //        )
 //      )
@@ -237,14 +237,14 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          ModuleCall(
-//            modules = List(
+//            modules = List.scala(
 //              Identifier("A")
 //            ),
 //            caller = FunctionCall(
 //              name = Identifier("f"),
-//              params = List()
+//              params = List.scala()
 //            )
 //          )
 //        )
@@ -261,7 +261,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
 //            body = primitive.Integer(1)
@@ -277,7 +277,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
 //            body = primitive.Boolean(true)
@@ -293,10 +293,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
-//            body = primitive.String("\"test\"")
+//            body = primitive.String.scala("\"test\"")
 //          )
 //        )
 //      )
@@ -309,10 +309,10 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
-//            body = primitive.List(List())
+//            body = primitive.List.scala(List.scala())
 //          )
 //        )
 //      )
@@ -325,12 +325,12 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
 //            body = FunctionCall(
 //              name = Identifier("f"),
-//              params = List()
+//              params = List.scala()
 //            )
 //          )
 //        )
@@ -344,16 +344,16 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          Variable(
 //            name = Identifier("item"),
 //            body = ModuleCall(
-//              modules = List(
+//              modules = List.scala(
 //                Identifier("A")
 //              ),
 //              caller = FunctionCall(
 //                name = Identifier("f"),
-//                params = List()
+//                params = List.scala()
 //              )
 //            )
 //          )
@@ -373,7 +373,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          ???
 //        )
 //      )
@@ -388,7 +388,7 @@
 //        |"""
 //        .stripMargin,
 //      Structure(
-//        statements = List(
+//        statements = List.scala(
 //          ???
 //        )
 //      )

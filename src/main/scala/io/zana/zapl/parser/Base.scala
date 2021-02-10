@@ -46,9 +46,9 @@ object Base extends JavaTokenParsers {
 
     val STATIC_T_INT = "Int"
 
-    val STATIC_T_STRING = "String"
+    val STATIC_T_STRING = "String.scala"
 
-    val STATIC_T_LIST = "List"
+    val STATIC_T_LIST = "List.scala"
 
     val STATIC_T_BOOLEAN = "Boolean"
 

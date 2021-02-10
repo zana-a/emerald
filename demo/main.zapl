@@ -1,3 +1,6 @@
-def a(): Int = do
-  1
+
+mod Enum do
+  def at(list: List<Int>, n: Int) = list(n)
 end
+
+IO::puts(Enum::at([1, 2, 3], 1))

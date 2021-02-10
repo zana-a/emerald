@@ -11,7 +11,7 @@ class TestList {
   def empty_list(): Unit = {
     Tester.tester(
       """
-        |List()
+        |List.scala()
         |"""
         .stripMargin
         .trim,
@@ -25,7 +25,7 @@ class TestList {
   def string_list(): Unit = {
     Tester.tester(
       """
-        |List("one", "two", "three")
+        |List.scala("one", "two", "three")
         |"""
         .stripMargin
         .trim,
@@ -45,7 +45,7 @@ class TestList {
   def integer_list(): Unit = {
     Tester.tester(
       """
-        |List(1, 2, 3)
+        |List.scala(1, 2, 3)
         |"""
         .stripMargin
         .trim,
@@ -65,7 +65,7 @@ class TestList {
   def boolean_list(): Unit = {
     Tester.tester(
       """
-        |List(true, false, true)
+        |List.scala(true, false, true)
         |"""
         .stripMargin
         .trim,
@@ -85,7 +85,7 @@ class TestList {
   def list_list(): Unit = {
     Tester.tester(
       """
-        |List(List(), List(), List())
+        |List.scala(List.scala(), List.scala(), List.scala())
         |"""
         .stripMargin
         .trim,
@@ -102,7 +102,7 @@ class TestList {
 
     Tester.tester(
       """
-        |List(List(List(List(List()))))
+        |List.scala(List.scala(List.scala(List.scala(List.scala()))))
         |"""
         .stripMargin
         .trim,

@@ -23,7 +23,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
+//        params = List.scala(),
 //        body = primitive.Integer(1)
 //      )
 //    )
@@ -36,8 +36,8 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
-//        body = primitive.String("\"test\"")
+//        params = List.scala(),
+//        body = primitive.String.scala("\"test\"")
 //      )
 //    )
 //
@@ -49,7 +49,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
+//        params = List.scala(),
 //        body = primitive.Boolean(true)
 //      )
 //    )
@@ -62,8 +62,8 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
-//        body = primitive.List(List())
+//        params = List.scala(),
+//        body = primitive.List.scala(List.scala())
 //      )
 //    )
 //  }
@@ -80,8 +80,8 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
-//        body = Block(List())
+//        params = List.scala(),
+//        body = Block(List.scala())
 //      )
 //    )
 //  }
@@ -96,7 +96,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
+//        params = List.scala(),
 //        body = Identifier("something")
 //      )
 //    )
@@ -112,7 +112,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
+//        params = List.scala(),
 //        body = ???
 //      )
 //    )
@@ -128,10 +128,10 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(),
+//        params = List.scala(),
 //        body = FunctionCall(
 //          name = Identifier("a"),
-//          params = List()
+//          params = List.scala()
 //        )
 //      )
 //    )
@@ -147,7 +147,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(
+//        params = List.scala(
 //          Identifier("a")
 //        ),
 //        body = Identifier("a")
@@ -162,7 +162,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("f"),
-//        params = List(
+//        params = List.scala(
 //          Identifier("a"),
 //          Identifier("b"),
 //          Identifier("c")

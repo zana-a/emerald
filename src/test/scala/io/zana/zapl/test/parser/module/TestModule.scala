@@ -24,7 +24,7 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("A"),
-//        body = List()
+//        body = List.scala()
 //      )
 //    )
 //  }
@@ -41,10 +41,10 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("A"),
-//        body = List(
+//        body = List.scala(
 //          Function(
 //            name = Identifier("f"),
-//            params = List(),
+//            params = List.scala(),
 //            body = primitive.Integer(1)
 //          )
 //        )
@@ -66,20 +66,20 @@
 //        .stripMargin,
 //      Structure(
 //        name = Identifier("A"),
-//        body = List(
+//        body = List.scala(
 //          Function(
 //            name = Identifier("a"),
-//            params = List(),
+//            params = List.scala(),
 //            body = primitive.Integer(1)
 //          ),
 //          Function(
 //            name = Identifier("b"),
-//            params = List(),
+//            params = List.scala(),
 //            body = primitive.Integer(1)
 //          ),
 //          Function(
 //            name = Identifier("c"),
-//            params = List(),
+//            params = List.scala(),
 //            body = primitive.Integer(1)
 //          )
 //        )
