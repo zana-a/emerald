@@ -1,1 +1,8 @@
-println("Hello")
+mod Greeter do
+  def hello(name: String): String = do
+    name
+  end
+end
+
+println(Greeter::hello("Zana"))
+

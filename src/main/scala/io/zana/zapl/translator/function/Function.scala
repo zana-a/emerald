@@ -1,6 +1,8 @@
 package io.zana.zapl.translator.function
 
 import io.zana.zapl.parser.Base.Keyword
+import io.zana.zapl.structure.call.{FunctionCall, ModuleCall}
+import io.zana.zapl.structure.common.Identifier
 import io.zana.zapl.structure.primitive.Primitive
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
@@ -24,8 +26,16 @@ object Function extends Translatable[structures.function.Function] {
     val body: String = structure.body match {
       case primitive: Primitive =>
         translator.primitive.Primitive.translate(primitive)
-      //  todo    case call: Callable =>
-      //        translator.primitive.Primitive.translate(primitive)
+
+      case call: FunctionCall =>
+        translator.call.FunctionCall.translate(call)
+
+      case call: ModuleCall =>
+        translator.call.ModuleCall.translate(call)
+
+      case identifier: Identifier =>
+        translator.common.Identifier.translate(identifier)
+
       case e => s"??? not implemented for $e"
     }
 
