@@ -1,6 +1,8 @@
 
-mod Enum do
-  def at(list: List<Int>, n: Int) = list(n)
+mod List do
+  def at(list: List<Int>, n: Int): Int = list(n)
+  def at(list: List<String>, n: Int): String = list(n)
+  def at(list: List<Boolean>, n: Int): Boolean = list(n)
 end
 
-IO::puts(Enum::at([1, 2, 3], 1))
+println(List::at([2, false, true], 1))
