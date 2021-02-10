@@ -10,6 +10,9 @@ object StaticTypes {
 
   case object Boolean extends Static
 
-  case object List extends Static
+  //todo : perhaps move the tostring override to a structure translator
+  case class List(generic: Static) extends Static {
+    override def toString: String = s"List[$generic]"
+  }
 
 }
