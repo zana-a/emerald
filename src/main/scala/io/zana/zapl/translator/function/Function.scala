@@ -27,11 +27,11 @@ object Function extends Translatable[structures.function.Function] {
       case primitive: Primitive =>
         translator.primitive.Primitive.translate(primitive)
 
-      case call: FunctionCall =>
-        translator.call.FunctionCall.translate(call)
+      case functionCall: FunctionCall =>
+        translator.call.FunctionCall.translate(functionCall)
 
-      case call: ModuleCall =>
-        translator.call.ModuleCall.translate(call)
+      case moduleCall: ModuleCall =>
+        translator.call.ModuleCall.translate(moduleCall)
 
       case identifier: Identifier =>
         translator.common.Identifier.translate(identifier)
@@ -39,10 +39,6 @@ object Function extends Translatable[structures.function.Function] {
       case e => s"??? not implemented for $e"
     }
 
-    s"""
-       |def $name(${param.mkString(Keyword.COMMA ++ " ")}): ${`return`} = {
-       |  $body
-       |}
-       |""".stripMargin
+    s"def $name(${param.mkString(Keyword.COMMA ++ " ")}): ${`return`} = $body"
   }
 }
