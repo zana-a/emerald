@@ -5,4 +5,4 @@ mod List do
   def at(list: List<Boolean>, n: Int): Boolean = list(n)
 end
 
-println(List::at([2, false, true], 1))
+IO::puts(println(List::at([2, false, true], 1)))

@@ -1,7 +1,7 @@
 package io.zana.zapl.parser
 
 import io.zana.zapl.structure
-import io.zana.zapl.structure.common.StaticTypes
+import io.zana.zapl.structure.statics.Static
 
 import scala.util.parsing.combinator._
 
@@ -10,19 +10,19 @@ object Base extends JavaTokenParsers {
   import Keyword._
   import structure.common.Identifier
 
-  def staticType: Parser[StaticTypes.Static] = {
-    def int: Parser[StaticTypes.Int.type] =
-      STATIC_T_INT ^^ (_ => StaticTypes.Int)
+  def staticType: Parser[Static.Static] = {
+    def int: Parser[Static.Int.type] =
+      STATIC_T_INT ^^ (_ => Static.Int)
 
-    def string: Parser[StaticTypes.String.type] =
-      STATIC_T_STRING ^^ (_ => StaticTypes.String)
+    def string: Parser[Static.String.type] =
+      STATIC_T_STRING ^^ (_ => Static.String)
 
-    def boolean: Parser[StaticTypes.Boolean.type] =
-      STATIC_T_BOOLEAN ^^ (_ => StaticTypes.Boolean)
+    def boolean: Parser[Static.Boolean.type] =
+      STATIC_T_BOOLEAN ^^ (_ => Static.Boolean)
 
-    def list: Parser[StaticTypes.List] = {
+    def list: Parser[Static.List] = {
       STATIC_T_LIST ~> (LEFT_ANGLE ~> staticType <~ RIGHT_ANGLE) ^^
-        (generic => StaticTypes.List(generic))
+        (generic => Static.List(generic))
     }
 
     int | string | boolean | list

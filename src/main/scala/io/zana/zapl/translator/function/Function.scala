@@ -20,9 +20,9 @@ object Function extends Translatable[structures.function.Function] {
         .common
         .Identifier
         .translate(param.name)
-    }: ${param.static}"
+    }: ${translator.statics.Static.translate(param.static)}"
 
-    val `return` = structure.`return`
+    val `return` = translator.statics.Static.translate(structure.`return`)
 
     val body: String = structure.body match {
       case primitive: Primitive =>
