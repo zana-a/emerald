@@ -1,15 +1,13 @@
 package io.zana.zapl.parser.control
 
-import io.zana.zapl.parser
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.block.Block._
+import io.zana.zapl.parser.expression.Expression._
 import io.zana.zapl.parser.expression.Logic
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.primitive.Primitive._
 
 object Control {
-
-  import parser.Base._
-  import Keyword._
-  import parser.block.Block._
-  import parser.expression.Expression._
-  import parser.primitive.Primitive._
 
   def guard: Parser[Any] =
     Logic.expression
@@ -21,7 +19,7 @@ object Control {
     guard ~ FAT_ARROW ~ command
 
   def default: Parser[Any] =
-    Keyword.UNDERSCORE ~ FAT_ARROW ~ command
+    UNDERSCORE ~ FAT_ARROW ~ command
 
   def cond: Parser[Any] =
     COND ~ DO ~ opt(rep(arm)) ~ default ~ END

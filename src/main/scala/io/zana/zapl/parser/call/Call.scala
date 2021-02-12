@@ -1,11 +1,9 @@
 package io.zana.zapl.parser.call
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.structure.call.Callable
 
 object Call {
-
-  import parser.Base._
-  import structure.call.Callable
 
   def call: Parser[Callable] =
     FunctionCall.call | ModuleCall.call

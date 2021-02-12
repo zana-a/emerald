@@ -1,14 +1,13 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.primitive.Primitive._
+import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Logic {
 
-  import parser.Base._
-  import Keyword._
-  import parser.primitive.Primitive._
-
-  def expression: Parser[structure.expression.Expression] = {
+  def expression: Parser[Structure] = {
 
     def factor: Parser[Any] =
       NOT ~ factor | constant | LEFT_PAREN ~ expression ~ RIGHT_PAREN
@@ -27,7 +26,7 @@ object Logic {
         | GTEQ ~ expression
       )
     ) ^^ {
-      _ => structure.expression.Expression("1 + 1")
+      _ => Structure("dummy logic")
     }
   }
 }

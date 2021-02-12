@@ -1,14 +1,13 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.primitive.Primitive._
+import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Arithmetic {
 
-  import parser.Base._
-  import Keyword._
-  import parser.primitive.Primitive._
-
-  def expression: Parser[structure.expression.Expression] = {
+  def expression: Parser[Structure] = {
 
     def expr: Parser[Any] = term ~ rep(MINUS ~ term | PLUS ~ term)
 
@@ -18,7 +17,7 @@ object Arithmetic {
       factor ~ rep(MULTIPLICATION ~ factor | DIVISION ~ factor)
 
     expr ^^ {
-      _ => structure.expression.Expression("dummy")
+      _ => Structure("dummy")
     }
   }
 }
