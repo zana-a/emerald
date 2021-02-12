@@ -7,8 +7,8 @@ import io.zana.zapl.structure.call.{ModuleCall => Structure}
 
 object ModuleCall extends Parsable[Structure] {
 
-  override def parse: Parser[Structure] = {
-    rep(identifier <~ BOX) ~ FunctionCall.parse ^^ {
+  override def apply: Parser[Structure] = {
+    rep(identifier <~ BOX) ~ FunctionCall.apply ^^ {
       case ids ~ caller => Structure(ids, caller)
     }
   }
