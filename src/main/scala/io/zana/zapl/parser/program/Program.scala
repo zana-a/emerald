@@ -6,12 +6,13 @@ import io.zana.zapl.parser.comment.LineComment
 import io.zana.zapl.parser.control.Control
 import io.zana.zapl.parser.function.Function
 import io.zana.zapl.parser.module.Module
+import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.parser.variable.Variable
 import io.zana.zapl.structure.program.{Program => Structure}
 
-object Program {
+object Program extends Parsable[Structure] {
 
-  def program: Parser[Structure] = rep(
+  override def apply: Parser[Structure] = rep(
     LineComment.apply
       | Module.apply
       | Call.apply

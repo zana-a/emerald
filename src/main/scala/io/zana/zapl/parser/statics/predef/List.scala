@@ -1,14 +1,15 @@
 package io.zana.zapl.parser.statics.predef
 
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.keyword.Keyword.{LEFT_ANGLE, STATIC_T_LIST}
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.statics.Static
 import io.zana.zapl.parser.util.Parsable
-import io.zana.zapl.structure.statics.{Integer => Structure}
+import io.zana.zapl.structure.statics.{List => Structure}
 
-object List extends Parsable[Structure.type] {
+object List extends Parsable[Structure] {
 
   //todo wrappable
-  override def apply: Parser[Structure.type] =
-    STATIC_T_LIST ~> (LEFT_ANGLE ~> static <~ RIGHT_ANGLE) ^^
-      (generic => Structure.List(generic))
+  override def apply: Parser[Structure] =
+    STATIC_T_LIST ~> (LEFT_ANGLE ~> Static.apply <~ RIGHT_ANGLE) ^^
+      (generic => Structure(generic))
 }
