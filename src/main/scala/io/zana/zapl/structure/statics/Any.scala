@@ -1,3 +1,3 @@
 package io.zana.zapl.structure.statics
 
-trait Static
+case object Any extends Static

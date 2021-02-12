@@ -28,6 +28,8 @@ object Keyword {
 
   val STATIC_T_BOOLEAN = "Boolean"
 
+  val STATIC_T_ANY = "Any"
+
   val LEFT_PAREN = "("
 
   val RIGHT_PAREN = ")"

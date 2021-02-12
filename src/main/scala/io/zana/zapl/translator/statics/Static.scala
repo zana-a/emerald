@@ -1,18 +1,18 @@
 package io.zana.zapl.translator.statics
 
-import io.zana.zapl.translator.Translatable
 import io.zana.zapl.structure.statics
+import io.zana.zapl.translator.Translatable
 
-object Static extends Translatable[statics.Static.Static]{
+object Static extends Translatable[statics.String.Static] {
 
-  override def translate(structure: statics.Static.Static): String = {
+  override def translate(structure: statics.String.Static): String = {
     structure match {
-      case statics.Static.Int => "Int"
-      case statics.Static.String => "String"
-      case statics.Static.Boolean => "Boolean"
-      case statics.Static.Unit => "Unit"
-      case statics.Static.Any => "Any"
-      case statics.Static.List(generic) => s"List[$generic]"
+      case statics.String.Int => "Int"
+      case statics.String.String => "String"
+      case statics.String.Boolean => "Boolean"
+      case statics.String.Unit => "Unit"
+      case statics.String.Any => "Any"
+      case statics.String.List(generic) => s"List[$generic]"
     }
   }
 }
