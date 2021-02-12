@@ -2,9 +2,7 @@ package io.zana.zapl.parser
 
 import io.zana.zapl.parser.base.Base._
 
-trait Parsable {
+trait Parsable[T] {
 
-  type T
-
-  def parse(): Parser[T]
+  def parse: Parser[T]
 }

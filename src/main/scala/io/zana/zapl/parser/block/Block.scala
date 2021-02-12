@@ -1,5 +1,6 @@
 package io.zana.zapl.parser.block
 
+import io.zana.zapl.parser.Parsable
 import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.call.Call._
 import io.zana.zapl.parser.comment.Comment._
@@ -9,9 +10,9 @@ import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.variable.Variable._
 import io.zana.zapl.structure.block.{Block => Structure}
 
-object Block {
+object Block extends Parsable[Structure] {
 
-  def block: Parser[Structure] = {
+  override def parse: Parser[Structure] = {
     DO ~> rep(
       lineComment
         | variable
