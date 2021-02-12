@@ -22,7 +22,7 @@ object Function extends Translatable[structures.function.Function] {
         .translate(param.name)
     }: ${translator.statics.Static.translate(param.static)}"
 
-    val `return` = translator.statics.Static.translate(structure.`return`)
+    val `return` = translator.statics.Static.translate(structure.static)
 
     val body: String = structure.body match {
       case primitive: Primitive =>

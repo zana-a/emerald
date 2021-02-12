@@ -1,12 +1,14 @@
 package io.zana.zapl.parser.function
 
 import io.zana.zapl.parser.base.Base._
+import io.zana.zapl.parser.block.Block
+import io.zana.zapl.parser.call.Call
 import io.zana.zapl.parser.control.Control
 import io.zana.zapl.parser.expression.Expression
 import io.zana.zapl.parser.identifier.Identifier
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.primitive.Primitive
-import io.zana.zapl.parser.statics.Static._
+import io.zana.zapl.parser.statics.Static
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.function.{FunctionBody, Function => Structure}
 
@@ -20,17 +22,17 @@ object Function extends Parsable[Structure] {
 
     val body: Parser[FunctionBody] = EQ ~> (
       Primitive.apply
-        | call
+        | Call.apply
         | Identifier.apply
         | Expression.apply
-        | block
+        | Block.apply
         | Control.apply
       )
 
-    val `return` = COLON ~> static
+    val static = COLON ~> Static.apply
 
-    (id ~ params ~ `return` ~ body) ^^ {
-      case id ~ params ~ r ~ body => Structure(id, params, r, body)
+    (id ~ params ~ static ~ body) ^^ {
+      case id ~ params ~ static ~ body => Structure(id, params, static, body)
     }
   }
 }
