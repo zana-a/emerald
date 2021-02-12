@@ -9,5 +9,7 @@ import io.zana.zapl.structure.control.{Cond => Structure}
 object Cond extends Parsable[Structure] {
 
   override def apply: Parser[Structure] =
-    (COND <~ DO) ~> (opt(rep(Arm.apply)) ~ Default.apply) <~ END ^^ ???
+    (COND <~ DO) ~> (opt(rep(Arm.apply)) ~ Default.apply) <~ END ^^ {
+      case Some(arms) ~ default => Structure(arms, default)
+    }
 }
