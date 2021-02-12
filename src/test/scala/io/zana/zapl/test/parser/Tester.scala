@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 
 object Tester {
 
-  import io.zana.zapl.parser.Base._
+  import io.zana.zapl.parser.base.Base._
 
   def tester(parser: Parser[Any], input: String, expected: Any): Unit = {
     parse(parser, input) match {

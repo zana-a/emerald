@@ -1,6 +1,6 @@
 package io.zana.zapl.parser.function
 
-import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.block.Block._
 import io.zana.zapl.parser.call.Call._
 import io.zana.zapl.parser.keyword.Keyword._

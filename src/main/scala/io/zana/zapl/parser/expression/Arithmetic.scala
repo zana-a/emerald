@@ -1,6 +1,6 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.primitive.Primitive._
 import io.zana.zapl.structure.expression.{Expression => Structure}

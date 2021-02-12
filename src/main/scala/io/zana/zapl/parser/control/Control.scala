@@ -1,6 +1,6 @@
 package io.zana.zapl.parser.control
 
-import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.block.Block._
 import io.zana.zapl.parser.expression.Expression._
 import io.zana.zapl.parser.expression.Logic

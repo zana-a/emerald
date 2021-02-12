@@ -1,6 +1,6 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.Base
+import io.zana.zapl.parser.base.Base
 import io.zana.zapl.structure.program.Program
 import org.scalafmt.interfaces.Scalafmt
 

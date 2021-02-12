@@ -1,6 +1,6 @@
 package io.zana.zapl
 
-import io.zana.zapl.parser.Base
+import io.zana.zapl.parser.base.Base
 
 object Main extends App {
   //  Builder.write(args)
