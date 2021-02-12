@@ -1,15 +1,14 @@
 package io.zana.zapl.parser.call
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.structure.call.{ModuleCall => Structure}
 
 object ModuleCall {
 
-  import parser.Base._
-  import Keyword._
-  import structure.call.{ModuleCall => Result}
-
-  def call: Parser[Result] =
+  def call: Parser[Structure] = {
     rep(identifier <~ BOX) ~ FunctionCall.call ^^ {
-      case ids ~ caller => Result(ids, caller)
+      case ids ~ caller => Structure(ids, caller)
     }
+  }
 }

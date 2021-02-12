@@ -1,6 +1,6 @@
 package io.zana.zapl.translator.function
 
-import io.zana.zapl.parser.Base.Keyword
+import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.call.{FunctionCall, ModuleCall}
 import io.zana.zapl.structure.common.Identifier
@@ -43,6 +43,6 @@ object Function extends Translatable[structures.function.Function] {
       case e => s"??? not implemented for $e"
     }
 
-    s"def $name(${param.mkString(Keyword.COMMA ++ " ")}): ${`return`} = $body"
+    s"def $name(${param.mkString(COMMA ++ " ")}): ${`return`} = $body"
   }
 }

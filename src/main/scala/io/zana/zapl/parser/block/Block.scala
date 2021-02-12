@@ -1,25 +1,23 @@
 package io.zana.zapl.parser.block
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.parser.call.Call._
+import io.zana.zapl.parser.comment.Comment._
+//  import parser.control.Control._
+import io.zana.zapl.parser.expression.Expression._
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.variable.Variable._
+import io.zana.zapl.structure.block.{Block => Structure}
 
 object Block {
 
-  import parser.Base._
-  import Keyword._
-  import parser.call.Call._
-  import parser.comment.Comment._
-  //  import parser.control.Control._
-  import parser.expression.Expression._
-  import parser.variable.Variable._
-  import structure.block.{Block => Result}
-
-  def block: Parser[Result] = {
+  def block: Parser[Structure] = {
     DO ~> rep(
       lineComment
         | variable
         | call
         | expression
-      //        | control
-    ) <~ END ^^ (values => Result(values))
+      // todo       | control
+    ) <~ END ^^ (values => Structure(values))
   }
 }

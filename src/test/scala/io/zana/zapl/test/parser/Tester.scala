@@ -1,11 +1,10 @@
 package io.zana.zapl.test.parser
 
-import io.zana.zapl.parser
 import org.junit.Assert.assertEquals
 
 object Tester {
 
-  import parser.Base._
+  import io.zana.zapl.parser.Base._
 
   def tester(parser: Parser[Any], input: String, expected: Any): Unit = {
     parse(parser, input) match {

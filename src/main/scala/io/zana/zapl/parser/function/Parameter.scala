@@ -1,12 +1,13 @@
 package io.zana.zapl.parser.function
 
-import io.zana.zapl.parser.Base.Keyword._
 import io.zana.zapl.parser.Base._
-import io.zana.zapl.structure.function.{Parameter => Result}
+import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.statics.Static.static
+import io.zana.zapl.structure.function.{Parameter => Structure}
 
 object Parameter {
 
-  def parameter: Parser[Result] = identifier ~ (COLON ~> staticType) ^^ {
-    case name ~ static => Result(name, static)
+  def parameter: Parser[Structure] = identifier ~ (COLON ~> static) ^^ {
+    case name ~ static => Structure(name, static)
   }
 }

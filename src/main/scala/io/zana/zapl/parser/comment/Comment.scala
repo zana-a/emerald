@@ -1,12 +1,10 @@
 package io.zana.zapl.parser.comment
 
-import io.zana.zapl.{parser, structure}
+import io.zana.zapl.parser.Base._
+import io.zana.zapl.structure.comment.{LineComment => Structure}
 
 object Comment {
 
-  import parser.Base._
-  import structure.comment.{LineComment => Result}
-
-  def lineComment: Parser[Result] =
-    """#.*""".r ^^ (c => Result(c.drop(1)))
+  def lineComment: Parser[Structure] =
+    """#.*""".r ^^ (c => Structure(c.drop(1)))
 }
