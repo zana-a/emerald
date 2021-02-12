@@ -9,6 +9,11 @@
 - Statement parser removed as there was no need for it
 - Rename to cond and loop was purely aesthetical and allows for room in future
   for c styled if and while if need be.
+- static types introduced in order to make operations feasible
+- static types introduced to give user more control over the type they assign to
+  variables
+- variables now have a mutability modifier so that by default things are
+  immutable
 
 TODO
 
