@@ -159,7 +159,7 @@ class TestBlock {
         .stripMargin,
       Structure(
         body = List(
-          FunctionCall(
+          Function(
             name = Identifier("f"),
             params = List()
           )
@@ -177,11 +177,11 @@ class TestBlock {
         .stripMargin,
       Structure(
         body = List(
-          ModuleCall(
+          Module(
             modules = List(
               Identifier("A")
             ),
-            caller = FunctionCall(
+            caller = Function(
               name = Identifier("f"),
               params = List()
             )

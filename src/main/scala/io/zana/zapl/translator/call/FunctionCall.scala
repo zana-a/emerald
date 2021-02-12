@@ -3,9 +3,9 @@ package io.zana.zapl.translator.call
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
 
-object FunctionCall extends Translatable[structures.call.FunctionCall] {
+object FunctionCall extends Translatable[structures.call.Function] {
 
-  override def translate(structure: structures.call.FunctionCall): String = {
+  override def translate(structure: structures.call.Function): String = {
     val name = translator.common.Identifier
       .translate(structure.name)
 
@@ -18,10 +18,10 @@ object FunctionCall extends Translatable[structures.call.FunctionCall] {
       case primitive: structures.primitive.Primitive =>
         translator.primitive.Primitive.translate(primitive)
 
-      case functionCall: structures.call.FunctionCall =>
+      case functionCall: structures.call.Function =>
         translate(functionCall)
 
-      case moduleCall: structures.call.ModuleCall =>
+      case moduleCall: structures.call.Module =>
         translator.call.ModuleCall.translate(moduleCall)
 
       case e => s"??? translator not implemented for $e"

@@ -2,7 +2,7 @@ package io.zana.zapl.translator.function
 
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure.block.Block
-import io.zana.zapl.structure.call.{FunctionCall, ModuleCall}
+import io.zana.zapl.structure.call.{Function, Module}
 import io.zana.zapl.structure.common.Identifier
 import io.zana.zapl.structure.primitive.Primitive
 import io.zana.zapl.translator.Translatable
@@ -28,10 +28,10 @@ object Function extends Translatable[structures.function.Function] {
       case primitive: Primitive =>
         translator.primitive.Primitive.translate(primitive)
 
-      case functionCall: FunctionCall =>
+      case functionCall: Function =>
         translator.call.FunctionCall.translate(functionCall)
 
-      case moduleCall: ModuleCall =>
+      case moduleCall: Module =>
         translator.call.ModuleCall.translate(moduleCall)
 
       case block: Block =>

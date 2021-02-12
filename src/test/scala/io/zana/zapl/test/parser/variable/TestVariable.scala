@@ -6,7 +6,7 @@ import org.junit.Test
 class TestVariable {
 
   import parser.variable.{Variable => Parser}
-  import structure.call.{FunctionCall, ModuleCall}
+  import structure.call.{Function, Module}
   import structure.common.Identifier
   import structure.primitive
   import structure.variable.{Variable => Structure}
@@ -88,7 +88,7 @@ class TestVariable {
         .stripMargin,
       Structure(
         name = Identifier("item"),
-        body = FunctionCall(
+        body = Function(
           name = Identifier("f"),
           params = List()
         )
@@ -103,11 +103,11 @@ class TestVariable {
         .stripMargin,
       Structure(
         name = Identifier("item"),
-        body = ModuleCall(
+        body = Module(
           modules = List(
             Identifier("A")
           ),
-          caller = FunctionCall(
+          caller = Function(
             name = Identifier("f"),
             params = List()
           )
