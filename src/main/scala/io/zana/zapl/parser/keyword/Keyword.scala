@@ -20,6 +20,10 @@ object Keyword {
 
   val MOD = "mod"
 
+  val LET = "let"
+
+  val MUT = "mut"
+
   val STATIC_T_INT = "Int"
 
   val STATIC_T_STRING = "String"
