@@ -10,7 +10,7 @@ import io.zana.zapl.structure.module.{Module => Structure}
 
 object Module extends Parsable[Structure] {
 
-  def module: Parser[Structure] = {
+  override def apply: Parser[Structure] = {
     val id = MOD ~> Identifier.apply
 
     val body = DO ~> rep(

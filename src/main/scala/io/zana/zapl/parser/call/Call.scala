@@ -7,5 +7,5 @@ import io.zana.zapl.structure.call.Callable
 object Call extends Parsable[Callable] {
 
   override def apply: Parser[Callable] =
-    FunctionCall | ModuleCall
+    FunctionCall.apply | ModuleCall.apply
 }
