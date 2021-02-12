@@ -1,23 +1,24 @@
 package io.zana.zapl.parser.block
 
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.call.Call._
-import io.zana.zapl.parser.comment.Comment._
-//  import parser.control.Control._
-import io.zana.zapl.parser.expression.Expression._
+import io.zana.zapl.parser.call.Call
+import io.zana.zapl.parser.comment.LineComment
+import io.zana.zapl.parser.control.Control
+import io.zana.zapl.parser.expression.Expression
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.parser.variable.Variable._
+import io.zana.zapl.parser.util.Parsable
+import io.zana.zapl.parser.variable.Variable
 import io.zana.zapl.structure.block.{Block => Structure}
 
-object Block {
+object Block extends Parsable[Structure] {
 
-  def block: Parser[Structure] = {
+  override def apply: Parser[Structure] = {
     DO ~> rep(
-      lineComment
-        | variable
-        | call
-        | expression
-      // todo       | control
+      LineComment.apply
+        | Variable.apply
+        | Call.apply
+        | Expression.apply
+        | Control.apply
     ) <~ END ^^ (values => Structure(values))
   }
 }

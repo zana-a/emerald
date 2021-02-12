@@ -2,16 +2,17 @@ package io.zana.zapl.parser.expression
 
 import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.parser.primitive.Primitive._
+import io.zana.zapl.parser.primitive.predef.Integer
+import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.expression.{Expression => Structure}
 
-object Arithmetic {
+object Arithmetic extends Parsable[Structure] {
 
-  def expression: Parser[Structure] = {
+  def apply: Parser[Structure] = {
 
     def expr: Parser[Any] = term ~ rep(MINUS ~ term | PLUS ~ term)
 
-    def factor: Parser[Any] = integer | LEFT_PAREN ~ expr ~ RIGHT_PAREN
+    def factor: Parser[Any] = Integer.apply | LEFT_PAREN ~ expr ~ RIGHT_PAREN
 
     def term: Parser[Any] =
       factor ~ rep(MULTIPLICATION ~ factor | DIVISION ~ factor)

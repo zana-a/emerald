@@ -1,16 +1,23 @@
 package io.zana.zapl.parser.module
 
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.comment.Comment._
-import io.zana.zapl.parser.function.Function._
+import io.zana.zapl.parser.comment.LineComment
+import io.zana.zapl.parser.function.Function
+import io.zana.zapl.parser.identifier.Identifier
 import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.module.{Module => Structure}
 
-object Module {
+object Module extends Parsable[Structure] {
 
-  def module: Parser[Structure] = {
-    val id = MOD ~> identifier
-    val body = DO ~> rep(lineComment | function | module) <~ END
+  override def apply: Parser[Structure] = {
+    val id = MOD ~> Identifier.apply
+
+    val body = DO ~> rep(
+      LineComment.apply
+        | Function.apply
+        | Module.apply
+    ) <~ END
 
     id ~ body ^^ { case id ~ body => Structure(id, body) }
   }

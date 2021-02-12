@@ -3,9 +3,9 @@ package io.zana.zapl.translator.call
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
 
-object ModuleCall extends Translatable[structures.call.ModuleCall] {
+object ModuleCall extends Translatable[structures.call.Module] {
 
-  override def translate(structure: structures.call.ModuleCall): String = {
+  override def translate(structure: structures.call.Module): String = {
 
     val modules = {
       val identifiers = for {

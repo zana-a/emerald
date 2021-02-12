@@ -4,8 +4,6 @@ import io.zana.zapl.parser.base.Base
 
 object Main extends App {
   //  Builder.write(args)
-
-
   val source =
     """
       |def a(a: List<Int>): List<Int> = true

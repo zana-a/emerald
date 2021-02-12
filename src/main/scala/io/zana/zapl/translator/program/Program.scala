@@ -20,11 +20,11 @@ object Program extends Translatable[structures.program.Program] {
         translator.function.Function
           .translate(function)
 
-      case functionCall: structures.call.FunctionCall =>
+      case functionCall: structures.call.Function =>
         translator.call.FunctionCall
           .translate(functionCall)
 
-      case moduleCall: structures.call.ModuleCall =>
+      case moduleCall: structures.call.Module =>
         translator.call.ModuleCall
           .translate(moduleCall)
 

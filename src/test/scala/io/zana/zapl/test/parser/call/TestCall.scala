@@ -1,12 +1,11 @@
 package io.zana.zapl.test.parser.call
 
-import io.zana.zapl.{parser, structure, test}
+import io.zana.zapl.{structure, test}
 import org.junit.Test
 
 class TestCall {
 
-  import parser.call.{FunctionCall => FParser, ModuleCall => MParser}
-  import structure.call.{FunctionCall => FStructure, ModuleCall => MStructure}
+  import structure.call.{Function => FStructure, Module => MStructure}
   import structure.common.Identifier
   import structure.primitive
   import test.parser.Tester

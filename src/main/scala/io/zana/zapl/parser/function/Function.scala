@@ -1,34 +1,38 @@
 package io.zana.zapl.parser.function
 
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.block.Block._
-import io.zana.zapl.parser.call.Call._
+import io.zana.zapl.parser.block.Block
+import io.zana.zapl.parser.call.Call
+import io.zana.zapl.parser.control.Control
+import io.zana.zapl.parser.expression.Expression
+import io.zana.zapl.parser.identifier.Identifier
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.parser.primitive.Primitive._
-import io.zana.zapl.parser.statics.Static._
+import io.zana.zapl.parser.primitive.Primitive
+import io.zana.zapl.parser.statics.Static
+import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.function.{FunctionBody, Function => Structure}
 
-object Function {
+object Function extends Parsable[Structure] {
 
+  override def apply: Parser[Structure] = {
 
-  def function: Parser[Structure] = {
-    val id = DEF ~> identifier
+    val id = DEF ~> Identifier.apply
 
-    val params = LEFT_PAREN ~> repsep(Parameter.parameter, COMMA) <~ RIGHT_PAREN
+    val params = LEFT_PAREN ~> repsep(Parameter.apply, COMMA) <~ RIGHT_PAREN
 
     val body: Parser[FunctionBody] = EQ ~> (
-      `type`
-        | call
-        | identifier
-        //todo        | expression
-        | block
-      // todo       | control
+      Primitive.apply
+        | Call.apply
+        | Identifier.apply
+        | Expression.apply
+        | Block.apply
+        | Control.apply
       )
 
-    val `return` = COLON ~> static
+    val static = COLON ~> Static.apply
 
-    (id ~ params ~ `return` ~ body) ^^ {
-      case id ~ params ~ r ~ body => Structure(id, params, r, body)
+    (id ~ params ~ static ~ body) ^^ {
+      case id ~ params ~ static ~ body => Structure(id, params, static, body)
     }
   }
 }
