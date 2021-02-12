@@ -9,8 +9,7 @@ import io.zana.zapl.structure.control.{Loop => Structure}
 object Loop extends Parsable[Structure] {
 
   override def apply: Parser[Structure] =
-    LOOP ~ DO ~ opt(rep(Arm.apply)) ~ Default.apply ~ END ^^ {
+    (LOOP <~ DO) ~> (opt(rep(Arm.apply)) ~ Default.apply) <~ END ^^ {
       ???
     }
-
 }
