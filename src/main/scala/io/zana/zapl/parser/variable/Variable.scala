@@ -1,20 +1,23 @@
 package io.zana.zapl.parser.variable
 
+import io.zana.zapl.parser.Parsable
+import io.zana.zapl.parser.base.Base
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.call.Call._
 import io.zana.zapl.parser.expression.Expression._
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.parser.primitive.Primitive._
+import io.zana.zapl.parser.primitive.Primitive
 import io.zana.zapl.structure.common.Identifier
 import io.zana.zapl.structure.function._
-import io.zana.zapl.structure.variable.{Variable => Result}
+import io.zana.zapl.structure.variable.{Variable => Structure}
 
-object Variable {
+object Variable extends Parsable[Structure] {
 
-  def id: Parser[Identifier] = identifier <~ EQ
+  override def apply: Base.Parser[Structure] = {
+    def id: Parser[Identifier] = identifier <~ EQ
 
-  def body: Parser[FunctionBody] = `type` | call | expression
+    def body: Parser[FunctionBody] = Primitive.apply | call | expression
 
-  def variable: Parser[Result] =
-    id ~ body ^^ { case id ~ body => Result(id, body) }
+    id ~ body ^^ { case id ~ body => Structure(id, body) }
+  }
+
 }
