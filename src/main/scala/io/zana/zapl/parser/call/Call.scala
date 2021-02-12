@@ -1,10 +1,11 @@
 package io.zana.zapl.parser.call
 
+import io.zana.zapl.parser.Parsable
 import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.structure.call.Callable
 
-object Call {
+object Call extends Parsable[Callable] {
 
-  def call: Parser[Callable] =
-    FunctionCall.call | ModuleCall.call
+  override def parse: Parser[Callable] =
+    FunctionCall.parse | ModuleCall.parse
 }

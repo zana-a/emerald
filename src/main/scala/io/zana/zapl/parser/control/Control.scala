@@ -1,7 +1,7 @@
 package io.zana.zapl.parser.control
 
 import io.zana.zapl.parser.base.Base._
-import io.zana.zapl.parser.block.Block._
+import io.zana.zapl.parser.block.Block
 import io.zana.zapl.parser.expression.Expression._
 import io.zana.zapl.parser.expression.Logic
 import io.zana.zapl.parser.keyword.Keyword._
@@ -13,7 +13,7 @@ object Control {
     Logic.expression
 
   def command: Parser[Any] =
-    identifier | `type` | expression | block
+    identifier | `type` | expression | Block.parse
 
   def arm: Parser[Any] =
     guard ~ FAT_ARROW ~ command

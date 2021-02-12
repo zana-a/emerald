@@ -5,7 +5,7 @@ import org.junit.Test
 
 class TestComment {
 
-  import parser.comment.{Comment => Parser}
+  import parser.comment.{LineComment => Parser}
   import structure.comment.{LineComment => Structure}
   import test.parser.Tester
 
