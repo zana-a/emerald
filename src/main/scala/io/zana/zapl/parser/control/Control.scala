@@ -1,9 +1,11 @@
 package io.zana.zapl.parser.control
 
 import io.zana.zapl.parser.base.Base._
+import io.zana.zapl.parser.util.Parsable
+import io.zana.zapl.structure.control.{Control => Structure}
 
-object Control {
+object Control extends Parsable[Structure] {
 
-  def control: Parser[Any] =
+  override def apply: Parser[Structure] =
     Cond.apply | Loop.apply
 }

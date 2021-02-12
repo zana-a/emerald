@@ -1,9 +1,9 @@
 package io.zana.zapl.parser.expression
 
-import io.zana.zapl.parser.Parsable
 import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.primitive.predef.Integer
+import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Arithmetic extends Parsable[Structure] {
