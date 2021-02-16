@@ -1,5 +1,8 @@
 package io.zana.zapl
 
+import java.nio.file.Path
+import scala.io.{Source, StdIn}
+
 object Main extends App {
 
   //  val parse = parser.base.Base.parse(
@@ -46,13 +49,10 @@ object Main extends App {
   val parse = parser.base.Base.parse(
     parser.control.Control.apply,
     {
-      """
-        |cond do
-        |  true => true
-        |  _ => false
-        |end
-        |"""
-        .stripMargin
+      val io = Source.fromFile(Path.of("demo/main.zapl").toUri)
+      val source = io.mkString
+      io.close()
+      source
     }
   )
 
