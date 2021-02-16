@@ -47,7 +47,7 @@ object Main extends App {
   //  }
 
   val parse = parser.base.Base.parse(
-    parser.control.Control.apply,
+    parser.program.Program.apply,
     {
       val io = Source.fromFile(Path.of("demo/main.zapl").toUri)
       val source = io.mkString

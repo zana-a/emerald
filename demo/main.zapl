@@ -1,4 +1,0 @@
-cond do
-  true => false
-  _ => false
-end
