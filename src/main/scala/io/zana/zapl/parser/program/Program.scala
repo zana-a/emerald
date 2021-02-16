@@ -12,12 +12,12 @@ import io.zana.zapl.structure.program.{Program => Structure}
 
 object Program extends Parsable[Structure] {
 
-  override def apply: Parser[Structure] = rep(
+  override def apply: Parser[Structure] = phrase(rep(
     LineComment.apply
       | Module.apply
       | Call.apply
       | Function.apply
       | Variable.apply
       | Control.apply
-  ) ^^ (statements => Structure(statements))
+  )) ^^ (statements => Structure(statements))
 }
