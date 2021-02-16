@@ -5,8 +5,4 @@ import io.zana.zapl.structure.function.FunctionBody
 
 trait Callable extends FunctionBody
   with CallBody
-  with BlockBody {
-
-  override def toString: String =
-    "call." ++ super.toString
-}
+  with BlockBody
