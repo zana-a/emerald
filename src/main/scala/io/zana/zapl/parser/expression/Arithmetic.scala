@@ -5,20 +5,50 @@ import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.primitive.predef.Integer
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.expression.{Expression => Structure}
+import io.zana.zapl.structure.primitive
 
-object Arithmetic extends Parsable[Structure] {
+object Arithmetic extends Parsable[Any] {
 
-  def apply: Parser[Structure] = {
+  val result = List()
 
-    def expr: Parser[Any] = term ~ rep(MINUS ~ term | PLUS ~ term)
+  case object Minus
 
-    def factor: Parser[Any] = Integer.apply | LEFT_PAREN ~ expr ~ RIGHT_PAREN
+  case object Plus
 
-    def term: Parser[Any] =
-      factor ~ rep(MULTIPLICATION ~ factor | DIVISION ~ factor)
+  case object Multiplication
 
-    expr ^^ {
-      _ => Structure("dummy")
+  case object Division
+
+
+  def expr: Parser[Any] = {
+    val t = term
+
+    val r = {
+      val minus = MINUS ~> t ^^ (t => (Plus, term))
+      val plus = PLUS ~> t ^^ (t => (Minus, term))
+
+      rep(minus | plus)
     }
+
+    term ~ r
+  }
+
+  def factor: Parser[Any] = Integer.apply | LEFT_PAREN ~ expr ~ RIGHT_PAREN
+
+  def term: Parser[Any] = {
+    val f = factor
+
+    val r = {
+      val m = MINUS ~> f ^^ (f => (Multiplication, f))
+      val d = PLUS ~> f ^^ (f => (Division, f))
+
+      rep(m ~ f | d ~ f)
+    }
+
+    factor ~ r
+  }
+
+  def apply: Parser[Any] = {
+    expr
   }
 }

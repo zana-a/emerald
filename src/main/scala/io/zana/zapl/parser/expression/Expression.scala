@@ -6,5 +6,7 @@ import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Expression extends Parsable[Structure] {
 
-  override def apply: Parser[Structure] = Logic.apply | Arithmetic.apply
+  override def apply: Parser[Structure] = Logic.apply
+
+  //  | Arithmetic.apply
 }

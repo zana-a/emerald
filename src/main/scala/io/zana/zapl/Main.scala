@@ -1,66 +1,67 @@
 package io.zana.zapl
 
-import java.nio.file.Path
-import scala.io.{Source, StdIn}
+import scala.annotation.tailrec
+
+//import java.nio.file.Path
+//import scala.io.Source
 
 object Main extends App {
 
+  def f(x: List[Int], y: List[Int] = List.empty)(g: Int => Int): List[Int] =
+    x match {
+      case Nil => y
+      case h :: t => f(t, y ++ List(g(h)))(g)
+    }
+
+  println(
+    f(List(1, 2, 3))(x => x + 1)
+  )
+
   //  val parse = parser.base.Base.parse(
-  //    parser.program.Program.apply,
+  //    parser.expression.Arithmetic.apply,
   //    {
-  //      """
-  //        |let a: String = 2
-  //        |let mut b: Int = 2
-  //        |
-  //        |def add(x: Int, y: Int): Int = x
-  //        |
-  //        |def some_string(): String = do
-  //        |  let mut some_mutable_string: String = "some string"
-  //        |  some_mutable_string
-  //        |end
-  //        |
-  //        |mod A do
-  //        |
-  //        |  mod B do
-  //        |    def add(x: Int, y: Int): Int = x
-  //        |  end
-  //        |
-  //        |  def some_string(): String = do
-  //        |    let mut some_mutable_string: String = "some string"
-  //        |    some_mutable_string
-  //        |  end
-  //        |end
-  //        |
-  //        |add(1, 2)
-  //        |A::B(3, 4)
-  //        |"""
-  //        .stripMargin
+  //      val io = Source.fromFile(Path.of("demo/main.zapl").toUri)
+  //      val source = io.mkString
+  //      io.close()
+  //      source
   //    }
   //  )
   //
   //  parse match {
   //    case parser.base.Base.Success(s, _) =>
+  //      println(s)
   //      pprint.pprintln(s, height = 9000, width = 2)
   //
   //    case parser.base.Base.NoSuccess(s, _) =>
   //      throw new RuntimeException(s)
   //  }
 
-  val parse = parser.base.Base.parse(
-    parser.program.Program.apply,
-    {
-      val io = Source.fromFile(Path.of("demo/main.zapl").toUri)
-      val source = io.mkString
-      io.close()
-      source
-    }
-  )
+  //
+  //  object CustomParser {
+  //
+  //    trait Parser[T]
+  //
+  //    trait Result
+  //
+  //    case class Success(result: String, rest: String) extends Result
+  //
+  //    case class Failure(msg: String) extends Result
+  //
+  //    case class DefaultParser(input: String) {
+  //
+  //      def lowerAlpha: Parser[String] = """[a-z]""".r
+  //
+  //      def upperAlpha: Parser[String] = """[A-Z]""".r
+  //
+  //      def alpha: Parser[String] = or(lowerAlpha, upperAlpha)
+  //
+  //      def or(a: Any, b: Any): Parser[Any] = {
+  //
+  //      }
+  //    }
+  //
+  //  }
+  //
+  //  CustomParser.DefaultParser("a")
 
-  parse match {
-    case parser.base.Base.Success(s, _) =>
-      pprint.pprintln(s, height = 9000, width = 2)
-
-    case parser.base.Base.NoSuccess(s, _) =>
-      throw new RuntimeException(s)
-  }
 }
