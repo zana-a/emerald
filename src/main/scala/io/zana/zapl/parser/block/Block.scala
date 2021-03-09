@@ -17,7 +17,7 @@ object Block extends Parsable[Structure] {
       LineComment.apply
         | Variable.apply
         | Call.apply
-        | Expression.apply
+        //  todo      | Expression.apply
         | Control.apply
     ) <~ END ^^ (values => Structure(values))
   }
