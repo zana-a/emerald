@@ -7,7 +7,7 @@ import io.zana.zapl.parser.control.Control
 import io.zana.zapl.parser.expression.Expression
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.util.Parsable
-import io.zana.zapl.parser.variable.Variable
+import io.zana.zapl.parser.variable.{Assign, Variable}
 import io.zana.zapl.structure.block.{Block => Structure}
 
 object Block extends Parsable[Structure] {
@@ -16,8 +16,9 @@ object Block extends Parsable[Structure] {
     DO ~> rep(
       LineComment.apply
         | Variable.apply
+        | Assign.apply
         | Call.apply
-        //  todo      | Expression.apply
+        | Expression.apply
         | Control.apply
     ) <~ END ^^ (values => Structure(values))
   }
