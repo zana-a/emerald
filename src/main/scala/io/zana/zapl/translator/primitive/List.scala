@@ -14,26 +14,26 @@ object List extends Translatable[primitive.List] {
         result ++ translator
           .primitive
           .String
-          .translate(item.asInstanceOf[primitive.String])
+          .apply(item.asInstanceOf[primitive.String])
 
       case primitive.Integer(_) =>
         result ++ translator
           .primitive
           .Integer
-          .translate(item.asInstanceOf[primitive.Integer])
+          .apply(item.asInstanceOf[primitive.Integer])
 
       case primitive.Boolean(_) =>
         result ++ translator
           .primitive
           .Boolean
-          .translate(item.asInstanceOf[primitive.Boolean])
+          .apply(item.asInstanceOf[primitive.Boolean])
 
       case primitive.List(_) =>
         helper(item.asInstanceOf[primitive.List], result) ++ result
     }
   }
 
-  override def translate(structure: primitive.List): String = {
+  override def apply(structure: primitive.List): String = {
     helper(structure).toString
   }
 }

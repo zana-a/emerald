@@ -5,6 +5,6 @@ import io.zana.zapl.translator.Translatable
 
 object Boolean extends Translatable[primitive.Boolean] {
 
-  override def translate(structure: primitive.Boolean): String =
+  override def apply(structure: primitive.Boolean): String =
     structure.value.toString
 }

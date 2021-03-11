@@ -6,9 +6,9 @@ import io.zana.zapl.{translator, structure => structures}
 
 object Module extends Translatable[module.Module] {
 
-  override def translate(structure: module.Module): String = {
+  override def apply(structure: module.Module): String = {
 
-    val name = translator.common.Identifier.translate(structure.name)
+    val name = translator.common.Identifier.apply(structure.name)
 
     val body = {
       val gen = for {
@@ -16,14 +16,14 @@ object Module extends Translatable[module.Module] {
       } yield item match {
         case comment: structures.comment.LineComment =>
           translator.comment.LineComment
-            .translate(comment)
+            .apply(comment)
 
         case function: structures.function.Function =>
           translator.function.Function
-            .translate(function)
+            .apply(function)
 
         case module: structures.module.Module =>
-          translate(module)
+          apply(module)
 
         case e => s"??? translator not implemented for $e"
       }

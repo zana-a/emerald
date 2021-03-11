@@ -9,5 +9,6 @@ import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Logic extends Parsable[Structure] {
 
-  override def apply: Parser[Structure] = ???
+  // TODO: HARD CODED!
+  override def apply: Parser[Structure] = "true && true" ^^ (s => Structure(s))
 }

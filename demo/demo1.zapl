@@ -1,0 +1,43 @@
+mod Add do
+  def f(): Int = 0
+  def f(a: Int): Int = a
+  #comment
+  def f(a: Int, b: Int): Int = true # a + b
+  def f(a: List<Int>): Int = Enum::sum(a)
+end
+
+Add::f()
+Add::f(2)
+Add::f(1, 4)
+Add::f([1, 2, 3])
+
+mod Conditionals do
+  def lesser(a: Int, b: Int): Boolean = do
+    cond do
+      true => true
+      false => false
+    end
+  end
+
+  def greater(a: Int, b: Int): Boolean = cond do
+    true => true
+    false => false
+  end
+end
+
+mod Looper do
+  def loop(): Any = do
+    loop do
+      true => true
+      false => false
+    end
+  end
+
+  def loop2(): Any = loop do
+    true => true
+    false => false
+  end
+end
+
+Conditionals::lesser(23, 4)
+Looper::loop()

@@ -5,7 +5,7 @@ import io.zana.zapl.{structure => structures}
 
 object Block extends Translatable[structures.block.Block] {
 
-  override def translate(structure: structures.block.Block): String = {
+  override def apply(structure: structures.block.Block): String = {
     val body = for {
       items <- structure.body
     } yield items

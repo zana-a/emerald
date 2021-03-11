@@ -5,7 +5,7 @@ import io.zana.zapl.translator.Translatable
 
 object Static extends Translatable[statics.Static] {
 
-  override def translate(structure: statics.Static): String = {
+  override def apply(structure: statics.Static): String = {
     structure match {
       case statics.Integer => "Int"
       case statics.String => "String"

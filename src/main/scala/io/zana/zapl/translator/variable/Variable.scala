@@ -7,7 +7,7 @@ import io.zana.zapl.translator.primitive.{Primitive => PrimitiveTranslator}
 
 object Variable extends Translatable[variable.Variable] {
 
-  override def translate(structure: variable.Variable): String = {
+  override def apply(structure: variable.Variable): String = {
     val identifier = structure.name match {
       case Identifier(name) => name
     }
@@ -17,28 +17,28 @@ object Variable extends Translatable[variable.Variable] {
     val body = structure.body match {
       case primitive.String(_) =>
         PrimitiveTranslator
-          .translate(structure
+          .apply(structure
             .body
             .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.Integer(_) =>
         PrimitiveTranslator
-          .translate(structure
+          .apply(structure
             .body
             .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.Boolean(_) =>
         PrimitiveTranslator
-          .translate(structure
+          .apply(structure
             .body
             .asInstanceOf[primitive.Primitive]
           )
 
       case primitive.List(_) =>
         PrimitiveTranslator
-          .translate(structure
+          .apply(structure
             .body
             .asInstanceOf[primitive.Primitive]
           )

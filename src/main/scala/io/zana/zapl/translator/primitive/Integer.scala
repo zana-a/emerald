@@ -5,6 +5,6 @@ import io.zana.zapl.translator.Translatable
 
 object Integer extends Translatable[primitive.Integer] {
 
-  def translate(structure: primitive.Integer): String =
+  def apply(structure: primitive.Integer): String =
     structure.value.toString
 }

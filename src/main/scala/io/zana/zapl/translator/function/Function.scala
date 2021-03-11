@@ -10,8 +10,8 @@ import io.zana.zapl.{translator, structure => structures}
 
 object Function extends Translatable[structures.function.Function] {
 
-  override def translate(structure: structures.function.Function): String = {
-    val name = translator.common.Identifier.translate(structure.name)
+  override def apply(structure: structures.function.Function): String = {
+    val name = translator.common.Identifier.apply(structure.name)
 
     val param = for {
       param <- structure.params
@@ -19,26 +19,26 @@ object Function extends Translatable[structures.function.Function] {
       translator
         .common
         .Identifier
-        .translate(param.name)
-    }: ${translator.statics.Static.translate(param.static)}"
+        .apply(param.name)
+    }: ${translator.statics.Static.apply(param.static)}"
 
-    val `return` = translator.statics.Static.translate(structure.static)
+    val `return` = translator.statics.Static.apply(structure.static)
 
     val body: String = structure.body match {
       case primitive: Primitive =>
-        translator.primitive.Primitive.translate(primitive)
+        translator.primitive.Primitive.apply(primitive)
 
       case functionCall: Function =>
-        translator.call.FunctionCall.translate(functionCall)
+        translator.call.FunctionCall.apply(functionCall)
 
       case moduleCall: Module =>
-        translator.call.ModuleCall.translate(moduleCall)
+        translator.call.ModuleCall.apply(moduleCall)
 
       case block: Block =>
-        translator.block.Block.translate(block)
+        translator.block.Block.apply(block)
 
       case identifier: Identifier =>
-        translator.common.Identifier.translate(identifier)
+        translator.common.Identifier.apply(identifier)
 
       case e => s"??? not implemented for $e"
     }
