@@ -9,8 +9,5 @@ import io.zana.zapl.structure.primitive
 
 object Arithmetic extends Parsable[Any] {
 
-  def apply: Parser[Any] = {
-    "dummy"
-  }
-
+  def apply: Parser[Any] = ???
 }

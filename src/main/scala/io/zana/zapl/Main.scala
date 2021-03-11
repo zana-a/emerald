@@ -23,5 +23,4 @@ object Main extends App {
     case parser.base.Base.NoSuccess(s, _) =>
       throw new RuntimeException(s)
   }
-
 }

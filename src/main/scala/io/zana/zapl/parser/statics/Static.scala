@@ -11,5 +11,6 @@ object Static extends Parsable[Structure] {
       | predef.String.apply
       | predef.Boolean.apply
       | predef.List.apply
+      | predef.Any.apply
     )
 }
