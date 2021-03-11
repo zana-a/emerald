@@ -1,4 +1,4 @@
-package io.zana.zapl.structure.common
+package io.zana.zapl.structure.identifier
 
 import io.zana.zapl.structure.call.CallBody
 import io.zana.zapl.structure.function.FunctionBody

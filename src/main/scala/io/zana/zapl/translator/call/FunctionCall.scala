@@ -12,7 +12,7 @@ object FunctionCall extends Translatable[structures.call.Function] {
     val params = for {
       param <- structure.params
     } yield param match {
-      case identifier: structures.common.Identifier =>
+      case identifier: structures.identifier.Identifier =>
         translator.common.Identifier.apply(identifier)
 
       case primitive: structures.primitive.Primitive =>

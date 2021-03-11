@@ -1,6 +1,6 @@
 package io.zana.zapl.test.parser.variable
 
-import io.zana.zapl.structure.common.Identifier
+import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.{primitive, statics}
 import io.zana.zapl.test.parser.Tester
 import junit.framework.TestSuite

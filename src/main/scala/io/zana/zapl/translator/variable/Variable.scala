@@ -1,6 +1,6 @@
 package io.zana.zapl.translator.variable
 
-import io.zana.zapl.structure.common.Identifier
+import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.{primitive, variable}
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.translator.primitive.{Primitive => PrimitiveTranslator}

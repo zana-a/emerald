@@ -1,3 +1,8 @@
 package io.zana.zapl.structure.primitive
 
-case class List(value: scala.List[Primitive]) extends Primitive
+import io.zana.zapl.structure.call.CallBody
+
+// TODO: WHY CALLBODY????
+
+case class List(value: scala.List[CallBody]) extends Primitive
+

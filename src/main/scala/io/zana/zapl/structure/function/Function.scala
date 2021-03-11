@@ -1,7 +1,7 @@
 package io.zana.zapl.structure.function
 
 import io.zana.zapl.structure.Structure
-import io.zana.zapl.structure.common.Identifier
+import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.module.ModuleBody
 import io.zana.zapl.structure.statics.Static
 
