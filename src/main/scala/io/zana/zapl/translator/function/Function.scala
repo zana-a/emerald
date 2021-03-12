@@ -3,8 +3,8 @@ package io.zana.zapl.translator.function
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.call.{
-  Function => FunctionCall,
-  Module => ModuleCall
+  FunctionCall => FunctionCall,
+  ModuleCall => ModuleCall
 }
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive.Primitive

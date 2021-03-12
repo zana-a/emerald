@@ -5,7 +5,7 @@ import io.zana.zapl.parser.identifier.Identifier
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.primitive.Primitive
 import io.zana.zapl.parser.util.Parsable
-import io.zana.zapl.structure.call.{CallBody, Function => Structure}
+import io.zana.zapl.structure.call.{CallBody, FunctionCall => Structure}
 
 object Function extends Parsable[Structure] {
 

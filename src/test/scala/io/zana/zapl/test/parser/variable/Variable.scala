@@ -145,7 +145,7 @@ class Variable extends Base {
       "let a: List<Any> = function()",
       Tools.Assign.structure(
         Identifier("a"),
-        call.Function(
+        call.FunctionCall(
           Identifier("function"),
           List()
         )
@@ -156,11 +156,11 @@ class Variable extends Base {
       "a = A::function()",
       Tools.Assign.structure(
         Identifier("a"),
-        call.Module(
+        call.ModuleCall(
           List(
             Identifier("A"),
           ),
-          call.Function(
+          call.FunctionCall(
             Identifier("function"),
             List()
           )

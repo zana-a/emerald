@@ -146,7 +146,7 @@ class Primitive extends Base {
         |[hello()]
         |""".stripMargin,
       primitive.List(List(
-        call.Function(
+        call.FunctionCall(
           identifier.Identifier("hello"),
           List()
         ))
@@ -158,11 +158,11 @@ class Primitive extends Base {
         |[A::hello()]
         |""".stripMargin,
       primitive.List(List(
-        call.Module(
+        call.ModuleCall(
           List(
             identifier.Identifier("A")
           ),
-          call.Function(
+          call.FunctionCall(
             identifier.Identifier("hello"),
             List()
           )

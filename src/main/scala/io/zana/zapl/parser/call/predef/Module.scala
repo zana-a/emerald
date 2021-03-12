@@ -4,7 +4,7 @@ import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.identifier.Identifier
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.parser.util.Parsable
-import io.zana.zapl.structure.call.{Module => Structure}
+import io.zana.zapl.structure.call.{ModuleCall => Structure}
 
 object Module extends Parsable[Structure] {
 
