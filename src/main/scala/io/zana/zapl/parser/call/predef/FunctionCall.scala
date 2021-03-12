@@ -7,12 +7,12 @@ import io.zana.zapl.parser.primitive.Primitive
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.structure.call.{CallBody, FunctionCall => Structure}
 
-object Function extends Parsable[Structure] {
+object FunctionCall extends Parsable[Structure] {
 
   def params: Parser[List[CallBody]] = repsep(
     Primitive.apply
       | this.apply
-      | Module.apply
+      | ModuleCall.apply
       | Identifier.apply,
     COMMA
   )
