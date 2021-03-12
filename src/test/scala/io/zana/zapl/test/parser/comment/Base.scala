@@ -2,7 +2,7 @@ package io.zana.zapl.test.parser.comment
 
 import junit.framework.TestSuite
 
-trait Base extends TestSuite {
+trait Base {
 
   object Tools {
 

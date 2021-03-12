@@ -6,5 +6,5 @@ import io.zana.zapl.translator.Translatable
 object LineComment extends Translatable[comment.LineComment] {
 
   override def apply(structure: comment.LineComment): String =
-    "//" ++ structure.comment
+    "//" + structure.comment
 }

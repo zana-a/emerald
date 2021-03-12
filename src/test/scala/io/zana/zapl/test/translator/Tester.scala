@@ -4,7 +4,7 @@ import org.junit.Assert._
 
 object Tester {
 
-  def tester(expected: String, result: String): Unit = {
+  def apply(expected: String, result: String): Unit = {
     assertEquals(expected, result)
   }
 }
