@@ -1,31 +1,35 @@
 package io.zana.zapl
 
+import io.zana.zapl.standard.Error
 import io.zana.zapl.structure.program.Program
 
-import java.io.FileNotFoundException
 import java.nio.file.Path
 import scala.io.Source
 
-case class Compiler(input: String, display: Boolean = false) {
+case class Compiler(args: Seq[String], display: Boolean = false) {
 
-  private val path: Path = Path.of(input)
+  private val path: Path = if (args.nonEmpty) {
+    Path.of(args.head)
+  } else {
+    Error(Error.Custom("No input path was given."))
+  }
 
   private val source: String = {
-    val io = Source.fromFile(path.toUri)
     if (path.toFile.exists) {
+      val io = Source.fromFile(path.toUri)
       val source = io.mkString
       io.close()
       source
     } else {
-      throw new FileNotFoundException(s"The path ($path) could not be found.")
+      Error(Error.FileNotFound(path.toString))
     }
   }
 
   private val ast: Program = {
     parser.base.Base.parse(parser.program.Program.apply, source) match {
       case parser.base.Base.Success(s, _) => s
-      case parser.base.Base.Failure(s, _) => throw new RuntimeException(s)
-      case parser.base.Base.Error(s, _) => throw new RuntimeException(s)
+      case parser.base.Base.Failure(s, _) => Error(Error.UnknownSyntax(s))
+      case parser.base.Base.Error(s, _) => Error(Error.UnknownSyntax(s))
     }
   }
 
