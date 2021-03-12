@@ -7,5 +7,5 @@ import io.zana.zapl.structure.primitive.{String => Structure}
 object String extends Parsable[Structure] {
 
   override def apply: Parser[Structure] =
-    stringLiteral ^^ (result => Structure(result))
+    stringLiteral ^^ (s => Structure(s))
 }
