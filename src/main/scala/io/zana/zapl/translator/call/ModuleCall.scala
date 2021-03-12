@@ -10,7 +10,7 @@ object ModuleCall extends Translatable[structures.call.Module] {
     val modules = {
       val identifiers = for {
         identifier <- structure.modules
-      } yield translator.common.Identifier.apply(identifier)
+      } yield translator.identifier.Identifier.apply(identifier)
 
       for {
         identifier <- identifiers

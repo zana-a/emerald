@@ -14,13 +14,13 @@ import io.zana.zapl.{translator, structure => structures}
 object Function extends Translatable[structures.function.Function] {
 
   override def apply(structure: structures.function.Function): String = {
-    val name = translator.common.Identifier.apply(structure.name)
+    val name = translator.identifier.Identifier.apply(structure.name)
 
     val param = for {
       param <- structure.params
     } yield s"${
       translator
-        .common
+        .identifier
         .Identifier
         .apply(param.name)
     }: ${translator.statics.Static.apply(param.static)}"
@@ -41,7 +41,7 @@ object Function extends Translatable[structures.function.Function] {
         translator.block.Block.apply(block)
 
       case identifier: Identifier =>
-        translator.common.Identifier.apply(identifier)
+        translator.identifier.Identifier.apply(identifier)
 
       case e => s"??? not implemented for $e"
     }

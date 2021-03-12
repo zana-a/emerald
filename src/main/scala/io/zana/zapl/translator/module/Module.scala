@@ -8,7 +8,7 @@ object Module extends Translatable[module.Module] {
 
   override def apply(structure: module.Module): String = {
 
-    val name = translator.common.Identifier.apply(structure.name)
+    val name = translator.identifier.Identifier.apply(structure.name)
 
     val body = {
       val gen = for {

@@ -1,4 +1,4 @@
-package io.zana.zapl.translator.common
+package io.zana.zapl.translator.identifier
 
 import io.zana.zapl.structure.identifier
 import io.zana.zapl.translator.Translatable
