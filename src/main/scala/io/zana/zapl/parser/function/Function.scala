@@ -24,7 +24,7 @@ object Function extends Parsable[Structure] {
       Primitive.apply
         | Call.apply
         | Identifier.apply
-        | Expression.apply
+        //        | Expression.apply
         | Block.apply
         | Control.apply
       )
