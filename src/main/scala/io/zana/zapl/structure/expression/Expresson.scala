@@ -17,7 +17,7 @@ case class Pair(sym: String, e1: Expression, e2: Expression) extends Expression
 
 trait Call extends Expression
 
-case class FunctionCall(name: Identifier, params: List[CallBody]) extends Call
-
-case class ModuleCall(modules: List[Identifier], caller: FunctionCall)
-  extends Call
+//case class FunctionCall(name: Identifier, params: List[CallBody]) extends Call
+//
+//case class ModuleCall(modules: List[Identifier], caller: FunctionCall)
+//  extends Call

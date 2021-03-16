@@ -21,11 +21,11 @@ object Function extends Parsable[Structure] {
     val params = LEFT_PAREN ~> repsep(Parameter.apply, COMMA) <~ RIGHT_PAREN
 
     val body: Parser[FunctionBody] = EQ ~> (
-      Primitive.apply
+      Expression.apply
+        | Primitive.apply
         | Block.apply
         | Call.apply
         | Identifier.apply
-        | Expression.apply
         | Control.apply
       )
 

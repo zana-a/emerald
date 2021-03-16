@@ -6,7 +6,7 @@ import io.zana.zapl.parser.expression.predef._
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.parser
 import io.zana.zapl.structure
-import io.zana.zapl.structure.expression.{Call, Expression, FunctionCall, Literal, ModuleCall, Pair, Single, Variable}
+import io.zana.zapl.structure.expression.{Call, Expression, Pair, Single, Variable}
 
 object Expression extends Parsable[Expression] {
 
@@ -19,12 +19,7 @@ object Expression extends Parsable[Expression] {
   }
 
   def call: Parser[Call] =
-    parser.call.Call.apply ^^ {
-      case structure.call.FunctionCall(name, params) =>
-        FunctionCall(name, params)
-      case structure.call.ModuleCall(modules, caller) =>
-        ModuleCall(modules, FunctionCall(caller.name, caller.params))
-    }
+    parser.call.Call.apply
 
   def relop: Parser[(Expression, Expression) => Expression] =
     ("==" | "!=" | "<=" | "<" | ">=" | ">" | "<=") ^^ {

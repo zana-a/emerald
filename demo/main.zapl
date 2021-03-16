@@ -1,1 +1,1 @@
-def add(a: Int, b: Int): Int = a + b
+def add(a: Int, b: Int): Int = 1 + 2
