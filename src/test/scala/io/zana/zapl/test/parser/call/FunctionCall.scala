@@ -1,6 +1,6 @@
 package io.zana.zapl.test.parser.call
 
-import io.zana.zapl.structure.expression.{Literal, Pair}
+import io.zana.zapl.structure.expression.Pair
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester

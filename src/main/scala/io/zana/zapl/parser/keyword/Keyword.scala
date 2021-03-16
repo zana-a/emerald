@@ -88,6 +88,10 @@ object Keyword {
 
   val EQ = "="
 
+  val MODULO = "%"
+
+  val BANG = "!"
+
   def nonSymbol: Parser[String] =
     TRUE | FALSE | DEF | DO | END | COND | LOOP | MOD
 }
