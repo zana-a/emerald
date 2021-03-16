@@ -10,6 +10,6 @@ import io.zana.zapl.parser.util.Parsable
 object Command extends Parsable[Any] {
 
   override def apply: Parser[Any] =
-    Identifier.apply | Primitive.apply | Expression.apply | Block.apply
+    Expression.apply | Identifier.apply | Primitive.apply | Block.apply
 
 }

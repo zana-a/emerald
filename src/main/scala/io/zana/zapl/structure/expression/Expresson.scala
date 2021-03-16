@@ -7,8 +7,6 @@ import io.zana.zapl.structure.identifier.Identifier
 
 trait Expression extends FunctionBody with BlockBody with CallBody
 
-case class Literal(x: Int) extends Expression
-
 case class Variable(name: String) extends Expression
 
 case class Single(sym: String, e: Expression) extends Expression

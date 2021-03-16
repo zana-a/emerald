@@ -81,4 +81,38 @@ class Module extends Base {
       )
     )
   }
+
+  @Test
+  def withNestedModule(): Unit = {
+    Tester(
+      Tools.parser,
+      """
+        |mod A do
+        |
+        |  mod B do
+        |
+        |    mod C do
+        |
+        |    end
+        |
+        |  end
+        |
+        |end
+        |""".stripMargin,
+      Tools.structure(
+        Identifier("A"),
+        List(
+          Tools.structure(
+            Identifier("B"),
+            List(
+              Tools.structure(
+                Identifier("C"),
+                List()
+              )
+            )
+          )
+        )
+      )
+    )
+  }
 }
