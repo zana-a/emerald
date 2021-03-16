@@ -1,9 +1,6 @@
-def f(): Any = cond do
-  true => false
-  false => loop do
-    _ => 1+ 2
-  end
-  _ => do
-    true
-  end
+def add(a: Int, b: Int): Int = a + b
+
+def fib(n: Int): Int = cond do
+  n < 1 => 1
+  _ => fib(n - 1) + fib(n - 2)
 end
