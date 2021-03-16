@@ -3,6 +3,7 @@ package io.zana.zapl.test.parser.function
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.statics
 import io.zana.zapl.structure.call
+import io.zana.zapl.structure.expression.{Pair, Single}
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
@@ -10,7 +11,7 @@ import org.junit.Test
 class Function extends Base {
 
   @Test
-  def simple(): Unit = {
+  def single(): Unit = {
     Tester(
       Tools.Function.parse,
       "def f(): String = \"\"",
@@ -94,9 +95,67 @@ class Function extends Base {
     )
   }
 
+  @Test
+  def expression(): Unit = {
+    Tester(
+      Tools.Function.parse,
+      "def f(): Int = 1",
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Integer,
+        primitive.Integer(1)
+      )
+    )
+    Tester(
+      Tools.Function.parse,
+      "def f(): Int = -1",
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Integer,
+        Single("-", primitive.Integer(1))
+      )
+    )
+    Tester(
+      Tools.Function.parse,
+      "def f(): Int = 1 + 2",
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Integer,
+        Pair(
+          "+",
+          primitive.Integer(1),
+          primitive.Integer(2)
+        )
+      )
+    )
+    Tester(
+      Tools.Function.parse,
+      "def f(): Int = (1 / 2 + 2)",
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Integer,
+        Pair(
+          "+",
+          Pair(
+            "/",
+            primitive.Integer(1),
+            primitive.Integer(2),
+          ),
+          primitive.Integer(2)
+        )
+      )
+    )
+  }
+
+
   //TODO:
-  // 1. def with expression
-  // 2. def with block
-  // 2. def with control
-  // 2. def with block
+  // 1. def with expression | done
+  // 2. def with block      |
+  // 3. def with control    |
+  // 4. def with block      |
+  // 5. def with call       | done
 }
