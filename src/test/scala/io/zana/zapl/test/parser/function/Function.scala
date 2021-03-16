@@ -4,6 +4,7 @@ import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.statics
 import io.zana.zapl.structure.call
+import io.zana.zapl.structure.control.{Cond, Loop}
 import io.zana.zapl.structure.expression.{Pair, Single}
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester
@@ -127,10 +128,39 @@ class Function extends Base {
     )
   }
 
-  //TODO:
-  // 1. def with expression | done
-  // 2. def with block      | done
-  // 3. def with control    |
-  // 4. def with block      |
-  // 5. def with call       | done
+  @Test
+  def control(): Unit = {
+    Tester(
+      Tools.Function.parse,
+      """
+        |def f(): Any = cond do
+        |end
+        |""".stripMargin,
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Any,
+        Cond(
+          None,
+          None,
+        )
+      )
+    )
+    Tester(
+      Tools.Function.parse,
+      """
+        |def f(): Any = loop do
+        |end
+        |""".stripMargin,
+      Tools.Function.structure(
+        Identifier("f"),
+        List(),
+        statics.Any,
+        Loop(
+          None,
+          None,
+        )
+      )
+    )
+  }
 }
