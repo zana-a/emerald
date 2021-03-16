@@ -1,5 +1,6 @@
 package io.zana.zapl.test.parser.control
 
+import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.control
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.structure.control.Arm
@@ -224,11 +225,153 @@ class Cond extends Base {
     )
   }
 
+  @Test
+  def primitives(): Unit = {
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => true
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            primitive.Boolean(true)
+          )
+        ),
+      )
+    )
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => 1
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            primitive.Integer(1)
+          )
+        ),
+      )
+    )
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => "demo"
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            primitive.String("\"demo\"")
+          )
+        ),
+      )
+    )
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => []
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            primitive.List(List())
+          )
+        ),
+      )
+    )
+  }
+
+  @Test
+  def block(): Unit = {
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => do
+        |
+        |  end
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            Block(List())
+          )
+        ),
+      )
+    )
+  }
+
+  @Test
+  def controls(): Unit = {
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => cond do
+        |  end
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            control.Cond(
+              None,
+              None
+            )
+          )
+        ),
+      )
+    )
+    Tester(
+      parser,
+      """
+        |cond do
+        |  _ => loop do
+        |
+        |  end
+        |end
+        |""".stripMargin,
+      control.Cond(
+        None,
+        Some(
+          Arm(
+            primitive.Boolean(true),
+            control.Loop(
+              None,
+              None
+            )
+          )
+        ),
+      )
+    )
+  }
+
   // TODO:
   // 1. command an expression | done
-  // 2. command an identifier |
-  // 3. command a primitive
-  // 4. command a block
-  // 5. command a control
-  // 6. command a call
+  // 2. command an identifier | done
+  // 3. command a primitive   | done
+  // 4. command a block       | done
+  // 5. command a control     |
+  // 6. command a call        |
 }
