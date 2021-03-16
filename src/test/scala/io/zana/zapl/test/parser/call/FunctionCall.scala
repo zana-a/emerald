@@ -1,5 +1,6 @@
 package io.zana.zapl.test.parser.call
 
+import io.zana.zapl.structure.expression.{Literal, Pair}
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester
@@ -32,6 +33,32 @@ class FunctionCall extends Base {
           primitive.String("\"string\""),
           primitive.Integer(123),
           primitive.List(List()),
+        )
+      )
+    )
+    Tester(
+      Tools.FunctionCall.parser,
+      "a(1 + 2)",
+      Tools.FunctionCall.structure(
+        Identifier("a"),
+        List(
+          Pair("+", primitive.Integer(1), primitive.Integer(2))
+        )
+      )
+    )
+    Tester(
+      Tools.FunctionCall.parser,
+      "a((1 + 2) * 2)",
+      Tools.FunctionCall.structure(
+        Identifier("a"),
+        List(
+          Pair("*",
+            Pair("+",
+              primitive.Integer(1),
+              primitive.Integer(2)
+            ),
+            primitive.Integer(2)
+          )
         )
       )
     )

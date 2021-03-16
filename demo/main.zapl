@@ -1,1 +1,7 @@
-let a:String = "\t\n"
+def fib(n: Int): Int = cond do
+  n <= 1 => 1
+  _ => do
+    # fib(n - 2) + fib(n - 1)
+    true
+  end
+end
