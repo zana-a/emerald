@@ -5,6 +5,7 @@ import io.zana.zapl.parser.call.Call
 import io.zana.zapl.parser.expression.predef._
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.parser
+import io.zana.zapl.parser.primitive
 import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure
 import io.zana.zapl.structure.expression.{Call, Expression, Pair, Single}
@@ -84,6 +85,7 @@ object Expression extends Parsable[Expression] {
     singular
       | call
       | number
+      | primitive.predef.String.apply
       | variable
       | LEFT_PAREN ~> expr <~ RIGHT_PAREN
     )

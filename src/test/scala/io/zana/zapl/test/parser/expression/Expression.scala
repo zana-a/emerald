@@ -84,6 +84,15 @@ class Expression extends Base {
   }
 
   @Test
+  def concat(): Unit = {
+    Tester(
+      Tools.parse,
+      "\"a\" + \"b\"",
+      Pair("+", primitive.String("\"a\""), primitive.String("\"b\""))
+    )
+  }
+
+  @Test
   def logic(): Unit = {
     Tester(
       Tools.parse,
