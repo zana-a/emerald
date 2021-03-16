@@ -7,5 +7,5 @@ import io.zana.zapl.structure.expression.{Expression => Structure}
 
 object Guard extends Parsable[Structure] {
 
-  override def apply: Parser[Structure] = ??? // TODO :Expression.apply
+  override def apply: Parser[Structure] = Expression.apply
 }

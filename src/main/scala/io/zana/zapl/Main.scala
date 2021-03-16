@@ -3,10 +3,10 @@ package io.zana.zapl
 object Main extends App {
   //  Compiler(args, display = true)
   println(parser.base.Base.parse(
-    parser.expression.Expression.expr,
-    "fib(1) - 1"
+    parser.function.Function.apply,
+    """
+      |def add(a: Int, b: Int): Int = a + b
+      |""".stripMargin
   ))
-
-  1 + Int.box(1)
 }
 

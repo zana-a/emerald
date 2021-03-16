@@ -6,23 +6,27 @@ import io.zana.zapl.parser.expression.predef._
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.parser
 import io.zana.zapl.structure
-import io.zana.zapl.structure.expression.{Expression => Structure}
+import io.zana.zapl.structure.expression.{Call, Expression, FunctionCall, Literal, ModuleCall, Pair, Single, Variable}
 
-object Expression extends Parsable[Any] {
+object Expression extends Parsable[Expression] {
 
-  def number: Parser[Literal] = wholeNumber ^^ (n => Literal(Conversion.toInt(n)))
+  def number: Parser[Expression] = wholeNumber ^^ (n => structure.primitive.Integer(Conversion.toInt(n)))
 
-  def variable: Parser[Variable] = ident ^^ (i => Variable(i))
+  def variable: Parser[Expression] = ident ^^ {
+    case "true" => structure.primitive.Boolean(true)
+    case "false" => structure.primitive.Boolean(false)
+    case i => Variable(i)
+  }
 
-  def call: Parser[predef.Call] =
+  def call: Parser[Call] =
     parser.call.Call.apply ^^ {
       case structure.call.FunctionCall(name, params) =>
-        predef.FunctionCall(name, params)
+        FunctionCall(name, params)
       case structure.call.ModuleCall(modules, caller) =>
-        predef.ModuleCall(modules, caller.asInstanceOf[predef.FunctionCall])
+        ModuleCall(modules, FunctionCall(caller.name, caller.params))
     }
 
-  def relop: Parser[(Expr, Expr) => Expr] =
+  def relop: Parser[(Expression, Expression) => Expression] =
     ("==" | "!=" | "<=" | "<" | ">=" | ">" | "<=") ^^ {
       case "==" => (e1, e2) => Pair("==", e1, e2)
       case "!=" => (e1, e2) => Pair("!=", e1, e2)
@@ -32,41 +36,41 @@ object Expression extends Parsable[Any] {
       case ">" => (e1, e2) => Pair(">", e1, e2)
     }
 
-  def addop: Parser[(Expr, Expr) => Expr] = ("+" | "-") ^^ {
+  def addop: Parser[(Expression, Expression) => Expression] = ("+" | "-") ^^ {
     case "+" => (e1, e2) => Pair("+", e1, e2)
     case "-" => (e1, e2) => Pair("-", e1, e2)
   }
 
-  def mulop: Parser[(Expr, Expr) => Expr] =
+  def mulop: Parser[(Expression, Expression) => Expression] =
     ("*" | "/" | "%") ^^ {
       case "*" => (e1, e2) => Pair("*", e1, e2)
       case "/" => (e1, e2) => Pair("/", e1, e2)
       case "%" => (e1, e2) => Pair("%", e1, e2)
     }
 
-  def negop: Parser[Expr => Expr] = "-" ^^ (_ => e => Single("-", e))
+  def negop: Parser[Expression => Expression] = "-" ^^ (_ => e => Single("-", e))
 
-  def andop: Parser[(Expr, Expr) => Expr] = "&&" ^^ (_ => (e1, e2) => Pair("&&", e1, e2))
+  def andop: Parser[(Expression, Expression) => Expression] = "&&" ^^ (_ => (e1, e2) => Pair("&&", e1, e2))
 
-  def orop: Parser[(Expr, Expr) => Expr] = "||" ^^ (_ => (e1, e2) => Pair("||", e1, e2))
+  def orop: Parser[(Expression, Expression) => Expression] = "||" ^^ (_ => (e1, e2) => Pair("||", e1, e2))
 
-  def notop: Parser[Expr => Expr] = "!" ^^ (_ => e => Single("!", e))
+  def notop: Parser[Expression => Expression] = "!" ^^ (_ => e => Single("!", e))
 
-  def expr: Parser[Expr] = chainl1(orTerm, orTerm, orop)
+  def expr: Parser[Expression] = chainl1(orTerm, orTerm, orop)
 
-  def orTerm: Parser[Expr] = chainl1(andTerm, andTerm, andop)
+  def orTerm: Parser[Expression] = chainl1(andTerm, andTerm, andop)
 
-  def andTerm: Parser[Expr] = chainl1(relTerm, relTerm, relop)
+  def andTerm: Parser[Expression] = chainl1(relTerm, relTerm, relop)
 
-  def relTerm: Parser[Expr] = chainl1(addTerm, addTerm, addop)
+  def relTerm: Parser[Expression] = chainl1(addTerm, addTerm, addop)
 
-  def addTerm: Parser[Expr] = chainl1(factor, factor, mulop)
+  def addTerm: Parser[Expression] = chainl1(factor, factor, mulop)
 
-  def singular: Parser[Expr] = (negop | notop) ~ factor ^^ {
+  def singular: Parser[Expression] = (negop | notop) ~ factor ^^ {
     case f ~ e => f(e)
   }
 
-  def factor: Parser[Expr] = singular | call | number | variable | "(" ~> expr <~ ")"
+  def factor: Parser[Expression] = singular | call | number | variable | "(" ~> expr <~ ")"
 
-  override def apply: Parser[Any] = expr
+  override def apply: Parser[Expression] = expr
 }

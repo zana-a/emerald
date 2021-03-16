@@ -1,6 +1,6 @@
 package io.zana.zapl.structure.call
 
-import io.zana.zapl.parser.expression.predef.Expr
+import io.zana.zapl.structure.expression.Expression
 import io.zana.zapl.structure.identifier.Identifier
 
 case class FunctionCall(name: Identifier, params: List[CallBody])

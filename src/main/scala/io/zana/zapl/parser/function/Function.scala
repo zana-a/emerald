@@ -22,10 +22,10 @@ object Function extends Parsable[Structure] {
 
     val body: Parser[FunctionBody] = EQ ~> (
       Primitive.apply
+        | Block.apply
         | Call.apply
         | Identifier.apply
-        //        | Expression.apply
-        | Block.apply
+        | Expression.apply
         | Control.apply
       )
 

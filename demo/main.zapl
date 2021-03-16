@@ -1,1 +1,1 @@
-let a:String = "\t\n"
+def add(a: Int, b: Int): Int = a + b
