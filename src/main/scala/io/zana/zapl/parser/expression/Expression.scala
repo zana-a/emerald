@@ -5,6 +5,7 @@ import io.zana.zapl.parser.call.Call
 import io.zana.zapl.parser.expression.predef._
 import io.zana.zapl.parser.util.Parsable
 import io.zana.zapl.parser
+import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure
 import io.zana.zapl.structure.expression.{Call, Expression, Pair, Single, Variable}
 
@@ -12,13 +13,13 @@ object Expression extends Parsable[Expression] {
 
   def number: Parser[Expression] = wholeNumber ^^ (n => structure.primitive.Integer(Conversion.toInt(n)))
 
-  def variable: Parser[Expression] = ident ^^ {
+  def variable: Parser[Expression] = not(DEF | DO | END | COND | LOOP | MOD) ~> ident ^^ {
     case "true" => structure.primitive.Boolean(true)
     case "false" => structure.primitive.Boolean(false)
     case i => Variable(i)
   }
 
-  def call: Parser[Call] =
+  def call: Parser[Expression] =
     parser.call.Call.apply
 
   def relop: Parser[(Expression, Expression) => Expression] =
@@ -65,7 +66,13 @@ object Expression extends Parsable[Expression] {
     case f ~ e => f(e)
   }
 
-  def factor: Parser[Expression] = singular | call | number | variable | "(" ~> expr <~ ")"
+  def factor: Parser[Expression] = (
+    singular
+      | call
+      | number
+      | variable
+      | "(" ~> expr <~ ")"
+    )
 
   override def apply: Parser[Expression] = expr
 }
