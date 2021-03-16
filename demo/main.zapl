@@ -1,4 +1,9 @@
 def f(): Any = cond do
-
-  _ => do end
+  true => false
+  false => loop do
+    _ => 1+ 2
+  end
+  _ => do
+    true
+  end
 end

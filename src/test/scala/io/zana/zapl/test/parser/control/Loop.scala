@@ -1,27 +1,25 @@
 package io.zana.zapl.test.parser.control
 
 import io.zana.zapl.structure.block.Block
-import io.zana.zapl.structure.control
-import io.zana.zapl.structure.primitive
 import io.zana.zapl.structure.control.Arm
 import io.zana.zapl.structure.expression.Pair
 import io.zana.zapl.structure.identifier.Identifier
-import io.zana.zapl.structure.call
+import io.zana.zapl.structure.{call, control, primitive}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 
-class Cond extends Base {
+class Loop extends Base {
 
   @Test
   def empty(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         None,
       )
@@ -31,15 +29,15 @@ class Cond extends Base {
   @Test
   def arms(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |  true => false
         |  false => true
         |  true && false => true
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         Some(
           List(
             Arm(
@@ -64,13 +62,13 @@ class Cond extends Base {
   @Test
   def defaultArm(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         | _ => true
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -81,13 +79,13 @@ class Cond extends Base {
       )
     )
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         | _ => 1 + 1
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -98,13 +96,13 @@ class Cond extends Base {
       )
     )
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         | _ => 1 == 1
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -119,16 +117,16 @@ class Cond extends Base {
   @Test
   def multiArm(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |  true => false
         |  false => true
         |  true && false => true
         |  _ => false
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         Some(
           List(
             Arm(
@@ -158,13 +156,13 @@ class Cond extends Base {
   @Test
   def identifier(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |  _ => a
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -179,13 +177,13 @@ class Cond extends Base {
   @Test
   def callers(): Unit = {
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |  _ => a()
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -199,13 +197,13 @@ class Cond extends Base {
       )
     )
     Tester(
-      Tools.Cond.parser,
+      Tools.Loop.parser,
       """
-        |cond do
+        |loop do
         |  _ => A::a()
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -230,11 +228,11 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => true
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -247,11 +245,11 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => 1
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -264,11 +262,11 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => "demo"
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -281,11 +279,11 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => []
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -302,13 +300,13 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => do
         |
         |  end
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -325,12 +323,12 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => cond do
         |  end
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -346,12 +344,12 @@ class Cond extends Base {
     Tester(
       parser,
       """
-        |cond do
+        |loop do
         |  _ => loop do
         |  end
         |end
         |""".stripMargin,
-      control.Cond(
+      control.Loop(
         None,
         Some(
           Arm(
@@ -366,3 +364,4 @@ class Cond extends Base {
     )
   }
 }
+
