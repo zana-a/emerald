@@ -1,6 +1,16 @@
-def add(a: Int, b: Int): Int = a + b
+mod Examples do
 
-def fib(n: Int): Int = cond do
-  n < 1 => 1
-  _ => fib(n - 1) + fib(n - 2)
+  def add(a: Int, b: Int): Int = a + b
+
+  def fib(n: Int): Int = cond do
+    n < 1 => 1
+    _ => fib(n - 1) + fib(n - 2)
+  end
+
 end
+
+let addition: Int = Examples::add(1, 2)
+let mut fib_result: Int = Examples::fib(23)
+fib_result = fib_result + 1
+
+

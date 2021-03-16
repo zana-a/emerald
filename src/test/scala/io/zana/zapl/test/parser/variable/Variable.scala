@@ -1,7 +1,9 @@
 package io.zana.zapl.test.parser.variable
 
+import io.zana.zapl.parser.keyword.Keyword._
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.call
+import io.zana.zapl.structure.expression.Pair
 import io.zana.zapl.structure.{primitive, statics}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
@@ -139,7 +141,7 @@ class Variable extends Base {
     )
   }
 
-  def expression(): Unit = {
+  def caller(): Unit = {
     Tester(
       Tools.Variable.parser,
       "let a: List<Any> = function()",
@@ -169,10 +171,33 @@ class Variable extends Base {
     )
   }
 
-  // TODO:
-  // Test for:
-  // 1. Primitives                  | done
-  // 2. Expressions + Function call | incomplete - done
-  // 3. Static                      | done
-
+  @Test
+  def expression(): Unit = {
+    Tester(
+      Tools.Variable.parser,
+      "let a: List<Any> = 1 + 2",
+      Tools.Variable.structure(
+        modifiable = false,
+        Identifier("a"),
+        statics.List(statics.Any),
+        Pair(
+          PLUS,
+          primitive.Integer(1),
+          primitive.Integer(2)
+        )
+      )
+    )
+    Tester(
+      Tools.Assign.parser,
+      "a = 1 + 2",
+      Tools.Assign.structure(
+        Identifier("a"),
+        Pair(
+          PLUS,
+          primitive.Integer(1),
+          primitive.Integer(2)
+        )
+      )
+    )
+  }
 }
