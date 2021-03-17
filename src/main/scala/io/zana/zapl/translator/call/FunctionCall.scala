@@ -1,6 +1,5 @@
 package io.zana.zapl.translator.call
 
-import io.zana.zapl.structure.expression.Expression
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
 

@@ -1,7 +1,7 @@
 package io.zana.zapl.translator.program
 
 import io.zana.zapl.translator.Translatable
-import io.zana.zapl.{translator, structure => structures}
+import io.zana.zapl.{structure => structures}
 
 object Program extends Translatable[structures.program.Program] {
   //  private def helper(structure: structures.program.Program): List[String] = {
