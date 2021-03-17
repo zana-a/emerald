@@ -1,7 +1,7 @@
-package io.zana.zapl
+package io.zana.zapl.standard
 
-import io.zana.zapl.standard.Error
 import io.zana.zapl.structure.program.Program
+import io.zana.zapl.{parser, translator}
 
 import java.nio.file.Path
 import scala.io.Source
@@ -49,5 +49,3 @@ case class Compiler(args: Seq[String], display: Boolean = false) {
     standardOut("Translator", translate)
   }
 }
-
-

@@ -7,14 +7,18 @@ mod Examples do
   end
 
   def fib(n: Int): Int = cond do
-    n < 1 => 1
+    n < 3 => 1
     _ => fib(n - 1) + fib(n - 2)
   end
 
 end
 
-let addition: Int = Examples::add(1, 2)
-let mut fib_result: Int = Examples::fib(23)
+let addition: Int =
+  Examples::add(1, 2)
+
+let mut fib_result: Int =
+  Examples::fib(23)
+
 fib_result = fib_result + 1
 
 print(Examples::hello("Bob"))
