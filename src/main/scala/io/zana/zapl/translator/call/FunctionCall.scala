@@ -1,5 +1,6 @@
 package io.zana.zapl.translator.call
 
+import io.zana.zapl.structure.expression.Expression
 import io.zana.zapl.translator.Translatable
 import io.zana.zapl.{translator, structure => structures}
 
@@ -23,6 +24,9 @@ object FunctionCall extends Translatable[structures.call.FunctionCall] {
 
       case moduleCall: structures.call.ModuleCall =>
         translator.call.ModuleCall.apply(moduleCall)
+
+      case expression: structures.expression.Expression =>
+        translator.expression.Expression.apply(expression)
 
       case e => s"??? translator not implemented for $e"
     }
