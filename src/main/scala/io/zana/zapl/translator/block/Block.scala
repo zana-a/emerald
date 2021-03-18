@@ -20,6 +20,6 @@ object Block extends Translatable[structures.block.Block] {
       //      case e: Control => translator.control.Control(e
     }
 
-    s"{\n\t${body.mkString("\n")}\n}"
+    s"{\n${body.mkString("\n")}\n}"
   }
 }
