@@ -1,3 +1,14 @@
-def fib(n: Int, b: List<String>): Int = do
+let items: List<Any> = [1, 2, 3, "String"]
+let mut counter: Int = 0
 
+loop do
+  Enum::size(items) == counter => do
+    print(items(counter))
+    counter = counter + 1
+    break
+  end
+
+  _ => do
+    print()
+  end
 end

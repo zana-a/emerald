@@ -28,7 +28,7 @@ class FunctionCall extends Base {
       )
     )
     Tester(
-      "a((1+2))",
+      "a(1 + 2)",
       translate(
         parse(
           "a(1 + 2)"

@@ -16,18 +16,21 @@ object Function extends Translatable[structures.function.Function] {
 
     val params =
       for {param <- structure.params}
-        yield s"${translator.identifier.Identifier(param.name)}:" +
+        yield s"${translator.identifier.Identifier(param.name)}:" + " " +
           s"${translator.statics.Static(param.static)}"
 
     val `return` = translator.statics.Static(structure.static)
 
     val body = structure.body match {
       case e: Primitive => translator.primitive.Primitive(e)
+      case e: Identifier => translator.identifier.Identifier(e)
       case e: FunctionCall => translator.call.FunctionCall(e)
       case e: ModuleCall => translator.call.ModuleCall(e)
       case e: Block => translator.block.Block(e)
-      case e: Expression => translator.expression.Expression(e)
-      case e: Identifier => translator.identifier.Identifier(e)
+      case e: Expression =>
+        translator.expression.Expression.sanitise(
+          translator.expression.Expression(e)
+        )
       case e => s"??? not implemented for $e"
     }
 
