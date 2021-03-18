@@ -1,24 +1,3 @@
-mod Examples do
-
-  def add(a: Int, b: Int): Int = a + b
-
-  def hello(name: String): String = do
-    "Hello" + " " + name
-  end
-
-  def fib(n: Int): Int = cond do
-    n < 3 => 1
-    _ => fib(n - 1) + fib(n - 2)
-  end
-
+def another(a: List<Int>): Any = do
+  let a: Int = 2
 end
-
-let addition: Int =
-  Examples::add(1, 2)
-
-let mut fib_result: Int =
-  Examples::fib(23)
-
-fib_result = fib_result + 1
-
-print(Examples::hello("Bob"))
