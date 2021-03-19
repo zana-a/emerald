@@ -23,7 +23,7 @@ object Program extends Translatable[structures.program.Program] {
       case e: Function => translator.function.Function(e)
       case e: Variable => translator.variable.Variable(e)
       //      case e: Assign => translator.variable.Assign(e)
-      //      case e: Control => translator.control.Control(e)
+      case e: Control => translator.control.Control(e)
       case e => throw new Error(s"did not know how to parse ${e}")
     }
 
