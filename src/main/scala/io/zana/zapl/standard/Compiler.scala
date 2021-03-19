@@ -39,13 +39,17 @@ case class Compiler(args: Seq[String], display: Boolean = false) {
 
 
   if (display) {
-    def standardOut(heading: String, input: Any): Unit = {
+    def standardOut(heading: String, input: Any, pretty: Boolean= false): Unit = {
       println(heading + "\n" + "-" * heading.length)
-      pprint.pprintln(input, height = 9000, width = 2)
-      println
+      if (pretty) {
+        pprint.pprintln(input, height = 9000, width = 2)
+      } else {
+        println(input)
+      }
     }
 
-    standardOut("AST", ast)
+    standardOut("AST", ast, pretty = true)
+    println
     standardOut("Translator", translate)
   }
 }

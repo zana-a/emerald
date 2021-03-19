@@ -1,3 +1,6 @@
-cond do
-
+def fib(n: Int): Int = cond do
+  n < 3 => 1
+  _ => fib(n - 1) + fib(n - 2)
 end
+
+fib(12)

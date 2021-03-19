@@ -1,10 +1,12 @@
 package io.zana.zapl.translator.expression
 
 import io.zana.zapl.parser.keyword.Keyword._
+import io.zana.zapl.structure.call.Callable
 import io.zana.zapl.structure.expression.{Pair, Single, Expression => Structure}
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.translator.Translatable
+import io.zana.zapl.translator
 
 object Expression extends Translatable[Structure] {
 
@@ -26,6 +28,8 @@ object Expression extends Translatable[Structure] {
         val l = apply(e1)
         val r = apply(e2)
         LEFT_PAREN + l + " " + sym + " " + r + RIGHT_PAREN
+      case e: Callable => translator.call.Callable(e)
+      case e => throw new Error(s"did not know how to translate $e")
     }
   }
 }
