@@ -12,10 +12,9 @@ object ZParser {
     if (a == b) Success(a)
     else Failure(s"$a != $b")
 
-  def tag[T <: String](a: T)(b: T): Parser[T] = {
+  def tag[T <: String](a: T)(b: T): Parser[T] =
     if (a == b) Success(a)
     else Failure(s"$a != $b")
-  }
 
   def or[T](a: String => Parser[T], b: String => Parser[T])(c: String): Parser[T] =
     a.apply(c) match {
@@ -26,7 +25,6 @@ object ZParser {
       }
     }
 
-  def parse[T](s: String)(p: String => Parser[T]): Parser[T] = {
+  def parse[T](s: String)(p: String => Parser[T]): Parser[T] =
     p.apply(s)
-  }
 }
