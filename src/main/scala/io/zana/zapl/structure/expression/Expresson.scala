@@ -3,7 +3,6 @@ package io.zana.zapl.structure.expression
 import io.zana.zapl.structure.block.BlockBody
 import io.zana.zapl.structure.call.CallBody
 import io.zana.zapl.structure.function.FunctionBody
-import io.zana.zapl.structure.identifier.Identifier
 
 trait Expression extends FunctionBody with BlockBody with CallBody
 

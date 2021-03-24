@@ -1,47 +1,33 @@
 package io.zana.zapl.translator.program
 
+import io.zana.zapl.structure.call.Callable
+import io.zana.zapl.structure.comment.LineComment
+import io.zana.zapl.structure.control.Control
+import io.zana.zapl.structure.expression.{Call, Expression}
+import io.zana.zapl.structure.variable.Assign
+import io.zana.zapl.structure.module.Module
+import io.zana.zapl.structure.function.Function
+import io.zana.zapl.structure.variable.Variable
 import io.zana.zapl.translator.Translatable
-import io.zana.zapl.{translator, structure => structures}
+import io.zana.zapl.translator
+import io.zana.zapl.{structure => structures}
 
 object Program extends Translatable[structures.program.Program] {
-  //  private def helper(structure: structures.program.Program): List[String] = {
-  //    if (structure.statements.isDefined) {
-  //      for {
-  //        statement <- structure.statements
-  //      } yield statement match {
-  //        case variable: structures.variable.Variable =>
-  //          translator.variable.Variable
-  //            .translate(variable)
-  //
-  //        case module: structures.module.Module =>
-  //          translator.module.Module
-  //            .translate(module)
-  //
-  //        case function: structures.function.Function =>
-  //          translator.function.Function
-  //            .translate(function)
-  //
-  //        case functionCall: structures.call.Function =>
-  //          translator.call.FunctionCall
-  //            .translate(functionCall)
-  //
-  //        case moduleCall: structures.call.Module =>
-  //          translator.call.ModuleCall
-  //            .translate(moduleCall)
-  //
-  //        case e => s"??? translator not implemented for $e"
-  //      }
-  //    } else {
-  //      ???
-  //    }
-  //
-  //
-  //  }
+
 
   override def apply(structure: structures.program.Program): String = {
-    """
-      |program goes here
-      |""".stripMargin
+    val result = for {statement <- structure.statements} yield statement match {
+      case e: LineComment => translator.comment.LineComment(e)
+      case e: Module => translator.module.Module(e)
+      case e: Callable => translator.call.Callable(e)
+      case e: Function => translator.function.Function(e)
+      case e: Variable => translator.variable.Variable(e)
+      //      case e: Assign => translator.variable.Assign(e)
+      case e: Control => translator.control.Control(e)
+      case e => throw new Error(s"did not know how to parse ${e}")
+    }
+
+    result.mkString("\n")
   }
 
   //    val result = for {i <- helper(structure)} yield i

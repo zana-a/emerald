@@ -1,8 +1,7 @@
 package io.zana.zapl.translator.call
 
-import io.zana.zapl.structure.call.FunctionCall
-import io.zana.zapl.structure.call.ModuleCall
 import io.zana.zapl.structure.call
+import io.zana.zapl.structure.call.{FunctionCall, ModuleCall}
 import io.zana.zapl.translator
 import io.zana.zapl.translator.Translatable
 

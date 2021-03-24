@@ -6,27 +6,27 @@ import io.zana.zapl.{translator, structure => structures}
 object FunctionCall extends Translatable[structures.call.FunctionCall] {
 
   override def apply(structure: structures.call.FunctionCall): String = {
-    val name = translator.identifier.Identifier
-      .apply(structure.name)
+    val name = translator.identifier.Identifier(structure.name)
 
-    val params = for {
-      param <- structure.params
-    } yield param match {
-      case identifier: structures.identifier.Identifier =>
-        translator.identifier.Identifier.apply(identifier)
-
-      case primitive: structures.primitive.Primitive =>
-        translator.primitive.Primitive.apply(primitive)
-
-      case functionCall: structures.call.FunctionCall =>
-        apply(functionCall)
-
-      case moduleCall: structures.call.ModuleCall =>
-        translator.call.ModuleCall.apply(moduleCall)
-
-      case e => s"??? translator not implemented for $e"
+    val params = {
+      val result = for {param <- structure.params} yield param match {
+        case e: structures.identifier.Identifier =>
+          translator.identifier.Identifier(e)
+        case e: structures.primitive.Primitive =>
+          translator.primitive.Primitive(e)
+        case e: structures.call.FunctionCall =>
+          apply(e)
+        case e: structures.call.ModuleCall =>
+          translator.call.ModuleCall(e)
+        case e: structures.expression.Expression =>
+          translator.expression.Expression.sanitise(
+            translator.expression.Expression(e)
+          )
+        case e => throw new Error(s"translator not implemented for $e")
+      }
+      result.mkString(", ")
     }
 
-    s"$name(${params.mkString(", ")})"
+    s"$name($params)"
   }
 }

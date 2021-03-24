@@ -1,8 +1,8 @@
 package io.zana.zapl.standard
 
 import java.nio.file.Path
-import scala.sys.exit
 import scala.io.AnsiColor._
+import scala.sys.exit
 
 object Error {
 
