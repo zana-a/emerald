@@ -5,8 +5,7 @@ object Main extends App {
   import ZParser._
 
   println(
-    parse(item)("")
+    parse(lowerAlpha | digit | upperAlpha)("A1a")
   )
-
 
 }
