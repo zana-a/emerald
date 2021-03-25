@@ -51,6 +51,8 @@ object ZParser {
     }
   )
 
+  def alpha: Parser[Char] = lowerAlpha | upperAlpha
+
   def digit: Parser[Char] = Parser(
     (in: String) => {
       in.toList match {
