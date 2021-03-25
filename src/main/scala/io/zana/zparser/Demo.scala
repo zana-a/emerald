@@ -6,6 +6,14 @@ import ZParser._
 object Demo extends App {
 
   val res =
-    parse(or(tag("a"), tag("d")))("aef")
+    parse(
+      or(
+        or(
+          tag("hello"),
+          tag("hi")
+        ),
+        tag("bonjour")
+      )
+    )("wagwan")
   print(res)
 }
