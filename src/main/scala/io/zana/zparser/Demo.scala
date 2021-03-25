@@ -7,13 +7,11 @@ object Demo extends App {
 
   val res =
     parse(
-      or(
-        or(
-          tag("hello"),
-          tag("hi")
-        ),
-        tag("bonjour")
-      )
-    )("wagwan")
+      or(tag("let"), tag("a"))
+    )("let a = 2")
+
   print(res)
 }
+
+
+// let a = 2
