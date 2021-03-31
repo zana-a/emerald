@@ -14,7 +14,6 @@ import io.zana.zapl.{structure => structures}
 
 object Program extends Translatable[structures.program.Program] {
 
-
   override def apply(structure: structures.program.Program): String = {
     val result = for {statement <- structure.statements} yield statement match {
       case e: LineComment => translator.comment.LineComment(e)
@@ -27,18 +26,8 @@ object Program extends Translatable[structures.program.Program] {
       case e => throw new Error(s"did not know how to parse ${e}")
     }
 
-    result.mkString("\n")
+    "object Application extends App {\n" +
+      result.mkString("\n") +
+      "\n}"
   }
-
-  //    val result = for {i <- helper(structure)} yield i
-  //
-  //    //todo replace object name with file name possibly
-  //    s"""
-  //       |object Application extends App {
-  //       |
-  //       |${result.mkString("\n")}
-  //       |}
-  //       |"""
-  //      .stripMargin
-  //  }
 }
