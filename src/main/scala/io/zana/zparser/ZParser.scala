@@ -1,6 +1,6 @@
 package io.zana.zparser
 
-object ZParser {
+trait ZParser {
 
   // an object of parser that takes a function `f` that is a higher order
   // function which takes a string and returns an option of parser state. If
@@ -9,11 +9,22 @@ object ZParser {
   case class Parser[T](f: String => Option[(T, String)]) {
     def apply(in: String): Option[(T, String)] = f(in)
 
-
     def |(q: Parser[T]): Parser[T] = Parser(
       (in: String) => parse(this)(in) match {
         case s: Some[_] => s
         case None => parse(q)(in)
+      }
+    )
+
+    def n: Parser[Nothing] = ???
+
+    def ~(q: Parser[T]): Parser[String] = Parser(
+      (in: String) => parse(this)(in) match {
+        case Some(value) => parse(q)(value._2) match {
+          case Some(inner) => Some((value._1.toString + inner._1.toString), inner._2)
+          case None => None
+        }
+        case None => None
       }
     )
   }
@@ -26,6 +37,13 @@ object ZParser {
         case x :: xs => Some((x, xs.mkString))
         case _ => None
       }
+    }
+  )
+
+  def tag(s: String): Parser[String] = Parser(
+    (in: String) => {
+      if (in.contains(s)) Some((s, in.drop(s.length)))
+      else None
     }
   )
 
@@ -64,9 +82,7 @@ object ZParser {
     }
   )
 
-
   // the parse function takes a generic parser `p` and a curried function
   // that takes the parameter in which is the input data by the consumer.
-  def parse[T](p: Parser[T])(in: String): Option[(T, String)] =
-    p(in)
+  def parse[T](p: Parser[T])(in: String): Option[(T, String)] = p(in)
 }

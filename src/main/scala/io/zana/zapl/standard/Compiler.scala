@@ -39,7 +39,7 @@ case class Compiler(args: Seq[String], display: Boolean = false) {
 
 
   if (display) {
-    def standardOut(heading: String, input: Any, pretty: Boolean= false): Unit = {
+    def standardOut(heading: String, input: Any, pretty: Boolean = false): Unit = {
       println(heading + "\n" + "-" * heading.length)
       if (pretty) {
         pprint.pprintln(input, height = 9000, width = 2)
