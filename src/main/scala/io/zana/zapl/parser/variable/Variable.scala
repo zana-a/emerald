@@ -13,7 +13,7 @@ import io.zana.zapl.structure.variable.{Variable => Structure}
 object Variable extends Parsable[Structure] {
 
   override def apply: Parser[Structure] = {
-    (LET ~> opt(MUT)) ~ Identifier.apply ~ (COLON ~> Static.apply) ~
+    (LET ~> opt(MUT)) ~ Identifier.apply ~ opt(COLON ~> Static.apply) ~
       (EQ ~> (Expression.apply | Primitive.apply | Call.apply)) ^^ {
       case Some(_) ~ id ~ static ~ body =>
         Structure(modifiable = true, id, static, body)

@@ -118,7 +118,7 @@ class Program extends Base {
           Variable(
             modifiable = false,
             Identifier("a"),
-            statics.Integer,
+            Some(statics.Integer),
             primitive.Integer(1)
           )
         )
@@ -134,7 +134,7 @@ class Program extends Base {
           Variable(
             modifiable = true,
             Identifier("a"),
-            statics.Integer,
+            Some(statics.Integer),
             primitive.Integer(1)
           )
         )

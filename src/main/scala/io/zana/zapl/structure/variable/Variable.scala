@@ -6,6 +6,6 @@ import io.zana.zapl.structure.program.ProgramBody
 import io.zana.zapl.structure.statics.Static
 
 case class Variable(modifiable: Boolean, name: Identifier,
-                    static: Static, body: Any)
+                    static: Option[Static], body: Any)
   extends BlockBody
     with ProgramBody

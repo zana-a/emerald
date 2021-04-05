@@ -20,7 +20,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.Integer,
+        Some(statics.Integer),
         primitive.Integer(2)
       )
     )
@@ -37,7 +37,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = true,
         Identifier("a"),
-        statics.Integer,
+        Some(statics.Integer),
         primitive.Integer(2)
       )
     )
@@ -65,7 +65,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.Integer,
+        Some(statics.Integer),
         primitive.Integer(1)
       )
     )
@@ -75,7 +75,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.Boolean,
+        Some(statics.Boolean),
         primitive.Boolean(true)
       )
     )
@@ -85,7 +85,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.String,
+        Some(statics.String),
         primitive.String("\"\"")
       )
     )
@@ -95,7 +95,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.List(statics.Integer),
+        Some(statics.List(statics.Integer)),
         primitive.List(List(
           primitive.Integer(1)
         ))
@@ -107,7 +107,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.List(statics.Boolean),
+        Some(statics.List(statics.Boolean)),
         primitive.List(List(
           primitive.Boolean(true)
         ))
@@ -119,7 +119,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.List(statics.String),
+        Some(statics.List(statics.String)),
         primitive.List(List(
           primitive.String("\"\"")
         ))
@@ -131,7 +131,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.List(statics.List(statics.Integer)),
+        Some(statics.List(statics.List(statics.Integer))),
         primitive.List(List(
           primitive.List(List(
             primitive.Integer(1)
@@ -179,7 +179,7 @@ class Variable extends Base {
       Tools.Variable.structure(
         modifiable = false,
         Identifier("a"),
-        statics.List(statics.Any),
+        Some(statics.List(statics.Any)),
         Pair(
           PLUS,
           primitive.Integer(1),
