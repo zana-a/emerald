@@ -4,7 +4,7 @@ import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.statics
 import io.zana.zapl.structure.call
-import io.zana.zapl.structure.control.{Cond, Loop}
+import io.zana.zapl.structure.control.Cond
 import io.zana.zapl.structure.expression.{Pair, Single}
 import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester
@@ -141,22 +141,6 @@ class Function extends Base {
         List(),
         statics.Any,
         Cond(
-          None,
-          None,
-        )
-      )
-    )
-    Tester(
-      Tools.Function.parse,
-      """
-        |def f(): Any = loop do
-        |end
-        |""".stripMargin,
-      Tools.Function.structure(
-        Identifier("f"),
-        List(),
-        statics.Any,
-        Loop(
           None,
           None,
         )

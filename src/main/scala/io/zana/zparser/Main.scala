@@ -7,6 +7,6 @@ object Main extends App {
   import MyParser._
 
   println(
-    parse(alpha)("abc")
+    parse(tag("abc") | tag("bde"))("abcd")
   )
 }

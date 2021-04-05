@@ -1,20 +1,13 @@
 - Identifier introduced, so it can be tested.
 - Options removed since repetitions do not return a none
 - moduleIdentifier removed so that naming is more expressive
-- moved to idea based project. ultimately abandoned for lack of library
-  automation
+- moved to idea based project. ultimately abandoned for lack of library automation
 - Moved back to scala 2 for better tooling
-- in some cases the parser needs whitespace such as mod-A-do where `-` is the
-  white space. Without it, parser thinks it is part of the previous token.
+- in some cases the parser needs whitespace such as mod-A-do where `-` is the white space. Without it, parser thinks it
+  is part of the previous token.
 - Statement parser removed as there was no need for it
-- Rename to cond and loop was purely aesthetical and allows for room in future
-  for c styled if and while if need be.
+- Rename to cond and loop was purely aesthetical and allows for room in future for c styled if and while if need be.
 - static types introduced in order to make operations feasible
-- static types introduced to give user more control over the type they assign to
-  variables
-- variables now have a mutability modifier so that by default things are
-  immutable
-
-TODO
-
-- perhaps make empty lists as some instead 
+- static types introduced to give user more control over the type they assign to variables
+- variables now have a mutability modifier so that by default things are immutable
+- Loop removed as it can be rewritten as a recusrive cond function

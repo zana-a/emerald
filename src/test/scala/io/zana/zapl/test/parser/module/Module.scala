@@ -1,7 +1,7 @@
 package io.zana.zapl.test.parser.module
 
 import io.zana.zapl.structure.block.Block
-import io.zana.zapl.structure.control.{Cond, Loop}
+import io.zana.zapl.structure.control.Cond
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.function.Function
 import io.zana.zapl.structure.primitive
@@ -39,9 +39,6 @@ class Module extends Base {
         |
         | def f(): Any = cond do
         | end
-        |
-        | def f(): Any = loop do
-        | end
         |end
         |""".stripMargin,
       Tools.structure(
@@ -68,15 +65,6 @@ class Module extends Base {
               None
             )
           ),
-          Function(
-            Identifier("f"),
-            List(),
-            statics.Any,
-            Loop(
-              None,
-              None
-            )
-          )
         )
       )
     )

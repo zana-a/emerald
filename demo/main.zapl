@@ -19,7 +19,7 @@ end
 println(Examples::add(1, 3))
 
 # 144
-println(Examples::fib(12))
+println(Examples::fib(5))
 
 # Hello, Zana!
 println(Examples::hello("Zana"))

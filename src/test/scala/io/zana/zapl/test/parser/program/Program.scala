@@ -2,7 +2,7 @@ package io.zana.zapl.test.parser.program
 
 import io.zana.zapl.structure.call
 import io.zana.zapl.structure.comment.LineComment
-import io.zana.zapl.structure.control.{Cond, Loop}
+import io.zana.zapl.structure.control.Cond
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.function.Function
 import io.zana.zapl.structure.statics
@@ -168,22 +168,6 @@ class Program extends Base {
       Tools.structure(
         List(
           Cond(
-            None,
-            None
-          )
-        )
-      )
-    )
-    Tester(
-      Tools.parser,
-      """
-        |loop do
-        |
-        |end
-        |""".stripMargin,
-      Tools.structure(
-        List(
-          Loop(
             None,
             None
           )

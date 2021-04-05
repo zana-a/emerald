@@ -58,15 +58,14 @@ object Cond extends Translatable[structures.control.Cond] {
           case ah :: at => {
             result += (s"if (${exprSanitise(ah._1)}) ${ah._2}")
             for {it <- at} yield result += s"else if (${exprSanitise(it._1)}) ${it._2}"
-            result +=  s"else ${dh._2}"
+            result += s"else ${dh._2}"
           }
           case Nil => result += s"if (${exprSanitise(dh._1)}) ${dh._2}"
         }
         case Nil => allArms match {
           case ah :: at => {
-            result +=  s"if (${exprSanitise(ah._1)}) ${ah._2}"
+            result += s"if (${exprSanitise(ah._1)}) ${ah._2}"
             for {it <- at} yield result += s"else if (${exprSanitise(it._1)}) ${it._2}"
-
           }
           case Nil => Nil
         }
@@ -78,6 +77,3 @@ object Cond extends Translatable[structures.control.Cond] {
   }
 
 }
-
-
-// if () {}

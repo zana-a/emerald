@@ -343,26 +343,5 @@ class Cond extends Base {
         ),
       )
     )
-    Tester(
-      parser,
-      """
-        |cond do
-        |  _ => loop do
-        |  end
-        |end
-        |""".stripMargin,
-      control.Cond(
-        None,
-        Some(
-          Arm(
-            primitive.Boolean(true),
-            control.Loop(
-              None,
-              None
-            )
-          )
-        ),
-      )
-    )
   }
 }

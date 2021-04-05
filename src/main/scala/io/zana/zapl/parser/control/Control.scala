@@ -6,6 +6,5 @@ import io.zana.zapl.structure.control.{Control => Structure}
 
 object Control extends Parsable[Structure] {
 
-  override def apply: Parser[Structure] =
-    Cond.apply | Loop.apply
+  override def apply: Parser[Structure] = Cond.apply
 }
