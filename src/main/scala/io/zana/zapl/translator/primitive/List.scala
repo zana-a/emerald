@@ -6,32 +6,13 @@ import io.zana.zapl.translator.Translatable
 
 object List extends Translatable[primitive.List] {
 
-  private def helper(list: primitive.List, result: String = ""): List[Any] = {
-    for {
-      item <- list.value
-    } yield item match {
-      case primitive.String(_) =>
-        result ++ translator
-          .primitive
-          .String
-          .apply(item.asInstanceOf[primitive.String])
-
-      case primitive.Integer(_) =>
-        result ++ translator
-          .primitive
-          .Integer
-          .apply(item.asInstanceOf[primitive.Integer])
-
-      case primitive.Boolean(_) =>
-        result ++ translator
-          .primitive
-          .Boolean
-          .apply(item.asInstanceOf[primitive.Boolean])
-
-      case primitive.List(_) =>
-        helper(item.asInstanceOf[primitive.List], result) ++ result
+  private def helper(list: primitive.List, result: String = ""): List[String] =
+    for {item <- list.value} yield item match {
+      case e: primitive.String => result + translator.primitive.String.apply(e)
+      case e: primitive.Integer => result + translator.primitive.Integer.apply(e)
+      case e: primitive.Boolean => result + translator.primitive.Boolean.apply(e)
+      case e: primitive.List => helper(e, result) + result
     }
-  }
 
   override def apply(structure: primitive.List): String = {
     helper(structure).toString

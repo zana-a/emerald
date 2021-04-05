@@ -12,3 +12,4 @@
 - variables now have a mutability modifier so that by default things are immutable
 - Loop removed as it can be rewritten as a recusrive cond function
 - made variable type optional
+- empty cond on function does not produce a result.

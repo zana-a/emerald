@@ -5,6 +5,5 @@ import io.zana.zapl.translator.Translatable
 
 object String extends Translatable[primitive.String] {
 
-  def apply(structure: primitive.String): Predef.String =
-    structure.value
+  def apply(structure: primitive.String): String = structure.value
 }

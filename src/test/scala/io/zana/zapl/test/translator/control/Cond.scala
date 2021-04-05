@@ -6,27 +6,6 @@ import org.junit.Test
 class Cond extends Base {
 
   @Test
-  def empty(): Unit = {
-
-    Tester(
-      """
-        |
-        |"""
-        .stripMargin
-        .trim,
-      translate(
-        parse(
-          """
-            |cond
-            |
-            |do
-            |""".stripMargin
-        )
-      )
-    )
-  }
-
-  @Test
   def single(): Unit = {
     Tester(
       """
@@ -112,9 +91,9 @@ class Cond extends Base {
   def multiple(): Unit = {
     Tester(
       """
-        |if (true || false) true
-        |else if (true && true) false
-        |else if (false) false
+        |if (true || false) false
+        |else if (true && true) true
+        |else if (false || false) false
         |else print()
         |"""
         .stripMargin
@@ -124,7 +103,6 @@ class Cond extends Base {
           """
             |cond do
             | true || false => false
-            | true && true => true
             | true && true => true
             | false || false => false
             |  _ => print()

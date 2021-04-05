@@ -6,7 +6,7 @@ import org.junit.Test
 class Integer extends Base {
 
   @Test
-  def a(): Unit = {
+  def integer(): Unit = {
 
     Tester(
       Tools.parser,

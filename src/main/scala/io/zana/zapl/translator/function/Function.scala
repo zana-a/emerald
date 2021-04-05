@@ -15,12 +15,8 @@ object Function extends Translatable[structures.function.Function] {
   override def apply(structure: structures.function.Function): String = {
     val name = translator.identifier.Identifier(structure.name)
 
-    val params =
-      for {param <- structure.params}
-        yield s"${translator.identifier.Identifier(param.name)}:" + " " +
-          s"${translator.statics.Static(param.static)}"
-
-    val `return` = translator.statics.Static(structure.static)
+    val params = for {param <- structure.params} yield
+      translator.identifier.Identifier(param.name) + ": " + translator.statics.Static(param.static)
 
     val body = structure.body match {
       case e: Primitive => translator.primitive.Primitive(e)
@@ -29,13 +25,12 @@ object Function extends Translatable[structures.function.Function] {
       case e: ModuleCall => translator.call.ModuleCall(e)
       case e: Block => translator.block.Block(e)
       case e: Control => translator.control.Control(e)
-      case e: Expression =>
-        translator.expression.Expression.sanitise(
-          translator.expression.Expression(e)
-        )
-      case e => s"??? not implemented for $e"
+      case e: Expression => translator.expression.Expression.sanitise(translator.expression.Expression(e))
+      case e => throw new Error(s"Did not know how to parse $e")
     }
 
-    s"def $name(${params.mkString(COMMA ++ " ")}): ${`return`} = $body"
+    val `return` = translator.statics.Static(structure.static)
+
+    s"def $name(${params.mkString(COMMA + " ")}): ${`return`} = $body"
   }
 }

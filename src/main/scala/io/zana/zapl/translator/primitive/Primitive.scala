@@ -11,6 +11,6 @@ object Primitive extends Translatable[primitive.Primitive] {
     case e: primitive.Integer => translators.Integer(e)
     case e: primitive.List => translators.List(e)
     case e: primitive.String => translators.String(e)
-    case e => throw new Error(e.toString)
+    case e => throw new Error(s"Did not know to parse $e")
   }
 }
