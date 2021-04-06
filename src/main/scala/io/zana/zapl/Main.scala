@@ -1,11 +1,14 @@
 package io.zana.zapl
 
 import org.scalafmt.interfaces.Scalafmt
-
+import scala.language.postfixOps
 import java.io.File
+import sys.process._
+
 import java.nio.file.{Files, Path}
 
 object Main extends App {
+
 
   if (args.length > 0) {
     if (
@@ -38,8 +41,28 @@ object Main extends App {
           Files.createFile(complete)
           Files.write(complete, result.getBytes)
         }
+
+        s"scala $complete" !
       }
     }
+  } else {
+    println(
+      """
+        | 8888888888',8888'        .8.          8 888888888o   8 8888
+        |        ,8',8888'        .888.         8 8888    `88. 8 8888
+        |       ,8',8888'        :88888.        8 8888     `88 8 8888
+        |      ,8',8888'        . `88888.       8 8888     ,88 8 8888
+        |     ,8',8888'        .8. `88888.      8 8888.   ,88' 8 8888
+        |    ,8',8888'        .8`8. `88888.     8 888888888P'  8 8888
+        |   ,8',8888'        .8' `8. `88888.    8 8888         8 8888
+        |  ,8',8888'        .8'   `8. `88888.   8 8888         8 8888
+        | ,8',8888'        .888888888. `88888.  8 8888         8 8888
+        |,8',8888888888888.8'       `8. `88888. 8 8888         8 888888888888
+        |
+        |A programming language on the JVM.
+        |
+        |Please provide a file to run.
+        |""".stripMargin)
   }
 
 }
