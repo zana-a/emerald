@@ -130,7 +130,7 @@ class Function extends Base {
     )
     Tester(
       """
-        |def a(): List[scala.String] = List("hi")
+        |def a(): List[java.lang.String] = List("hi")
         |"""
         .stripMargin
         .trim,
@@ -144,7 +144,7 @@ class Function extends Base {
     )
     Tester(
       """
-        |def a(): scala.String = "hi"
+        |def a(): java.lang.String = "hi"
         |"""
         .stripMargin
         .trim,

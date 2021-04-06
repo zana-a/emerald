@@ -16,8 +16,11 @@ object Variable extends Translatable[variable.Variable] {
     val body = structure.body match {
       case e: Primitive => translator.primitive.Primitive(e)
       case e: Callable => translator.call.Callable(e)
-      case e: Expression => translator.expression.Expression(e)
-      case e => throw new Error(e.toString)
+      case e: Expression =>
+        translator.expression.Expression.sanitise(
+          translator.expression.Expression(e)
+        )
+      case e => throw new Error(s"Did not know how to parse $e")
     }
 
     val modifier = if (structure.modifiable) "var" else "val"
@@ -25,5 +28,3 @@ object Variable extends Translatable[variable.Variable] {
     s"$modifier $identifier = $body"
   }
 }
-
-//Expression.apply | Primitive.apply | Call.apply

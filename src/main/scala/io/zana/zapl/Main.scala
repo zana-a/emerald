@@ -1,6 +1,6 @@
 package io.zana.zapl
 
-import io.zana.zapl.standard.{Compiler, Error}
+import io.zana.zapl.standard.Compiler
 
 object Main extends App {
   Compiler(args, display = true).write()
