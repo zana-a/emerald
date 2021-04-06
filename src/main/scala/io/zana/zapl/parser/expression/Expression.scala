@@ -3,8 +3,7 @@ package io.zana.zapl.parser.expression
 import io.zana.zapl.parser.base.Base._
 import io.zana.zapl.parser.expression.predef._
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.parser.primitive
-import io.zana.zapl.parser.util.Parsable
+import io.zana.zapl.parser.{Parsable, primitive}
 import io.zana.zapl.structure.expression.{Expression, Pair, Single}
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.{parser, structure}
