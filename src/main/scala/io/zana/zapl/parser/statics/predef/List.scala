@@ -8,7 +8,6 @@ import io.zana.zapl.structure.statics.{List => Structure}
 
 object List extends Parsable[Structure] {
 
-  //todo wrappable
   override def apply: Parser[Structure] =
     STATIC_T_LIST ~> (LEFT_ANGLE ~> Static.apply <~ RIGHT_ANGLE) ^^
       (generic => Structure(generic))

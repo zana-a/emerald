@@ -1,5 +1,3 @@
-// TODO: Clean the damn code for build function
-
 package io.zana.zapl.translator.control
 
 import io.zana.zapl.structure.block.Block

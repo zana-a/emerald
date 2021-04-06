@@ -64,7 +64,4 @@ class FunctionCall extends Base {
     )
   }
 
-  // TODO:
-  // 1. Add test for expression within params.
-
 }

@@ -76,9 +76,4 @@ class LineComment extends Base {
       )
     )
   }
-
-  // TODO:
-  // 1. LineComment in program | done
-  // 2. LineComment in module  | done
-  // 3. LineComment in block   | done
 }

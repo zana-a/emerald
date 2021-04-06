@@ -179,10 +179,4 @@ class Primitive extends Base {
       ))
     )
   }
-
-  // TODO:
-  // Test for:
-  // 1. expression within list
-  // 3. Variable within list
-
 }
