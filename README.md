@@ -25,6 +25,8 @@ Desktop
 ```
 
 ```elixir
+# program.zapl
+
 def add(a: Int, b: Int): Int = do
   a + b
 end
