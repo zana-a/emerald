@@ -1,8 +1,8 @@
 package io.zana.zapl.test.parser.comment
 
 import io.zana.zapl.structure.block.Block
-import io.zana.zapl.structure.module.Module
 import io.zana.zapl.structure.identifier.Identifier
+import io.zana.zapl.structure.module.Module
 import io.zana.zapl.structure.program.Program
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test

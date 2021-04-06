@@ -1,7 +1,7 @@
 package io.zana.zapl.test.parser.function
 
-import io.zana.zapl.structure.statics
 import io.zana.zapl.structure.identifier.Identifier
+import io.zana.zapl.structure.statics
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 

@@ -1,8 +1,7 @@
 package io.zana.zapl.test.parser.expression
 
 import io.zana.zapl.structure.expression.{Pair, Single}
-import io.zana.zapl.structure.identifier.Identifier
-import io.zana.zapl.structure.{primitive, statics}
+import io.zana.zapl.structure.primitive
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 

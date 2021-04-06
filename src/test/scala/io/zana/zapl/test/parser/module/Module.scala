@@ -2,10 +2,9 @@ package io.zana.zapl.test.parser.module
 
 import io.zana.zapl.structure.block.Block
 import io.zana.zapl.structure.control.Cond
-import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.function.Function
-import io.zana.zapl.structure.primitive
-import io.zana.zapl.structure.statics
+import io.zana.zapl.structure.identifier.Identifier
+import io.zana.zapl.structure.{primitive, statics}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 

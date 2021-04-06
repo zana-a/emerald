@@ -1,12 +1,11 @@
 package io.zana.zapl.translator.variable
 
+import io.zana.zapl.structure.call.Callable
 import io.zana.zapl.structure.expression.Expression
-import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive.Primitive
 import io.zana.zapl.structure.variable
-import io.zana.zapl.structure.call.Callable
-import io.zana.zapl.translator.Translatable
 import io.zana.zapl.translator
+import io.zana.zapl.translator.Translatable
 
 object Variable extends Translatable[variable.Variable] {
 

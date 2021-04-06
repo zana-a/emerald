@@ -1,12 +1,10 @@
 package io.zana.zapl.test.parser.control
 
 import io.zana.zapl.structure.block.Block
-import io.zana.zapl.structure.control
-import io.zana.zapl.structure.primitive
 import io.zana.zapl.structure.control.Arm
 import io.zana.zapl.structure.expression.Pair
 import io.zana.zapl.structure.identifier.Identifier
-import io.zana.zapl.structure.call
+import io.zana.zapl.structure.{call, control, primitive}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 

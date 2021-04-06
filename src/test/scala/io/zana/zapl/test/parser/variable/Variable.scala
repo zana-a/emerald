@@ -1,10 +1,9 @@
 package io.zana.zapl.test.parser.variable
 
 import io.zana.zapl.parser.keyword.Keyword._
-import io.zana.zapl.structure.identifier.Identifier
-import io.zana.zapl.structure.call
 import io.zana.zapl.structure.expression.Pair
-import io.zana.zapl.structure.{primitive, statics}
+import io.zana.zapl.structure.identifier.Identifier
+import io.zana.zapl.structure.{call, primitive, statics}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test
 

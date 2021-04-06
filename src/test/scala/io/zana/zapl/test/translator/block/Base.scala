@@ -1,11 +1,8 @@
 package io.zana.zapl.test.translator.block
 
 import io.zana.zapl.parser.base.Base
-import io.zana.zapl.parser.base.Base.{Success, Failure, Error}
-import io.zana.zapl.parser
-import io.zana.zapl.structure
-import io.zana.zapl.standard
-import io.zana.zapl.translator
+import io.zana.zapl.parser.base.Base.{Error, Failure, Success}
+import io.zana.zapl.{parser, standard, structure, translator}
 
 trait Base {
 

@@ -9,8 +9,7 @@ import io.zana.zapl.structure.expression.Expression
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive.Primitive
 import io.zana.zapl.translator.Translatable
-import io.zana.zapl.translator
-import io.zana.zapl.{structure => structures}
+import io.zana.zapl.{translator, structure => structures}
 
 import scala.collection.mutable.ListBuffer
 

@@ -3,9 +3,8 @@ package io.zana.zapl.translator.variable
 import io.zana.zapl.structure.call.Callable
 import io.zana.zapl.structure.expression.Expression
 import io.zana.zapl.structure.primitive.Primitive
-import io.zana.zapl.translator
-import io.zana.zapl.{structure => structures}
 import io.zana.zapl.translator.Translatable
+import io.zana.zapl.{translator, structure => structures}
 
 object Assign extends Translatable[structures.variable.Assign] {
 

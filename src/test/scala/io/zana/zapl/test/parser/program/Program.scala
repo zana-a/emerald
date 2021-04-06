@@ -1,13 +1,11 @@
 package io.zana.zapl.test.parser.program
 
-import io.zana.zapl.structure.call
 import io.zana.zapl.structure.comment.LineComment
 import io.zana.zapl.structure.control.Cond
-import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.function.Function
-import io.zana.zapl.structure.statics
-import io.zana.zapl.structure.primitive
+import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.module.Module
+import io.zana.zapl.structure.{call, primitive, statics}
 import io.zana.zapl.structure.variable.{Assign, Variable}
 import io.zana.zapl.test.parser.Tester
 import org.junit.Test

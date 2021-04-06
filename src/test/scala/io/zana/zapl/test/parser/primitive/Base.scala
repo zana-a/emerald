@@ -1,7 +1,5 @@
 package io.zana.zapl.test.parser.primitive
 
-import junit.framework.TestSuite
-
 trait Base {
 
   object Tools {

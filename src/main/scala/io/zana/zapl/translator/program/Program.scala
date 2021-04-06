@@ -3,14 +3,11 @@ package io.zana.zapl.translator.program
 import io.zana.zapl.structure.call.Callable
 import io.zana.zapl.structure.comment.LineComment
 import io.zana.zapl.structure.control.Control
-import io.zana.zapl.structure.expression.{Call, Expression}
-import io.zana.zapl.structure.variable.Assign
-import io.zana.zapl.structure.module.Module
 import io.zana.zapl.structure.function.Function
-import io.zana.zapl.structure.variable.Variable
+import io.zana.zapl.structure.module.Module
+import io.zana.zapl.structure.variable.{Assign, Variable}
 import io.zana.zapl.translator.Translatable
-import io.zana.zapl.translator
-import io.zana.zapl.{structure => structures}
+import io.zana.zapl.{translator, structure => structures}
 
 object Program extends Translatable[structures.program.Program] {
 

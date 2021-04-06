@@ -5,8 +5,8 @@ import io.zana.zapl.structure.call.Callable
 import io.zana.zapl.structure.expression.{Pair, Single, Expression => Structure}
 import io.zana.zapl.structure.identifier.Identifier
 import io.zana.zapl.structure.primitive.Primitive
-import io.zana.zapl.translator.Translatable
 import io.zana.zapl.translator
+import io.zana.zapl.translator.Translatable
 
 object Expression extends Translatable[Structure] {
 

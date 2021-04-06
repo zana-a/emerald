@@ -1,11 +1,9 @@
 package io.zana.zapl.test.parser.primitive
 
-import org.junit.Test
-import io.zana.zapl.test.parser.Tester
-import io.zana.zapl.structure.primitive
-import io.zana.zapl.structure.call
-import io.zana.zapl.structure.identifier
 import io.zana.zapl.structure.identifier.Identifier
+import io.zana.zapl.structure.{call, identifier, primitive}
+import io.zana.zapl.test.parser.Tester
+import org.junit.Test
 
 class Primitive extends Base {
 
