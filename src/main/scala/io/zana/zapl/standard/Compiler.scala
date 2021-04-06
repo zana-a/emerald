@@ -32,7 +32,7 @@ case class Compiler(args: Seq[String], display: Boolean = false) {
         val file = Path.of(args.head).getFileName.toString.dropRight(5) + ".scala"
         val complete = Path.of(parent + file).toAbsolutePath
 
-        if (Files.isRegularFile(complete)) {
+        if (Files.exists(complete.getParent)) {
           Files.write(complete, result.getBytes)
         } else {
           Files.createDirectory(complete.getParent)
