@@ -1,6 +1,6 @@
 package io.zana.zparser
 
-object Main extends App {
+object Main {
 
   object MyParser extends ZParser
 
