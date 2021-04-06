@@ -1,10 +1,10 @@
-package io.zana.zapl.test.translator.program
+package io.zana.zapl.test.translator.statics
 
 trait Base {
 
-  def parse(input: String): io.zana.zapl.structure.program.Program =
+  def parse(input: String): io.zana.zapl.structure.statics.Static =
     io.zana.zapl.parser.base.Base.parse(
-      io.zana.zapl.parser.program.Program.apply,
+      io.zana.zapl.parser.statics.Static.apply,
       input
     ) match {
       case io.zana.zapl.parser.base.Base.Success(s, _) => s
@@ -14,7 +14,7 @@ trait Base {
         throw new RuntimeException(s)
     }
 
-  def translate(s: io.zana.zapl.structure.program.Program): String =
-    io.zana.zapl.translator.program.Program(s)
+  def translate(s: io.zana.zapl.structure.statics.Static): String =
+    io.zana.zapl.translator.statics.Static(s)
 
 }
