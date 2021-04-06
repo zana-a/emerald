@@ -1,56 +1,70 @@
 package io.zana.zapl.standard
 
-import io.zana.zapl.structure.program.Program
-import io.zana.zapl.{parser, translator}
-import org.scalafmt.interfaces.Scalafmt
+import io.zana.zapl.{parser, standard, translator}
 
 import java.nio.file.{Files, Path}
-import scala.io.Source
+import scala.io.AnsiColor._
+import scala.language.postfixOps
+import scala.sys.process._
 
 case class Compiler(args: Seq[String], display: Boolean = false) {
+  if (args.nonEmpty) {
+    if (
+      Files.exists(Path.of(args.head)) &&
+        Files.isRegularFile(Path.of(args.head)) &&
+        args.head.endsWith(".zapl")
+    ) {
+      val input = Files.lines(Path.of(args.head)).toArray.mkString("\n")
 
-  private val path: Path = if (args.nonEmpty) {
-    Path.of(args.head)
-  } else {
-    Error(Error.Custom("No input path was given."))
-  }
+      val ast = parser.base.Base.parse(parser.program.Program.apply, input) match {
+        case parser.base.Base.Success(s, _) => s
+        case e => throw new Error(e.toString)
+      }
 
-  private val source: String = {
-    if (path.toFile.exists) {
-      val io = Source.fromFile(path.toUri)
-      val source = io.mkString
-      io.close()
-      source
-    } else {
-      Error(Error.FileNotFound(path.toString))
-    }
-  }
+      val result = try {
+        translator.program.Program.apply(ast)
+      } catch {
+        case e: Error => standard.Error(e)
+      }
 
-  private val ast: Program = {
-    parser.base.Base.parse(parser.program.Program.apply, source) match {
-      case parser.base.Base.Success(s, _) => s
-      case parser.base.Base.Failure(s, _) => Error(Error.UnknownSyntax(s))
-      case parser.base.Base.Error(s, _) => Error(Error.UnknownSyntax(s))
-    }
-  }
+      {
+        val parent = Path.of(args.head).toAbsolutePath.getParent + "/target/"
+        val file = Path.of(args.head).getFileName.toString.dropRight(5) + ".scala"
+        val complete = Path.of(parent + file).toAbsolutePath
 
-  private val translate: String = {
-    translator.program.Program.apply(ast)
-  }
+        if (Files.isRegularFile(complete)) {
+          Files.write(complete, result.getBytes)
+        } else {
+          Files.createDirectory(complete.getParent)
+          Files.createFile(complete)
+          Files.write(complete, result.getBytes)
+        }
 
-  if (display) {
-    def standardOut(heading: String, input: Any, pretty: Boolean = false): Unit = {
-      println(heading + "\n" + "-" * heading.length)
-      if (pretty) {
-        pprint.pprintln(input, height = 9000, width = 2)
-      } else {
-        println(input)
+        println(s"${BOLD}${GREEN}Complete! 🎉$RESET")
+        println
+        print("AST: ")
+        pprint.pprintln(ast, height = Int.MaxValue, width = 4)
+
+        s"scala $complete" !
       }
     }
-
-    standardOut("AST", ast, pretty = true)
-    println
-    val scalafmt = Scalafmt.create(this.getClass.getClassLoader)
-    println(scalafmt.format(Path.of(""), path, translate))
+  } else {
+    println(
+      """
+        | 8888888888',8888'        .8.          8 888888888o   8 8888
+        |        ,8',8888'        .888.         8 8888    `88. 8 8888
+        |       ,8',8888'        :88888.        8 8888     `88 8 8888
+        |      ,8',8888'        . `88888.       8 8888     ,88 8 8888
+        |     ,8',8888'        .8. `88888.      8 8888.   ,88' 8 8888
+        |    ,8',8888'        .8`8. `88888.     8 888888888P'  8 8888
+        |   ,8',8888'        .8' `8. `88888.    8 8888         8 8888
+        |  ,8',8888'        .8'   `8. `88888.   8 8888         8 8888
+        | ,8',8888'        .888888888. `88888.  8 8888         8 8888
+        |,8',8888888888888.8'       `8. `88888. 8 8888         8 888888888888
+        |
+        |A programming language on the JVM.
+        |
+        |Please provide a file to run.
+        |""".stripMargin)
   }
 }
