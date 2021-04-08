@@ -13,3 +13,4 @@
 - Loop removed as it can be rewritten as a recusrive cond function
 - made variable type optional
 - empty cond on function does not produce a result.
+- the keywords tend to get in the way and should be handled with the negating parser.
